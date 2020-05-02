@@ -1,11 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
+    <title>Project Test</title>
+    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
 </head>
+
 <body>
-    
+
+    <!-- Header and navbar specific for the mobile viewport -->
+
+    <div id="isMobile">
+        <header class="mobile-header-brand">
+            <h1><span class="bookIcon"><i class="fas fa-book-reader"></i></span> Book<span class="worm">worm</span></h1>
+            <p>a book lover's best friend</p>
+        </header>
+
+        <nav class="mobile-navbar">
+            <a href="#">Home</a>
+            <a class="searchLink" href="#">Search</a>
+            <a href="#">My List</a>
+        </nav>
+    </div>
+
+    <!-- Header and navbar specific to desktop viewport -->
+
+    <div class="desktopContainer" id="is-desktop">
+        <div class="brand">
+            <h1><span class="bookIcon"><i class="fas fa-book-reader"></i></span> Book<span class="worm">worm</span></h1>
+            <p>a book lover's best friend</p>
+        </div>
+        <nav class="desktop-navbar">
+            <a href="#">Home</a>
+            <a class="searchLink" href="#">Search</a>
+            <a href="#">My List</a>
+        </nav>
+    </div>
+
+    <!-- Main body -->
+
+    <main class="mainBody">
+
+        <div class="searchElements">
+
+            <div class="searchBars">
+
+                <form id="titleSearch">
+
+                    <input id="titleSearchField" type="text" placeholder="Title Search" aria-label="Search">
+                    <button id="searchBtnT" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+
+                <form id="authorSearch">
+
+                    <input id="authorSearchField" type="text" placeholder="Author Search" aria-label="Search">
+                    <button id="searchBtnA" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+
+                <form id="genreSearch">
+
+                    <input id="genreSearchField" type="text" placeholder="Genre Search" aria-label="Search">
+                    <button id="searchBtnG" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+
+            </div>
+
+            <div class="order">
+                <p>Order search by:</p>
+                <input type="radio" id="relevance" name="relevance" value="relevance">
+                <label for="relevance">Relevance</label><br>
+                <input type="radio" id="newest" name="newest" value="newest">
+                <label for="newest">Newest to Oldest</label><br>
+            </div>
+
+            <div class="searchButton">
+                <button>Search</button>
+            </div>
+        </div>
+
+        <img class="bookImage"
+            src="https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            alt="bookcase">
+
+        <div class="grid-container">
+            <div id="imageHeader" class="columnHeaders grid-item">Image</div>
+            <div id="detailsHeader" class="columnHeaders grid-item">Details</div>
+            <div id="infoHeader" class="columnHeaders grid-item">More info</div>
+            <div id="listHeader" class="columnHeaders grid-item">Add to list</div>
+            
+            <!-- Book 1 -->
+            <div class="columnHeaders grid-item"><img class="image" src="https://books.google.com/books/content?id=tRXhsoI7W6EC&printsec=frontcover&img=1&zoom=5&source=gbs_api" alt="fire"></div>
+            <div id="details" class="grid-item">
+                <p>Title: <span class="titleText"></span></p>
+                <p>Author: <span class="authorText"></span></p>
+                
+            </div>
+            <div id="moreI" class="grid-item"><i class="fas fa-info-circle"></i></div>
+            <div id="add" class="grid-item"><i class="fas fa-plus-circle"></i></div>
+            
+            <!-- Book 2 -->
+
+            <div class="columnHeaders grid-item"><img class="image" src="https://books.google.com/books/content?id=AZ5J6B1-4BoC&printsec=frontcover&img=1&zoom=5&source=gbs_api" alt="hornet"></div>
+            <div id="details" class="grid-item">
+                <p>Title: <span class="titleText"></span></p>
+                <p>Author: <span class="authorText"></span></p>
+                
+            </div>
+            <div id="moreI" class="grid-item"><i class="fas fa-info-circle"></i></div>
+            <div id="add" class="grid-item">In my list</i></div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+
+    <footer id="sticky-footer" class="footer">
+        <small>Copyright &copy;</small>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
