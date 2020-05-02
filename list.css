@@ -2,9 +2,14 @@
 
 /* Full document styling */
 
+html {
+    height: 100%;
+}
+
 body {
+    height: 100%;
+    background-color: #F8EEE7;
     margin: 0;
-    background-color: rgb(250, 250, 250);
 }
 
 main {
@@ -67,11 +72,82 @@ main {
     width: 20%;
 }
 
+.worm {
+    color: #d9dcd6;
+}
+
+.mobile-navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+    background-color: #49274A;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.searchLink {
+    font-weight: bold;
+}
+
+header {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #94618E;
+    color: #ffffff;
+    text-align: center;
+    /* height: 100px; */
+}
+
+header h1 {
+    line-height: 60px;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-weight: 500;
+}
+
+a {
+    color: #ffffff !important;
+    text-decoration: none;
+}
+
+.desktopContainer {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #078c87;    
+    color: #ffffff;
+    text-align: center;
+    height: 100px;
+    padding: 5px 50px;
+    display: none;
+    justify-content: space-between;
+}
+
+.desktopContainer h1 {
+    line-height: 60px;
+    margin-bottom: 0;
+}
+
+.desktop-navbar {
+    padding-top: 35px;
+    padding-right: 5px;
+}
+
+.desktop-navbar a {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+header p {
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.current-search-link {
+    font-weight: bold;
+}
+
+
 
 /* List styling */
 
 .list-container {
-    padding: 20px;
 }
 
 .list-grid-container {
@@ -81,10 +157,11 @@ main {
 
 .list-grid-item {
     padding: 5px;
-    font-size: 16px;
+    font-size: 13px;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    margin: auto;
+    vertical-align: middle;
+    text-overflow: ellipsis;
 }
 
 #list-headers {
@@ -94,6 +171,7 @@ main {
 .listed-book {
     border: 1px solid rgb(97, 97, 97);
     margin-top: 2px;
+    background: white
 }
 
 .fa-info-circle, .fa-trash-alt {
@@ -104,24 +182,14 @@ main {
 
 /* Footer styling */
 
-.footer-main {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: grey;
-}
-
-.footer-line {
-    height:7px;
-    background-color: brown;
-    margin-bottom: 20px;
-}
-
-.footer-text {
-    font-family: 'Roboto', sans-serif;
-    color: white;
+footer {
     text-align: center;
+    border-top: 5px solid #20B2AA;
+    position: absolute;
+    bottom: 0;
+    background-color: dimgray;
+    color: #ffffff;
+    width: 100%;
 }
 
 
@@ -129,4 +197,45 @@ main {
 
 .display-none {
     display: none;
+}
+
+
+/* Responsiveness */
+@media (min-width: 480px) and (max-width: 570px) {
+    .list-grid-item {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 420px) and (max-width: 479px) {
+    .list-grid-item {
+        font-size: 11px;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    
+    #is-desktop {
+        display: flex;
+    }
+
+    #isMobile {
+        display: none;
+    }
+
+    .bookImage {
+        display: block;
+    }
+
+    .mainBody {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .searchElements {
+        display: flex;
+        flex-direction: column;
+    }
+
 }

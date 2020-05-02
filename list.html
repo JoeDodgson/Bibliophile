@@ -11,49 +11,39 @@
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
     crossorigin="anonymous"
     />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
     <link href="./list.css" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <!-- Header and navbar specific for the mobile viewport -->
 
-        <div>
-  
-            <div class="logo-container">
-    
-                <!--Logo at the top of the page-->
-                
-                <span class="logo-icon">
-                    <i class="fas fa-book-open"></i>
-                </span>
-                <span class="logo-text">
-                    <strong>Bookworm</strong>
-                </span>
-                
-            </div>
-    
-            <!--Nav below heading - for small screen size-->
-            <nav class="navbar">
-                
-                <!-- Links -->
-                <span class="home-link-container">
-                    <a class="nav-link" href="./home.html">Home</a>
-                </span>
+    <div id="isMobile">
+        <header class="mobile-header-brand">
+            <h1><span class="bookIcon"><i class="fas fa-book-reader"></i></span> Book<span class="worm">worm</span></h1>
+            <p>a book lover's best friend</p>
+        </header>
 
-                <span class="search-link-container border-left-right">
-                    <a class="nav-link" href="./search.html">Search</a>
-                </span>
+        <nav class="mobile-navbar">
+            <a href="./home.html">Home</a>
+            <a href="./search.html">Search</a>
+            <a class="current-page-link" href="./list.html">My List</a>
+        </nav>
+    </div>
 
-                <span class="list-link-container">
-                    <a class="nav-link" href="./list.html">
-                        <strong>List</strong>
-                    </a>
-                </span>
-    
-            </nav>
-  
+    <!-- Header and navbar specific to desktop viewport -->
+
+    <div class="desktopContainer" id="is-desktop">
+        <div class="brand">
+            <h1><span class="bookIcon"><i class="fas fa-book-reader"></i></span> Book<span class="worm">worm</span></h1>
+            <p>a book lover's best friend</p>
         </div>
+        <nav class="desktop-navbar">
+            <a href="#">Home</a>
+            <a class="searchLink" href="#">Search</a>
+            <a href="#">My List</a>
+        </nav>
+    </div>
    
-    </header>
 
     <main>
         <div class="list-container">
@@ -64,7 +54,7 @@
                     Details
                 </div>
                 <div class="list-grid-item">
-                    Target read date
+                    TRD
                 </div>
                 <div class="list-grid-item">
                     Info
@@ -76,14 +66,14 @@
 
             <div class="list-grid-container listed-book">
                 <div class="list-grid-item">
-                    Harry Potter and the Chamber of Secrets, J.K. Rowling
+                    Harry Potter and the Chamber of Secrets
                 </div>
                 <div class="list-grid-item target-read-date">
                     <p class="static-date">
-                        01/07/2020
+                        01/07/20
                     </p>
                     <textarea class="select-date display-none">
-                        01/07/2020
+                        01/07/20
                     </textarea>
                 </div>
                 <div class="list-grid-item">
@@ -96,14 +86,14 @@
 
             <div class="list-grid-container listed-book">
                 <div class="list-grid-item">
-                    Harry Potter and the Prisoner of Askaban, J.K. Rowling
+                    Harry Potter and the Prisoner of Askaban
                 </div>
                 <div class="list-grid-item target-read-date">
                     <p class="static-date">
-                        01/06/2020
+                        01/06/20
                     </p>
                     <textarea class="select-date display-none">
-                        01/06/2020
+                        01/06/20
                     </textarea>
                 </div>
                 <div class="list-grid-item">
@@ -117,22 +107,15 @@
 
     </main>
 
-    <!--Page footer-->
-    <footer class="footer-main">
+    <!-- Footer -->
 
-        <!--Coloured bar at the top of the footer-->
-        <div class="row footer-line"></div>
-  
-        <div class="row container-fluid">
-  
-            <!--Copyright message-->
-            <p  class="footer-text">
-              © 2020 Copyright JD, DP, NW, HR
-            </p>
-  
-        </div>
-  
-      </footer>
+    <footer id="sticky-footer" class="footer">
+        <small>Copyright &copy;</small>
+    </footer>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
