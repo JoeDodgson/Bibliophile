@@ -25,7 +25,7 @@ main {
     display: inline;
     text-align: center;
     color:black;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid rgb(97, 97, 97);
@@ -87,6 +87,10 @@ main {
     margin: auto;
 }
 
+#list-headers {
+    font-weight: bold;
+}
+
 .listed-book {
     border: 1px solid rgb(97, 97, 97);
     margin-top: 2px;
@@ -115,7 +119,7 @@ main {
 }
 
 .footer-text {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: white;
     text-align: center;
 }
