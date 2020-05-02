@@ -7,6 +7,10 @@ body {
     background-color: gainsboro;
 }
 
+main {
+    margin: 10px;
+    border: 1px solid black;
+}
 
 /* Header styling */
 
@@ -25,6 +29,8 @@ body {
     font-family: 'Open Sans', sans-serif;
     display: flex;
     justify-content: center;
+    border-bottom: 1px solid rgb(97, 97, 97);
+    padding: 5px 0 5px 0;
 }
 
 .nav-link {
@@ -45,7 +51,8 @@ body {
     text-align: center;
     color: brown;
     font-size: 24px;
-    margin: 10px 0 10px 0;
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid rgb(97, 97, 97);
 }
 
 .home-link-container, .search-link-container, .list-link-container {
