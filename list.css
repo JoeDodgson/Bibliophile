@@ -9,7 +9,6 @@ body {
 
 main {
     margin: 10px;
-    border: 1px solid black;
 }
 
 /* Header styling */
@@ -69,6 +68,36 @@ main {
 }
 
 
+/* List styling */
+
+.list-container {
+    padding: 20px;
+}
+
+.list-grid-container {
+    display: grid;
+    grid-template-columns: 45% 25% 15% 15%;
+}
+
+.list-grid-item {
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    margin: auto;
+}
+
+.listed-book {
+    border: 1px solid rgb(97, 97, 97);
+    margin-top: 2px;
+}
+
+.fa-info-circle, .fa-trash-alt {
+    font-size: 24px;
+}
+
+
+
 /* Footer styling */
 
 .footer-main {
@@ -89,4 +118,11 @@ main {
     font-family: 'Open Sans', sans-serif;
     color: white;
     text-align: center;
+}
+
+
+/* Universal styling */
+
+.display-none {
+    display: none;
 }
