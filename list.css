@@ -1,8 +1,14 @@
 /* list.css */
+
+/* Full document styling */
+
 body {
     margin: 0;
-    background-color: gainsboro
+    background-color: gainsboro;
 }
+
+
+/* Header styling */
 
 .header-display {
     display: inline;
@@ -17,23 +23,13 @@ body {
     text-align: center;
     color:black;
     font-family: 'Open Sans', sans-serif;
-
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
     display: flex;
     justify-content: center;
 }
 
 .nav-link {
-    color: rgb(97, 97, 97);
     font-size: 17px;
+    color: rgb(97, 97, 97);
 }
 
 .logo-text {
@@ -66,7 +62,24 @@ body {
 }
 
 
-/* .border-left-right {
-    border-left: 1px solid grey;
-    border-right: 1px solid grey;
-} */
+/* Footer styling */
+
+.footer-main {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: grey;
+}
+
+.footer-line {
+    height:7px;
+    background-color: brown;
+    margin-bottom: 20px;
+}
+
+.footer-text {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    text-align: center;
+}
