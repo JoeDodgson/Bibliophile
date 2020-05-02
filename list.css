@@ -1,1 +1,72 @@
 /* list.css */
+body {
+    margin: 0;
+    background-color: gainsboro
+}
+
+.header-display {
+    display: inline;
+    text-align: center;
+    background-color: #009999;
+    color:white;
+    font-family: 'Noto Serif', serif;
+}
+
+.navbar {
+    display: inline;
+    text-align: center;
+    color:black;
+    font-family: 'Open Sans', sans-serif;
+
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-link {
+    color: rgb(97, 97, 97);
+    font-size: 17px;
+}
+
+.logo-text {
+    font-family: 'Roboto', sans-serif;
+}
+
+.logo-icon {
+    height: 1rem;
+}
+
+.logo-container {
+    width: 100%;
+    text-align: center;
+    color: brown;
+    font-size: 24px;
+    margin: 10px 0 10px 0;
+}
+
+.home-link-container, .search-link-container, .list-link-container {
+    text-align: center;
+}
+
+.home-link-container, .list-link-container {
+    width: 39%;
+}
+
+.search-link-container {
+    text-align: center;
+    width: 20%;
+}
+
+
+/* .border-left-right {
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+} */
