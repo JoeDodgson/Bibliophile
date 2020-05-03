@@ -120,9 +120,7 @@ a:hover{
 a:active{
     color: orangered;
 }
-a:visited {
-    color: rgb(143, 25, 108);
-  }
+
 .desktopContainer {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: #078c87;    

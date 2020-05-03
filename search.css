@@ -120,10 +120,11 @@ a {
 footer {
     text-align: center;
     border-top: 5px solid #20B2AA;
-    /* position: sticky; */
+    position: absolute; 
     bottom: 0;
     background-color: dimgray;
     color: #ffffff;
+    width: 100%;
 }
 
 .grid-container {
