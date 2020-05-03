@@ -97,9 +97,9 @@ a {
 .mainBody {
     
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    height: 100%;
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;   
+    flex: 1; 
     align-items: center;
     padding: 40px 20px;
     background-color: #F8EEE7;    
@@ -152,6 +152,8 @@ a {
 
 }
 
+
+
 /* Search results styling */
 
 
@@ -172,6 +174,7 @@ a {
 
 .columnHeaders {
     font-weight: bold;
+    text-align: center;
 }
 
 .grid-item {
@@ -180,7 +183,7 @@ a {
     display: flex;  
     justify-content: center;
     flex-direction: column;
-        
+    
 }
 
 .fa-info-circle {
@@ -198,10 +201,10 @@ a {
     height: 75px;
     width: 50px;
 }
- 
-  footer {
+
+footer {
     width: 100%;
-    position: relative;
+    position: absolute;
     text-align: center;
     border-top: 5px solid #20B2AA;    
     bottom: 0;
@@ -209,6 +212,67 @@ a {
     color: #ffffff;
 }
 
+#search-warning {
+    color: red;
+}
+
+.small-image {
+    display: block;
+    max-width:67px;
+    max-height:100px;
+    width: auto;
+    height: auto;
+}
+
+.large-image {
+    display: none;
+    max-width:128px;
+    max-height:192px;
+    width: auto;
+    height: auto;
+}
+
+.title-text, .author-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.title-text {
+    max-height: 85px;
+}
+
+.author-text {
+    max-height: 34px;
+    font-style: italic;
+}
+
+.grid-item button {
+    cursor: default;
+    background-color: transparent;
+    box-sizing: unset;
+    margin: 0em;
+    padding: 0;
+    border-width: 0;
+    border-style: unset;
+    border-color: unset;
+    border-image: unset;
+}
+
+#results-summary {
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+/* General styling */
+
+.display-none {
+    display: none;
+}
+
+.pos-rel{
+    position: relative !important;
+}
 
 
 @media screen and (min-width: 768px) {
@@ -237,7 +301,21 @@ a {
         box-shadow: 2px 2px 5px #49274A;
         width: 50%;
         text-align: center;   
-             
+        font-size: 20px;
+    }
+
+    .searchFields {
+        height: 22px;
+        font-size: 20px;
+    }
+
+    .radio-buttons {
+        text-align: left;
+        padding-left: 25%;
+    }
+
+    #searchBtn {
+        font-size: 18px;
     }
 
     
@@ -255,11 +333,6 @@ a {
     }
     
 
-
-    footer {
-        bottom: auto;
-    }
-
     @media screen and (min-width: 1024px) {
 
         .image {
@@ -269,7 +342,30 @@ a {
 
     }
 
+    /* Alternate between image sizes shown */
+    .small-image {
+        display: none;
+    }
 
+    .large-image {
+        display: block;
+    }
 
+    .title-text, .author-text, .columnHeaders {
+        font-size: 22px;
+    }
+    
+    .title-text {
+        max-height: 135px;
+    }
+    
+    .author-text {
+        max-height: 54px;
+        font-style: italic;
+    }
+
+    .fas {
+        font-size: 40px;
+    }
 
 }

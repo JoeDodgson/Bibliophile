@@ -73,6 +73,11 @@
 
                 </form>
 
+                <!-- Search warning. Will only display when user searches on blank inputs -->
+                <div id="search-warning" class="display-none">
+                    <p>Enter a title, author or genre</p>
+                </div>
+
             </div>
 
             <div class="order">
@@ -90,45 +95,16 @@
             </div>
         </div>
 
-        <div class="grid-container result-headers">
-            <div id="imageHeader" class="columnHeaders grid-item">Cover</div>
-            <div id="detailsHeader" class="columnHeaders grid-item">Details</div>
-            <div id="infoHeader" class="columnHeaders grid-item">Info</div>
-            <div id="listHeader" class="columnHeaders grid-item">Add</div>
-        </div>
+        <div id="search-results-container">
 
-        <!-- Book 1 -->
-
-        <div class="grid-container book-container">
-            <div class="grid-item"><img class="image"
-                    src="https://books.google.com/books/content?id=tRXhsoI7W6EC&printsec=frontcover&img=1&zoom=5&source=gbs_api"
-                    alt="fire"></div>
-            <div id="details" class="grid-item">
-                <p>Title: <span class="titleText"></span></p>
-                <p>Author: <span class="authorText"></span></p>
+            <!-- Search results headers -->
+            <div id="result-headers" class="grid-container display-none">
+                <div id="imageHeader" class="columnHeaders grid-item">Cover</div>
+                <div id="detailsHeader" class="columnHeaders grid-item">Details</div>
+                <div id="infoHeader" class="columnHeaders grid-item">Info</div>
+                <div id="listHeader" class="columnHeaders grid-item">Add</div>
             </div>
-            <div id="moreI" class="grid-item"><i class="fas fa-info-circle"></i></div>
-            <div id="add" class="grid-item"><i class="fas fa-plus-circle"></i></div>
         </div>
-
-        <!-- Book 2 -->
-
-        <div class="grid-container book-container">
-            <div class="grid-item"><img class="image"
-                    src="https://books.google.com/books/content?id=AZ5J6B1-4BoC&printsec=frontcover&img=1&zoom=5&source=gbs_api"
-                    alt="hornet"></div>
-            <div id="details" class="grid-item">
-                <p>Title: <span class="titleText"></span></p>
-                <p>Author: <span class="authorText"></span></p>
-
-            </div>
-            <div id="moreI" class="grid-item"><i class="fas fa-info-circle"></i></div>
-            <div id="add" class="grid-item">In my list</i></div>
-        </div>
-
-
-
-
 
     </main>
 
