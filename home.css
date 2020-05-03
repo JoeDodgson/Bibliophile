@@ -1,1 +1,256 @@
-/* home.css */
+/* list.css */
+
+/* Full document styling */
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-color: #fef2e4;
+    margin: 0;
+    padding: 0px;
+    position: relative;
+}
+
+main {
+    margin: 10px;
+}
+
+/* Header styling */
+
+.header-display {
+    display: inline;
+    text-align: center;
+    background-color: #009999;
+    color:white;
+    font-family: 'Noto Serif', serif;
+}
+
+.navbar {
+    display: inline;
+    text-align: center;
+    color:black;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgb(97, 97, 97);
+    padding: 5px 0 5px 0;
+}
+a:hover{
+    
+    color: orange;
+}
+
+.nav-link {
+    font-size: 17px;
+    color: rgb(97, 97, 97);
+}
+
+.logo-text {
+    font-family: 'Roboto', sans-serif;
+}
+
+.logo-icon {
+    height: 1rem;
+}
+
+.logo-container {
+    width: 100%;
+    text-align: center;
+    color: brown;
+    font-size: 24px;
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid rgb(97, 97, 97);
+}
+
+.home-link-container, .search-link-container, .list-link-container {
+    text-align: center;
+}
+
+.home-link-container, .list-link-container {
+    width: 39%;
+}
+
+.search-link-container {
+    text-align: center;
+    width: 20%;
+}
+
+.worm {
+    color: #d9dcd6;
+}
+
+.mobile-navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+    background-color: #49274A;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.searchLink {
+    font-weight: bold;
+}
+
+header {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #94618E;
+    color: #ffffff;
+    text-align: center;
+    /* height: 100px; */
+}
+
+header h1 {
+    line-height: 60px;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-weight: 500;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: larger;
+}
+a:hover{
+    color: orange;
+}
+a:active{
+    color: orangered;
+}
+a:visited {
+    color: rgb(143, 25, 108);
+  }
+.desktopContainer {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #078c87;    
+    color: #ffffff;
+    text-align: center;
+    height: 100px;
+    padding: 5px 50px;
+    display: none;
+    justify-content: space-between;
+}
+
+.desktopContainer h1 {
+    line-height: 60px;
+    margin-bottom: 0;
+}
+
+.desktop-navbar {
+    padding-top: 35px;
+    padding-right: 5px;
+}
+
+.desktop-navbar a {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+ p {
+    
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.current-search-link {
+    font-weight: bold;
+}
+/*main styling*/
+
+  h2, h3{
+      text-align: center;
+      color: green;
+            
+  }
+  h2{
+    font-size: 30px;
+  }
+  h3{
+    font-size: 25px;
+  }
+  li{
+      color: #bf731a ;
+      font-size: 20px;
+      font-weight: 400;
+  }
+ 
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+  .center {
+    margin: 0;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-bottom: 5px solid green;
+    width: max-content;
+  }
+
+
+/* Footer styling */
+
+footer {
+    text-align: center;
+    border-top: 5px solid #20B2AA;
+    position: absolute;
+    bottom: 0;
+    background-color: dimgray;
+    color: #ffffff;
+    width: 100%;
+}
+
+
+/* Universal styling */
+
+.display-none {
+    display: none;
+}
+
+
+/* Responsiveness */
+@media (min-width: 480px) and (max-width: 570px) {
+    .list-grid-item {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 420px) and (max-width: 479px) {
+    .list-grid-item {
+        font-size: 11px;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    
+    #is-desktop {
+        display: flex;
+    }
+
+    #isMobile {
+        display: none;
+    }
+
+    .bookImage {
+        display: block;
+    }
+
+    .mainBody {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .searchElements {
+        display: flex;
+        flex-direction: column;
+    }
+
+}

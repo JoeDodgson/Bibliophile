@@ -1,11 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link href="home.css" rel="stylesheet">
 </head>
+
 <body>
-    
+    <!-- Header and navbar specific for the mobile viewport -->
+
+    <div id="isMobile">
+        <header class="mobile-header-brand">
+            <h1><span class="bookIcon"><i class="fas fa-book-reader"></i></span> Book<span class="worm">worm</span></h1>
+            <p>a book lover's best friend</p>
+        </header>
+
+        <nav class="mobile-navbar">
+            <a href="home.html">Home</a>
+            <a href="search.html">Search</a>
+            <a class="current-page-link" href="list.html">My List</a>
+        </nav>
+    </div>
+
+    <!-- Header and navbar specific to desktop viewport -->
+
+    <div class="desktopContainer" id="is-desktop">
+        <div class="brand">
+            <h1><span class="bookIcon"><i class="fas fa-book-reader"></i></span> Book<span class="worm">worm</span></h1>
+            <p>a book lover's best friend</p>
+        </div>
+        <nav class="desktop-navbar">
+            <a href="home.html">Home</a>
+            <a class="searchLink" href="search.html">Search</a>
+            <a href="list.html">My List</a>
+        </nav>
+    </div>
+
+
+    <main>
+        
+        <div class="center">             
+            
+            <h2>Bookworm</h2> 
+            <img src="images\bookLogo2.png" alt="logo" height="80px" width="150px">
+            <h3>a book lover's best friend</h3>
+            
+            <ul>
+                <li> <p>Find more informations about books</p></li>
+                <li> <p>Add to your read list</p></li>
+                <li> <p>Prioritise your read list</p></li>
+                <li>  <p>Set a target read date</p></li>
+            </ul>
+        </div>
+        
+    </main>
+
+    <!-- Footer -->
+
+    <footer id="sticky-footer" class="footer">
+        <small>Copyright &copy;</small>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
