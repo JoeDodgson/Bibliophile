@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Test</title>
+    <title>Search Page</title>
     <link rel="stylesheet" href="search.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
@@ -38,9 +38,9 @@
             <p>a book lover's best friend</p>
         </div>
         <nav class="desktop-navbar">
-            <a href="home.html">Home</a>
-            <a class="searchLink" href="search.html">Search</a>
-            <a href="list.html">My List</a>
+            <a href="./home.html">Home</a>
+            <a class="searchLink" href="#">Search</a>
+            <a href="./list.html">My List</a>
         </nav>
     </div>
 
@@ -54,67 +54,56 @@
 
                 <form id="titleSearch">
 
-                    <input id="titleSearchField" type="text" placeholder="Title Search" aria-label="Search">
-                    <button id="searchBtnT" type="submit"><i class="fa fa-search"></i></button>
+                    <input class="searchFields" id="titleSearchField" type="text" placeholder="Title Search"
+                        aria-label="Search">
+
                 </form>
 
                 <form id="authorSearch">
 
-                    <input id="authorSearchField" type="text" placeholder="Author Search" aria-label="Search">
-                    <button id="searchBtnA" type="submit"><i class="fa fa-search"></i></button>
+                    <input class="searchFields" id="authorSearchField" type="text" placeholder="Author Search"
+                        aria-label="Search">
+
                 </form>
 
                 <form id="genreSearch">
 
-                    <input id="genreSearchField" type="text" placeholder="Genre Search" aria-label="Search">
-                    <button id="searchBtnG" type="submit"><i class="fa fa-search"></i></button>
+                    <input class="searchFields" id="genreSearchField" type="text" placeholder="Genre Search"
+                        aria-label="Search">
+
                 </form>
+
+                <!-- Search warning. Will only display when user searches on blank inputs -->
+                <div id="search-warning" class="display-none">
+                    <p>Enter a title, author or genre</p>
+                </div>
 
             </div>
 
             <div class="order">
                 <p>Order search by:</p>
-                <input type="radio" id="relevance" name="relevance" value="relevance">
-                <label for="relevance">Relevance</label><br>
-                <input type="radio" id="newest" name="newest" value="newest">
-                <label for="newest">Newest to Oldest</label><br>
+                <div class="radio-buttons">
+                    <input type="radio" id="relevance" name="orderGroup" value="relevance" checked="true">
+                    <label for="relevance">Relevance</label><br>
+                    <input type="radio" id="newest" name="orderGroup" value="newest">
+                    <label for="newest">Newest to Oldest</label><br>
+                </div>
             </div>
 
             <div class="searchButton">
-                <button>Search</button>
+                <button id="searchBtn">Search</button>
             </div>
         </div>
 
-        <img class="bookImage"
-            src="https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            alt="bookcase">
+        <div id="search-results-container">
 
-        <div class="grid-container">
-            <div id="imageHeader" class="columnHeaders grid-item">Image</div>
-            <div id="detailsHeader" class="columnHeaders grid-item">Details</div>
-            <div id="infoHeader" class="columnHeaders grid-item">More info</div>
-            <div id="listHeader" class="columnHeaders grid-item">Add to list</div>
-            
-            <!-- Book 1 -->
-            <div class="columnHeaders grid-item"><img class="image" src="https://books.google.com/books/content?id=tRXhsoI7W6EC&printsec=frontcover&img=1&zoom=5&source=gbs_api" alt="fire"></div>
-            <div id="details" class="grid-item">
-                <p>Title: <span class="titleText"></span></p>
-                <p>Author: <span class="authorText"></span></p>
-                
+            <!-- Search results headers -->
+            <div id="result-headers" class="grid-container display-none">
+                <div id="imageHeader" class="columnHeaders grid-item">Cover</div>
+                <div id="detailsHeader" class="columnHeaders grid-item">Details</div>
+                <div id="infoHeader" class="columnHeaders grid-item">Info</div>
+                <div id="listHeader" class="columnHeaders grid-item">Add</div>
             </div>
-            <div id="moreI" class="grid-item"><i class="fas fa-info-circle"></i></div>
-            <div id="add" class="grid-item"><i class="fas fa-plus-circle"></i></div>
-            
-            <!-- Book 2 -->
-
-            <div class="columnHeaders grid-item"><img class="image" src="https://books.google.com/books/content?id=AZ5J6B1-4BoC&printsec=frontcover&img=1&zoom=5&source=gbs_api" alt="hornet"></div>
-            <div id="details" class="grid-item">
-                <p>Title: <span class="titleText"></span></p>
-                <p>Author: <span class="authorText"></span></p>
-                
-            </div>
-            <div id="moreI" class="grid-item"><i class="fas fa-info-circle"></i></div>
-            <div id="add" class="grid-item">In my list</i></div>
         </div>
 
     </main>
