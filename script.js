@@ -125,6 +125,7 @@ function bookSearch(titleSearch,authorSearch,genreSearch,sortType){
         url: queryURL,
         dataType: "json",
         success: function(data){
+            saveBooksData(data);
             // Hide the search warning message
             $("#search-warning").addClass("display-none");
             // Display the result headings
@@ -137,8 +138,8 @@ function bookSearch(titleSearch,authorSearch,genreSearch,sortType){
             numSearchResults = data.items.length;
             for(i = 0; i < numSearchResults; i++){
                 // Create a <div> parent element to hold info for each book
-                searchResult = document.createElement("div");
-
+                searchResult = document.createElement("div");                
+                
                 // -Set the class attribute to the new div
                 searchResult.setAttribute("class","grid-container book-container");
                 
@@ -282,6 +283,104 @@ function bookSearch(titleSearch,authorSearch,genreSearch,sortType){
             resultsSummaryText.textContent = "Displaying " + numSearchResults + " results";
             resultsSummary.append(resultsSummaryText);
             $("#search-results-container").append(resultsSummary);
+            
         }
     });
 }
+
+//start-niro
+var dataArray = [];
+var title;
+var author;
+var date;
+var dataId
+var dataObj;
+function renderBookData(){
+
+    //get the local storage and convert to a json object
+    dataArray = JSON.parse(localStorage.getItem("bookData")); 
+    //check the local storage have any data or not
+    if(dataArray !==null){
+
+        //use a for loop to render get revelent data from local storage  
+        for (var i = 0; i < dataArray.length; i++) {
+
+            var listDiv = $("<div>").addClass("list-grid-container listed-book");
+
+            //set data-ID attribute to a div.
+            var listedBook = listDiv.attr('data-ID' , dataArray[i].dataID );
+            var detailDiv = $("<div>").addClass("list-grid-item").text(dataArray[i].dataAuthor + "by" + dataArray[i].dataTitle);
+            var dateDiv = $("<div>").addClass("list-grid-item").text(dataArray[i].dataDate);
+            var infoDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-info-circle'></i>"));
+            var deleteDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-trash-alt'></i>"));
+
+            listedBook.append(detailDiv, dateDiv, infoDiv, deleteDiv);            
+            $(".list-container").append(listedBook);
+        }
+
+    }
+    
+    // if local storage is empty pass a message to the user
+    else{
+        var listEmptyMsg = $("<p>").addClass("emptyList").text("Your read to list is empty...");
+    }
+}
+
+// When the document has loaded, display saved my list
+$(document).ready(function() {
+
+    renderBookData();
+});
+
+function saveBooksData(data){
+    title = data.items[0].volumeInfo.title;
+    author = data.items[0].volumeInfo.authors[0];
+    bookId = data.items[0].id;
+    date = "04/05/2020";
+    
+    // date = dateDiv.textContent
+        dataObj = {
+        dataId : bookId,
+        dataTitle : title,
+        dataAuthor : author,
+        dataDate : date
+        };
+    
+
+    if(date === ""){
+        displayMessage("error", "Target read date cannot be blank");
+    }
+
+    else{       
+        
+        dataArray = JSON.parse(localStorage.getItem("bookData")) || [];
+        dataArray.push(dataObj);
+        localStorage.setItem("bookData", JSON.stringify(dataArray));
+    }
+    
+    
+}
+
+//function to show error message
+function displayMessage(type, message) {
+    var msgDiv = $("#msgDiv");
+    msgDiv.text = message;
+    msgDiv.attr("class", type);
+    }
+/* this should go to search.css
+#msg {
+  visibility: hidden;
+  margin-top: 20px;
+  font-weight: 700;
+  height: 1.2em;
+  font-size: 1.2em;
+}
+
+#msg.error {
+  visibility: visible;
+  color: #e6252c;
+}
+
+
+
+*/
