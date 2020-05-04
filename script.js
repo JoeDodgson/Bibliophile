@@ -292,22 +292,15 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 var bookID = $(this).parent().attr('data-id');
                 $(".new-modal-content").empty();
                 moreInfo(bookID);
-                $("#infoModal").css("display", "block");
 
                 // Get the modal
                 var modal = document.getElementById("infoModal");
 
-                // Get the button that opens the modal
-
-                var btn = document.querySelectorAll(".more-info");
-
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
 
-                // When the user clicks on the button, open the modal
-                btn.onclick = function () {
-                    modal.style.display = "block";
-                }
+                // When the user clicks on the More Info button, open the modal
+                $("#infoModal").css("display", "block");
 
                 // When the user clicks on <span> (x), close the modal
                 span.onclick = function () {
@@ -341,15 +334,19 @@ var currencyKey = "6c4469885fbd3d0be266ec69"
 
 function moreInfo(bookID) {
 
-
+    // Variable to hold Google Books API URL
 
     var fullBookUrl = "https://www.googleapis.com/books/v1/volumes/" + bookID + "?key=" + bookKey
 
+    // Ajax call to request data from Google Books API
 
     $.ajax({
         url: fullBookUrl,
         method: "GET"
     }).then(function (bookResponse) {
+
+        // Variable assignment of returned API book data
+
         var cover;
         if (bookResponse.volumeInfo.imageLinks.large !== undefined) {
             cover = bookResponse.volumeInfo.imageLinks.large;
@@ -359,30 +356,26 @@ function moreInfo(bookID) {
             cover = bookResponse.volumeInfo.imageLinks.small;
         } else if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
             cover = bookResponse.volumeInfo.imageLinks.thumbnail;
+        } else {
+            cover = "./assets/no-book-cover.gif"
         }
 
-        console.log(cover);
         var title = bookResponse.volumeInfo.title;
-        console.log(title);
         var authorArray = bookResponse.volumeInfo.authors;
         var last = authorArray.pop();
         var authors = authorArray.join(", ") + " and " + last;
         var publisher = bookResponse.volumeInfo.publisher;
-        console.log(publisher);
         var publishDate = bookResponse.volumeInfo.publishedDate;
-        console.log(publishDate);
+        var publishDateSplit = publishDate.split("-");
+        var publishYear = publishDateSplit[0];
+        var publishMonth = publishDateSplit[1];
+        var publishDay = publishDateSplit[2];
         var description = bookResponse.volumeInfo.description;
-        console.log(description);
         var pageCount = bookResponse.volumeInfo.pageCount;
-        console.log(pageCount);
         var language = bookResponse.volumeInfo.language;
-        console.log(language);
         var rating = bookResponse.volumeInfo.averageRating;
-        console.log(rating);
         var ratingsCount = bookResponse.volumeInfo.ratingsCount;
-        console.log(ratingsCount);
         var saleability = bookResponse.saleInfo.saleability;
-        console.log(saleability);
 
         // Creating modal and modal content
 
@@ -403,14 +396,19 @@ function moreInfo(bookID) {
         var retailDiv = $("<div>");
         var retailHead = $("<h3>");
         var bookSaleability = $("<p>");
+        var addDiv = $("<div>");
+        var addButton = $("<button>");
+        var addText = $("<h3>");
+        
 
         // Setting attributes
+
 
         bookCover.attr("src", cover);
         bookCover.attr("alt", "Book Cover");
         bookCover.addClass("book-cover");
         titleAuthorDiv.addClass("title-author-container info-container");
-        bookTitle.addClass("book-title")
+        bookTitle.addClass("book-title");
         bookAuthor.addClass("book-author");
         descriptionDiv.addClass("description-container info-container");
         descriptionHead.addClass("description-header");
@@ -418,12 +416,15 @@ function moreInfo(bookID) {
         publishDetailsDiv.addClass("publish-container info-container");
         bookPublishdetails.addClass("book-publish-details");
         retailDiv.addClass("retail-container info-container");
-        retailHead.addClass("retail-header")
+        retailHead.addClass("retail-header");
         bookSaleability.addClass("book-saleability");
         ratingDiv.addClass("rating-container info-container")
-        ratingHead.addClass("rating-header")
-        ratingOutofFive.addClass("rating")
+        ratingHead.addClass("rating-header");
+        ratingOutofFive.addClass("rating");
         ratingOutofFiveCount.addClass("rating-count")
+        addDiv.addClass("add-container info-container");
+        addButton.addClass("fas fa-plus-circle");
+        addText.addClass("add-text");
 
 
         // Setting content of elements
@@ -445,6 +446,7 @@ function moreInfo(bookID) {
         ratingOutofFiveCount.html("Number of ratings: " + ratingsCount);
         bookPublishdetails.html(pageCount + " pages | Published on " + publishDate + " by " + publisher);
         retailHead.html("Retail Information");
+        addText.html("Add to My List");
 
         if (saleability === "FOR_SALE") {
 
@@ -455,7 +457,6 @@ function moreInfo(bookID) {
         }
 
 
-
         // Appending elements
 
         infoContent.append(bookCover);
@@ -463,7 +464,8 @@ function moreInfo(bookID) {
         infoContent.append(descriptionDiv);
         infoContent.append(ratingDiv);
         infoContent.append(retailDiv);
-        infoContent.append(publishDetailsDiv);        
+        infoContent.append(publishDetailsDiv);
+        infoContent.append(addDiv);
         titleAuthorDiv.append(bookTitle);
         titleAuthorDiv.append(bookAuthor);
         descriptionDiv.append(descriptionHead);
@@ -474,14 +476,14 @@ function moreInfo(bookID) {
         ratingDiv.append(ratingOutofFiveCount);
         retailDiv.append(retailHead);
         retailDiv.append(bookSaleability);
+        addDiv.append(addButton);
+        addDiv.append(addText);
 
         // If statement declaring variables holding retail price and currency code as these properties only exist if the saleability is 'For Sale'
 
         if (saleability === "FOR_SALE") {
             var price = bookResponse.saleInfo.listPrice.amount;
-            console.log(price);
             var currency = bookResponse.saleInfo.listPrice.currencyCode;
-            console.log(currency);
             var currencyUrl = "https://prime.exchangerate-api.com/v5/" + currencyKey + "/latest/" + currency;
 
             // Second ajax call to make a request to the Exchange Rate API if the saleability is 'For Sale'
@@ -490,16 +492,14 @@ function moreInfo(bookID) {
                 url: currencyUrl,
                 method: "GET"
             }).then(function (exchangeResponse) {
+
                 var exchangeGBP = exchangeResponse.conversion_rates.GBP;
-                console.log(exchangeGBP);
-                var amountGBP = price * exchangeGBP;
+                var amountGBP = (price * exchangeGBP).toFixed(2);
 
                 var retailPriceGBP = $("<p>");
                 retailPriceGBP.addClass("GBP-retail-price");
                 retailPriceGBP.html("Retail price (GBP): £" + amountGBP);
                 retailDiv.append(retailPriceGBP);
-
-
 
             })
         }
@@ -507,9 +507,3 @@ function moreInfo(bookID) {
     })
 
 }
-
-
-
-
-
-
