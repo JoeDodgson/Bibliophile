@@ -178,6 +178,35 @@ header p {
     font-size: 24px;
 }
 
+.buttons-container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.saveButton, .cancelButton, .clearButton {
+    margin: 0px 10px;
+    max-width: 100px;
+    display: inline;
+}
+
+#saveBtn, #cancelBtn, #clearBtn {
+    width: 65px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
+
+#saveBtn {
+    background-color: green;
+}
+
+#cancelBtn {
+    background-color: orange;
+}
+
+#clearBtn {
+    background-color: red;
+} 
 
 
 /* Footer styling */
