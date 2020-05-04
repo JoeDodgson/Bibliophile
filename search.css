@@ -263,6 +263,76 @@ footer {
     text-align: center;
 }
 
+/* Styling More Info modal */
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    
+    
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .new-modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-container {
+      
+    width: 100%;
+    border-bottom: 2px solid lightgrey;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    /* margin-bottom: 10px; */
+  }
+
+  .title-author-container {
+      text-align: center;
+  }
+
+  .book-author {
+      font-style: italic;
+  }
+
+  .book-cover {
+      width: 80%;
+      height: auto;
+  }
 
 /* General styling */
 
@@ -330,6 +400,23 @@ footer {
         width: 90%;
         float: right;        
         
+    }
+
+    .modal-content {
+        min-height: 450px;
+    }
+    
+    .new-modal-content {
+        display: block;
+    }
+
+    .book-cover {
+        float: left;
+        width: 40%;
+        height: auto; 
+        max-width: 300px;
+        max-height: 600px;       
+        margin-right: 20px;
     }
     
 
