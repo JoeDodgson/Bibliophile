@@ -142,7 +142,11 @@ header p {
 .current-search-link {
     font-weight: bold;
 }
-
+#addDate{
+    width: -webkit-fill-available;
+    text-align: center;
+    border: 0px;
+}
 
 
 /* List styling */

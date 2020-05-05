@@ -137,8 +137,8 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
             numSearchResults = data.items.length;
             for (i = 0; i < numSearchResults; i++) {
                 // Create a <div> parent element to hold info for each book
-                searchResult = document.createElement("div");                
-                
+                searchResult = document.createElement("div");
+
                 // -Set the class attribute to the new div
                 searchResult.setAttribute("class", "grid-container book-container");
 
@@ -315,6 +315,10 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 }
 
             })
+            $(".fa-plus-circle").on("click", function () {
+                saveBooksData(this);
+
+            });
         }
     });
 }
@@ -326,69 +330,108 @@ var author;
 var date;
 var dataId
 var dataObj;
-function renderBookData(){
 
+
+function renderBookData() {    
     //get the local storage and convert to a json object
-    dataArray = JSON.parse(localStorage.getItem("bookData")); 
+    dataArray = JSON.parse(localStorage.getItem("bookData"));
     //check the local storage have any data or not
-    if(dataArray !==null){
+    if (dataArray !== null) {
 
         //use a for loop to render get revelent data from local storage  
         for (var i = 0; i < dataArray.length; i++) {
 
-            var listDiv = $("<div>").addClass("list-grid-container listed-book");
+            var listDiv = $("<div>").addClass("list-grid-container listed-book");            
 
             //set data-ID attribute to a div.
-            var listedBook = listDiv.attr('data-ID' , dataArray[i].dataID );
-            var detailDiv = $("<div>").addClass("list-grid-item").text(dataArray[i].dataAuthor + "by" + dataArray[i].dataTitle);
-            var dateDiv = $("<div>").addClass("list-grid-item").text(dataArray[i].dataDate);
+            var dateText = ($('<input/>').attr({ type: 'text', id: 'addDate', name: 'test' ,width: '5%'})).val(dataArray[i].dataDate);
+            var listedBook = listDiv.attr('data-ID', dataArray[i].dataID);
+            var detailDiv = $("<div>").addClass("list-grid-item").text(dataArray[i].dataTitle + '\n' + dataArray[i].dataAuthor);
+            var dateDiv = ($("<div>").addClass("list-grid-item")).append(dateText);
             var infoDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-info-circle'></i>"));
             var deleteDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-trash-alt'></i>"));
 
-            listedBook.append(detailDiv, dateDiv, infoDiv, deleteDiv);            
+            listedBook.append(detailDiv, dateDiv, infoDiv, deleteDiv);
             $(".list-container").append(listedBook);
         }
 
     }
-    
+
     // if local storage is empty pass a message to the user
-    else{
+    else {
         var listEmptyMsg = $("<p>").addClass("emptyList").text("Your read to list is empty...");
     }
 }
 
+var now = new Date();
+
+var day = ("0" + now.getDate()).slice(-2);
+var month = ("0" + (now.getMonth() + 1)).slice(-2);
+var newDate = (day)+"/"+(month)+"/"+ now.getFullYear();
+
+$("#addDate").keypress(function(event) { 
+	
+	if (event.keyCode === 13) { 
+		event.preventDefault();
+		changeDate(); 
+	} 
+});
+
+function changeDate(bookData, dataDate, newDate) {
+
+	// Get the existing data
+	var existing = localStorage.getItem(bookData);
+
+	// If no existing data, create an array
+	// Otherwise, convert the localStorage string to an array
+	existing = existing ? JSON.parse(existing) : {};
+
+	// Add new data to localStorage Array
+	existing[dataDate] = newDate;
+
+	// Save back to localStorage
+	localStorage.setItem(name, JSON.stringify(existing));
+
+};
+
+
 // When the document has loaded, display saved my list
-$(document).ready(function() {
+$(document).ready(function () {
 
     renderBookData();
 });
 
-function saveBooksData(data){
-    title = data.items[0].volumeInfo.title;
-    author = data.items[0].volumeInfo.authors[0];
-    bookId = data.items[0].id;
-    date = "04/05/2020";
-    
-    // date = dateDiv.textContent
-        dataObj = {
-        dataId : bookId,
-        dataTitle : title,
-        dataAuthor : author,
-        dataDate : date
-        };
-    
+function saveBooksData(data) {
 
-    if(date === ""){
-        displayMessage("error", "Target read date cannot be blank");
-    }
-
-    else{       
+    
+        bookId = $(".book-container").attr("data-id");
+        author = $(".author-text").html();
+        title = $(".title-text").html();
+        date = newDate;
+        console.log(title);
         
-        dataArray = JSON.parse(localStorage.getItem("bookData")) || [];
-        dataArray.push(dataObj);
-        localStorage.setItem("bookData", JSON.stringify(dataArray));
-    }
-    
+console.log(date);
+
+        // date = dateDiv.textContent
+        dataObj = {
+            dataId: bookId,
+            dataTitle: title,
+            dataAuthor: author,
+            dataDate: date
+        };
+
+
+        if (date === "") {
+            displayMessage("error", "Target read date cannot be blank");
+        }
+
+        else {
+
+            dataArray = JSON.parse(localStorage.getItem("bookData")) || [];
+            dataArray.push(dataObj);
+            localStorage.setItem("bookData", JSON.stringify(dataArray));
+        }
+
     
 }
 
@@ -397,7 +440,7 @@ function displayMessage(type, message) {
     var msgDiv = $("#msgDiv");
     msgDiv.text = message;
     msgDiv.attr("class", type);
-    }
+}
 /* this should go to search.css
 #msg {
   visibility: hidden;
@@ -439,6 +482,7 @@ function moreInfo(bookID) {
     }).then(function (bookResponse) {
 
         // Variable assignment of returned API book data
+        console.log(bookResponse);
 
         var cover;
         if (bookResponse.volumeInfo.imageLinks.large !== undefined) {
@@ -492,7 +536,7 @@ function moreInfo(bookID) {
         var addDiv = $("<div>");
         var addButton = $("<button>");
         var addText = $("<h3>");
-        
+
 
         // Setting attributes
 
