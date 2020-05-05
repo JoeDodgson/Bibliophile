@@ -1,5 +1,6 @@
 // script.js
 
+
 // Declare global variables
 // Static parts of the book search ajax call query URL
 var queryURLAPI = "&key=AIzaSyA6Hu3cw4Ie_fjiKoUuamSqsAFfqi7pknQ";
@@ -78,6 +79,7 @@ $("#searchBtn").on("click", function () {
         // Call the function to perform the ajax call
         bookSearch(titleSearch, authorSearch, genreSearch, sortType);
     }
+
 })
 
 function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
@@ -286,7 +288,6 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
             // Click event to call the moreInfo function (DP)
 
 
-
             $(".more-info").click(function () {
                 var bookID = $(this).parent().attr('data-id');
                 $(".new-modal-content").empty();
@@ -310,7 +311,6 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 window.onclick = function (event) {
                     if (event.target == modal) {
                         modal.style.display = "none";
-
                     }
                 }
 
@@ -320,6 +320,9 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
 
             });
         }
+
+
+
     });
 }
 
@@ -481,18 +484,24 @@ function moreInfo(bookID) {
         method: "GET"
     }).then(function (bookResponse) {
 
+        
+
         // Variable assignment of returned API book data
         console.log(bookResponse);
 
         var cover;
-        if (bookResponse.volumeInfo.imageLinks.large !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.large;
-        } else if (bookResponse.volumeInfo.imageLinks.medium !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.medium;
+        if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
+            cover = bookResponse.volumeInfo.imageLinks.thumbnail;
+        } else if (bookResponse.volumeInfo.imageLinks.smallThumbnail !== undefined) {
+            cover = bookResponse.volumeInfo.imageLinks.smallThumbnail;
         } else if (bookResponse.volumeInfo.imageLinks.small !== undefined) {
             cover = bookResponse.volumeInfo.imageLinks.small;
-        } else if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.thumbnail;
+        } else if (bookResponse.volumeInfo.imageLinks.medium !== undefined) {
+            cover = bookResponse.volumeInfo.imageLinks.medium;
+        } else if (bookResponse.volumeInfo.imageLinks.large !== undefined) {
+            cover = bookResponse.volumeInfo.imageLinks.large;
+        } else if (bookResponse.volumeInfo.imageLinks.extraLarge !== undefined) {
+            cover = bookResponse.volumeInfo.imageLinks.extraLarge;
         } else {
             cover = "./assets/no-book-cover.gif"
         }
@@ -568,6 +577,7 @@ function moreInfo(bookID) {
 
         bookTitle.html(title);
 
+        
         if (bookResponse.volumeInfo.authors === undefined) {
             bookAuthor.html("No data available")
         } else if (authorArray.length > 0) {
@@ -577,11 +587,23 @@ function moreInfo(bookID) {
         }
 
         descriptionHead.html("Description");
-        bookDescription.html(description);
+        
+        if (description === undefined) {
+            bookDescription.html("No description available");
+        } else {
+            bookDescription.html(description);
+        }
+        
         ratingHead.html("Rating");
-        ratingOutofFive.html("Average Rating: " + rating + "/5");
+
+        if (rating === undefined) {
+            ratingOutofFive.html("No ratings available");
+        } else {
+            ratingOutofFive.html("Average Rating: " + rating + "/5");
         ratingOutofFiveCount.html("Number of ratings: " + ratingsCount);
-        bookPublishdetails.html(pageCount + " pages | Published on " + publishDate + " by " + publisher);
+        }
+                
+        bookPublishdetails.html(pageCount + " pages | Publish date: " + publishDate + " | " + publisher);
         retailHead.html("Retail Information");
         addText.html("Add to My List");
 
