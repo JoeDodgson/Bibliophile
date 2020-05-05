@@ -194,10 +194,25 @@ a {
     font-size: 24px;
     
     
+    
 }
 
 .fa-plus-circle {
     font-size: 24px;
+    
+    
+}
+
+.fa-info-circle::before {
+    cursor: pointer;
+    
+    
+    
+}
+
+.fa-plus-circle::before {
+    cursor: pointer;
+    
     
 }
 
@@ -349,8 +364,16 @@ footer {
   }
 
   .add-container .fas {
-    border-radius: 50%;
-    margin-bottom: 15px;
+    background-color: transparent;
+    box-sizing: unset;
+    margin: 0em;
+    margin-bottom: 10px;
+    padding: 0;
+    border-width: 0;
+    border-style: unset;
+    border-color: unset;
+    border-image: unset;
+    cursor: pointer;
 }
 
 /* General styling */
