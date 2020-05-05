@@ -504,3 +504,28 @@ function moreInfo(bookID) {
     })
 
 }
+
+
+// My list - change date
+
+// Add an event listener for a click event on the target read date
+$(".target-read-date").on("click", function(){
+    // Hide static text and show the text input field so the user can modify the date
+    this.querySelector(".static-date").classList.add("display-none");
+    this.querySelector(".select-date").classList.remove("display-none");
+})
+
+$( function() {
+    $( ".select-date" ).datepicker();
+} );
+
+
+// Add buttons to the list.html for 'save' and 'cancel changes'
+// -Add an event listener for the click event on the 'save' button
+// -When the user clicks on the save button, loop through each of the books in My List. If the target read date <text area> element has .val() different to the <p> target read date element's .textContent, then edit the target read date saved in localStorage. Add 1 to the counter of how many changes were made
+// -Display a message saying "x dates changed" and change the display of the amended target read dates to flash with a green outline. Then switch back all of the displays to show the <p> element and hide the <text area>
+// -NOTE: What do we do when a user clicks on a target read date, then changes their mind and wants to see what was there previously? Maybe always revert to <p> element being displayed after clicking off, but display text in red to show that it's not saved.
+// Add a HTML element which says 'unsaved changes' in red text at the bottom of the page
+// Add event listener for change of text content to the target read date text input elements. Display an element which says 'unsaved changes' at the bottom of the page
+// Add event listener for the click event on the 'cancel changes button'. Calls the renderDisplay function
+// Add an item
