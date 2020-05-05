@@ -345,17 +345,23 @@ function moreInfo(bookID) {
         method: "GET"
     }).then(function (bookResponse) {
 
+        
+
         // Variable assignment of returned API book data
 
         var cover;
-        if (bookResponse.volumeInfo.imageLinks.large !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.large;
-        } else if (bookResponse.volumeInfo.imageLinks.medium !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.medium;
+        if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
+            cover = bookResponse.volumeInfo.imageLinks.thumbnail;
+        } else if (bookResponse.volumeInfo.imageLinks.smallThumbnail !== undefined) {
+            cover = bookResponse.volumeInfo.imageLinks.smallThumbnail;
         } else if (bookResponse.volumeInfo.imageLinks.small !== undefined) {
             cover = bookResponse.volumeInfo.imageLinks.small;
-        } else if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.thumbnail;
+        } else if (bookResponse.volumeInfo.imageLinks.medium !== undefined) {
+            cover = bookResponse.volumeInfo.imageLinks.medium;
+        } else if (bookResponse.volumeInfo.imageLinks.large !== undefined) {
+            cover = bookResponse.volumeInfo.imageLinks.large;
+        } else if (bookResponse.volumeInfo.imageLinks.extraLarge !== undefined) {
+            cover = bookResponse.volumeInfo.imageLinks.extraLarge;
         } else {
             cover = "./assets/no-book-cover.gif"
         }
@@ -431,6 +437,7 @@ function moreInfo(bookID) {
 
         bookTitle.html(title);
 
+        
         if (bookResponse.volumeInfo.authors === undefined) {
             bookAuthor.html("No data available")
         } else if (authorArray.length > 0) {
@@ -440,11 +447,23 @@ function moreInfo(bookID) {
         }
 
         descriptionHead.html("Description");
-        bookDescription.html(description);
+        
+        if (description === undefined) {
+            bookDescription.html("No description available");
+        } else {
+            bookDescription.html(description);
+        }
+        
         ratingHead.html("Rating");
-        ratingOutofFive.html("Average Rating: " + rating + "/5");
+
+        if (rating === undefined) {
+            ratingOutofFive.html("No ratings available");
+        } else {
+            ratingOutofFive.html("Average Rating: " + rating + "/5");
         ratingOutofFiveCount.html("Number of ratings: " + ratingsCount);
-        bookPublishdetails.html(pageCount + " pages | Published on " + publishDate + " by " + publisher);
+        }
+                
+        bookPublishdetails.html(pageCount + " pages | Publish date: " + publishDate + " | " + publisher);
         retailHead.html("Retail Information");
         addText.html("Add to My List");
 
