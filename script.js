@@ -527,32 +527,59 @@ function moreInfo(bookID) {
 }
 
 
-// My list - change date
+// My list - change date modal
 
 // Add an event listener for a click event on the target read date
 $(".target-read-date").on("click", function(){
-    // Hide static text and show the text input field so the user can modify the date
-    this.querySelector(".static-date").classList.add("display-none");
-    this.querySelector(".select-date").classList.remove("display-none");
+    // Get the book ID, title and target read date from the listed book parent element
+    var bookTitle = $(this).siblings(".book-details").children(".book-title")[0].textContent;
+    var bookDate = $(this)[0].textContent.trim();
+    var bookID = $(this).parent(".listed-book").attr('data-id');
+
+    // Update the title & target read date shown in modal and update data-id attribute
+    $("#date-modal-title").html(bookTitle);
+    $("#select-date").val(bookDate);
+    $("#change-date-modal").attr("data-stored-date",bookDate);
+    $("#change-date-modal").attr("data-id",bookID);
+
+    // When the user clicks the close button it hides the modal
+    $("#date-modal-close").on("click", function() {
+        $("#change-date-modal").addClass("display-none");
+    })
+    
+    // Display the 'change date' modal
+    $("#change-date-modal").removeClass("display-none");
 })
+
 
 // Add an event listener for the click event on the 'save' button
 $("#saveBtn").on("click", function(){
-    // Loop through each of the books in My List. 
-    
-    // Check if the date in the <textarea> is different to the date in the <p> element 
+    // Retrieve the stored target read date from the modal
+    var storedDate = $("#change-date-modal")[data-stored-date];
 
-    // If different, add to an array of changed dates
-    
-    // update the target read date saved in localStorage. 
-    
-    // Re-render my list
+    // Store the date that the user entered
+    var enteredDate = $("#select-date").val();
 
-    // Temporarily highlight the amended books read dates in green
+
+    console.log(enteredDate[2]);
+    // Validate the date entered
+    if(!(enteredDate.length === 10 && enteredDate[2] === "/" && enteredDate[5] === "/" && parseInt(enteredDate.slice(0,2)) <= 31 && parseInt(enteredDate.slice(3,5)) <= 12 && parseInt(enteredDate.slice(6,10)) > 2000)){
+        // If entered text does not pass validation if statement, display the error message
+        $("#select-date-warning").removeClass("display-none");
+    }
+    else if(enteredDate === $()){
+        // Check if the date in the <textarea> is different to the date in the <p> element
+
+        // Store the book-id, from the data-id attribute in the change date modal
+        var bookID = $("#change-date-modal").attr('data-id');
+        
+        // If different, add to an array of changed dates
+        
+        // update the target read date saved in localStorage. 
+        
+        // Display text to say changes have been saved
+    }
 })
 
-// -Display a message saying "x dates changed" and change the display of the amended target read dates to flash with a green outline. Then 
-// -NOTE: What do we do when a user clicks on a target read date, then changes their mind and wants to see what was there previously? Maybe always revert to <p> element being displayed after clicking off, but display text in red to show that it's not saved.
-// Add a HTML element which says 'unsaved changes' in red text at the bottom of the page
-// Add event listener for change of text content to the target read date text input elements. Display an element which says 'unsaved changes' at the bottom of the page
-// Add event listener for the click event on the 'cancel changes button'. Calls the renderDisplay function
+// Fix the positioning of the modal
+// Add hover styling to Target read date, Clear List button and Save changes button
