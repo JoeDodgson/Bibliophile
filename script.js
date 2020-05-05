@@ -315,6 +315,10 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 }
 
             })
+            $(".fa-plus-circle").on("click", function () {
+                saveBooksData(this);
+
+            });
         }
 
 
@@ -322,6 +326,141 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
     });
 }
 
+//start-niro
+var dataArray = [];
+var title;
+var author;
+var date;
+var dataId
+var dataObj;
+
+
+function renderBookData() {    
+    //get the local storage and convert to a json object
+    dataArray = JSON.parse(localStorage.getItem("bookData"));
+    //check the local storage have any data or not
+    if (dataArray !== null) {
+
+        //use a for loop to render get revelent data from local storage  
+        for (var i = 0; i < dataArray.length; i++) {
+
+            var listDiv = $("<div>").addClass("list-grid-container listed-book");            
+
+            //set data-ID attribute to a div.
+            var dateText = ($('<input/>').attr({ type: 'text', id: 'addDate', name: 'test' ,width: '5%'})).val(dataArray[i].dataDate);
+            var listedBook = listDiv.attr('data-ID', dataArray[i].dataID);
+            var detailDiv = $("<div>").addClass("list-grid-item").text(dataArray[i].dataTitle + '\n' + dataArray[i].dataAuthor);
+            var dateDiv = ($("<div>").addClass("list-grid-item")).append(dateText);
+            var infoDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-info-circle'></i>"));
+            var deleteDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-trash-alt'></i>"));
+
+            listedBook.append(detailDiv, dateDiv, infoDiv, deleteDiv);
+            $(".list-container").append(listedBook);
+        }
+
+    }
+
+    // if local storage is empty pass a message to the user
+    else {
+        var listEmptyMsg = $("<p>").addClass("emptyList").text("Your read to list is empty...");
+    }
+}
+
+var now = new Date();
+
+var day = ("0" + now.getDate()).slice(-2);
+var month = ("0" + (now.getMonth() + 1)).slice(-2);
+var newDate = (day)+"/"+(month)+"/"+ now.getFullYear();
+
+$("#addDate").keypress(function(event) { 
+	
+	if (event.keyCode === 13) { 
+		event.preventDefault();
+		changeDate(); 
+	} 
+});
+
+function changeDate(bookData, dataDate, newDate) {
+
+	// Get the existing data
+	var existing = localStorage.getItem(bookData);
+
+	// If no existing data, create an array
+	// Otherwise, convert the localStorage string to an array
+	existing = existing ? JSON.parse(existing) : {};
+
+	// Add new data to localStorage Array
+	existing[dataDate] = newDate;
+
+	// Save back to localStorage
+	localStorage.setItem(name, JSON.stringify(existing));
+
+};
+
+
+// When the document has loaded, display saved my list
+$(document).ready(function () {
+
+    renderBookData();
+});
+
+function saveBooksData(data) {
+
+    
+        bookId = $(".book-container").attr("data-id");
+        author = $(".author-text").html();
+        title = $(".title-text").html();
+        date = newDate;
+        console.log(title);
+        
+console.log(date);
+
+        // date = dateDiv.textContent
+        dataObj = {
+            dataId: bookId,
+            dataTitle: title,
+            dataAuthor: author,
+            dataDate: date
+        };
+
+
+        if (date === "") {
+            displayMessage("error", "Target read date cannot be blank");
+        }
+
+        else {
+
+            dataArray = JSON.parse(localStorage.getItem("bookData")) || [];
+            dataArray.push(dataObj);
+            localStorage.setItem("bookData", JSON.stringify(dataArray));
+        }
+
+    
+}
+
+//function to show error message
+function displayMessage(type, message) {
+    var msgDiv = $("#msgDiv");
+    msgDiv.text = message;
+    msgDiv.attr("class", type);
+}
+/* this should go to search.css
+#msg {
+  visibility: hidden;
+  margin-top: 20px;
+  font-weight: 700;
+  height: 1.2em;
+  font-size: 1.2em;
+}
+
+#msg.error {
+  visibility: visible;
+  color: #e6252c;
+}
+
+
+
+*/
 // More Information JavaScript
 
 // Declaration of global variables
@@ -348,6 +487,7 @@ function moreInfo(bookID) {
         
 
         // Variable assignment of returned API book data
+        console.log(bookResponse);
 
         var cover;
         if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
@@ -405,7 +545,7 @@ function moreInfo(bookID) {
         var addDiv = $("<div>");
         var addButton = $("<button>");
         var addText = $("<h3>");
-        
+
 
         // Setting attributes
 
