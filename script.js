@@ -346,9 +346,9 @@ function renderBookData() {
 
             var listDiv = $("<div>").addClass("list-grid-container listed-book");            
 
-            //set data-ID attribute to a div.
+            //set data-id attribute to a div.
             var dateText = ($('<input/>').attr({ type: 'text', id: 'addDate', name: 'test' ,width: '5%'})).val(dataArray[i].dataDate);
-            var listedBook = listDiv.attr('data-ID', dataArray[i].dataID);
+            var listedBook = listDiv.attr('data-id', dataArray[i].dataId);
             var detailDiv = $("<div>").addClass("list-grid-item").text(dataArray[i].dataTitle + '\n' + dataArray[i].dataAuthor);
             var dateDiv = ($("<div>").addClass("list-grid-item")).append(dateText);
             var infoDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-info-circle'></i>"));
