@@ -4,7 +4,7 @@ html {
 
 body {
     height: 100%;
-    background-color: #F8EEE7;
+    background-color: #eeeeee;
     margin: 0;
 }
 
@@ -106,8 +106,81 @@ a {
     flex: 1; 
     align-items: center;
     padding: 40px 20px;
-    background-color: #F8EEE7;    
+    background-color: #eeeeee;    
     
+}
+
+.form-style h2{
+	display: block;
+	text-align: center;
+	padding: 0;
+	margin: 0px 0px 25px 0px;
+	color: #5C5C5C;
+	
+}
+
+.form-style{
+	max-width:400px;
+	margin:15px auto 0 auto;
+	/* background:#fff; */
+	border-radius:2px;
+	padding:0 20px 20px 20px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.form-style ul{
+	list-style:none;
+	padding:0;
+	margin:0;	
+}
+.form-style li{
+	display: block;
+	padding: 9px;
+	border:1px solid black;
+	margin-bottom: 30px;
+    border-radius: 3px;
+    background-color: #ffffff;
+}
+
+.form-style li > label{
+	display: block;
+	float: left;
+	margin-top: -19px;
+	background: #eeeeee;
+	height: 14px;
+	padding: 2px 5px 2px 5px;
+	color: black;
+    font-size: 14px;
+    font-weight: bold;
+	overflow: hidden;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.form-style input[type="text"] {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 100%;
+	display: block;
+	outline: none;
+	border: none;
+	height: 25px;
+	line-height: 25px;
+	font-size: 16px;
+	padding: 0;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    /* background-color: #eeeeee; */
+    background-color: #ffffff;
+}
+
+.form-style li > span{
+	background: lavender;
+	display: block;
+	padding: 3px;
+	margin: 0 -9px -9px -9px;
+	text-align: center;
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
 }
 
 .searchElements {
@@ -125,8 +198,21 @@ a {
 }
 
 .order {
-    padding: 20px 0;    
+    padding: 20px 0;
+    text-align: center;
+    font-family: Georgia, "Times New Roman", Times, serif;   
+    font-weight: 500;    
     
+}
+
+.order p {
+    margin-bottom: 20px;
+    
+    
+}
+
+.radio-buttons {
+    margin: auto;
 }
 
 .searchButton {
@@ -146,6 +232,7 @@ a {
     border: none;
     transition: all 0.4s ease 0s;
     cursor: pointer;
+    margin-bottom: 15px;
     
     
 }
@@ -223,7 +310,7 @@ a {
 
 footer {
     width: 100%;
-    position: absolute;
+    position: fixed;
     text-align: center;
     border-top: 5px solid #20B2AA;    
     bottom: 0;
@@ -420,11 +507,7 @@ footer {
         height: 22px;
         font-size: 20px;
     }
-
-    .radio-buttons {
-        text-align: left;
-        padding-left: 25%;
-    }
+    
 
     #searchBtn {
         font-size: 18px;
