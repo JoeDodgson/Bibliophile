@@ -173,7 +173,6 @@ header p {
     font-size: 13px;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    vertical-align: middle;
     text-overflow: ellipsis;
 }
 
@@ -191,11 +190,26 @@ header p {
     font-style: italic;
 }
 
+.static-date {
+    width: fit-content;
+    margin: auto;
+    padding: 3px;
+    text-align: center;
+    border: 1px solid black ;
+    border-radius: 5px;
+    background-color: rgb(148, 97, 142, 0.3);
+}
+
+.static-date:hover, .static-date:focus {
+    background-color: rgb(148, 97, 142, 0.7);
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .fa-info-circle, .fa-trash-alt, .fa-plus-circle {
     font-size: 24px;
     cursor: pointer;
 }
-
 
 
 .buttons-container {
@@ -217,7 +231,19 @@ header p {
 }
 
 
-/* Modal styling */
+/* Target read date modal styling */
+#change-date-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
 #date-modal-content {
     background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     margin: 15% auto;
@@ -235,6 +261,7 @@ header p {
     font-size: 28px;
     font-weight: bold;
     height: 100%;
+    text-align: right;
 }
 
 #date-modal-close:hover,
@@ -251,12 +278,12 @@ header p {
 
 #date-modal-title {
     font-weight: bold;
-    width: 80%;
+    width: 100%;
     float: right;
 }
 
 #new-date-container {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #select-date-guidance, #select-date-warning, #no-change-warning, #confirm-save {
@@ -280,15 +307,22 @@ header p {
     color: green ;
 }
 
+#date-entry-save-container {
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+}
+
 #select-date {
     width: 80px;
     height: 18px;
     margin-top: 5px;
+    float: left;
 }
 
 #save-button-container {
-    text-align: center;
-    margin-top: 5px;
+    float: left;
+    margin: 5px 0 0 20px;
 }
 
 #saveBtn {

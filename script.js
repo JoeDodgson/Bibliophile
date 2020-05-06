@@ -696,6 +696,7 @@ function moreInfo(bookID) {
 
 // Add an event listener for a click event on the target read date
 $(".target-read-date").on("click", function(){
+
     // Store the date modal as a variable
     var dateModal = $("#change-date-modal");
 
@@ -703,7 +704,6 @@ $(".target-read-date").on("click", function(){
     var bookTitle = $(this).siblings(".book-details").children(".book-title")[0].textContent;
     var bookDate = $(this)[0].textContent.trim();
     var bookID = $(this).parent(".listed-book").attr('data-id');
-
 
     // Update the title & target read date shown in modal and update data-id attribute
     $("#date-modal-title").html(bookTitle);
@@ -713,18 +713,11 @@ $(".target-read-date").on("click", function(){
 
     // Display the 'change date' modal
     dateModal.removeClass("display-none");
-
+    
     // When the user clicks the close button it hides the modal
     $("#date-modal-close").on("click", function() {
         dateModal.addClass("display-none");
     })
-    
-    // When the user clicks anywhere outside of the modal, hide the modal
-    window.onclick = function (event) {
-        if (event.target == dateModal) {
-            modal.style.display = "none";
-        }
-    }
 })
 
 
@@ -755,21 +748,20 @@ $("#saveBtn").on("click", function(){
         var bookID = $("#change-date-modal").attr("data-id");
         
         // update the target read date saved in localStorage. 
-        dataArray = JSON.parse(localStorage.getItem("dataArray"));
+        bookData = JSON.parse(localStorage.getItem("bookData"));
         
-        for (i = 0; i < dataArray.length; i++) {
-            if (dataArray[i].dataID === bookID){
-                dataArray[i].dataDate = enteredDate;
-                localStorage.setItem("dataArray", JSON.stringify(dataArray));
+        for (i = 0; i < bookData.length; i++) {
+            if (bookData[i].dataID === bookID){
+                bookData[i].dataDate = enteredDate;
+                localStorage.setItem("bookData", JSON.stringify(bookData));
                 break;
             }
         }
         
         // Display text to say changes have been saved
         $("#confirm-save").removeClass("display-none");
+
+        // Render the user's list
+        renderBookData();
     }
 })
-
-// Fix the positioning of the modal - should be fixed by the 
-// Add hover styling to Target read date, Clear List button and Save changes button
-// Add 'clear all' functionality
