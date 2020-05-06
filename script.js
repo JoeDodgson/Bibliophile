@@ -765,3 +765,12 @@ $("#saveBtn").on("click", function(){
         renderBookData();
     }
 })
+
+// Add an event listener for the click event on Clear button
+// Create a modal for the user confirm if they are happy to clear all saved books
+// Add event listener for confirm button
+    // Set the local storage data to be a blank string
+    // Render the list
+    // Close the modal
+// Add event listener for cancel button
+    // Close the modal
