@@ -314,6 +314,10 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 }
 
             })
+            $(".fa-plus-circle").on("click", function () {
+                saveBooksData(this);
+
+            });
         }
 
 
@@ -321,6 +325,166 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
     });
 }
 
+//start-niro
+var dataArray = [];
+var title;
+var author;
+var date;
+var dataId
+var dataObj;
+
+
+function renderBookData() {
+    //get the local storage and convert to a json object
+    dataArray = JSON.parse(localStorage.getItem("bookData"));
+    //check the local storage have any data or not
+    if (dataArray !== null) {
+
+        //use a for loop to render get revelent data from local storage  
+        for (var i = 0; i < dataArray.length; i++) {
+
+            var listDiv = $("<div>").addClass("list-grid-container listed-book");
+
+            //set data-id attribute to a div.
+            var dateText = ($('<input/>').attr({ type: 'text', id: 'addDate', name: 'test', width: '5%' })).val(dataArray[i].dataDate);
+            var listedBook = listDiv.attr('data-id', dataArray[i].dataId);
+            var detailDiv = $("<div>").addClass("list-grid-item").text(dataArray[i].dataTitle + '\n' + dataArray[i].dataAuthor);
+            var dateDiv = ($("<div>").addClass("list-grid-item")).append(dateText);
+            var infoDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-info-circle'></i>"));
+            var deleteDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-trash-alt'></i>"));
+
+            listedBook.append(detailDiv, dateDiv, infoDiv, deleteDiv);
+            $(".list-container").append(listedBook);
+        }
+
+    }
+
+    // if local storage is empty pass a message to the user
+    else {
+        var listEmptyMsg = $("<p>").addClass("emptyList").text("Your read to list is empty...");
+    }
+
+    $(".fa-info-circle").on("click", function () {
+        
+        var bookID = $(this).parent().parent().attr('data-id');        
+        $(".new-modal-content").empty();
+        moreInfo(bookID);
+
+        // Get the modal
+        var modal = document.getElementById("infoModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the More Info button, open the modal
+        $("#infoModal").css("display", "block");
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    })
+}
+
+var now = new Date();
+
+var day = ("0" + now.getDate()).slice(-2);
+var month = ("0" + (now.getMonth() + 1)).slice(-2);
+var newDate = (day) + "/" + (month) + "/" + now.getFullYear();
+
+$("#addDate").keypress(function (event) {
+
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        changeDate();
+    }
+});
+
+function changeDate(bookData, dataDate, newDate) {
+
+    // Get the existing data
+    var existing = localStorage.getItem(bookData);
+
+    // If no existing data, create an array
+    // Otherwise, convert the localStorage string to an array
+    existing = existing ? JSON.parse(existing) : {};
+
+    // Add new data to localStorage Array
+    existing[dataDate] = newDate;
+
+    // Save back to localStorage
+    localStorage.setItem(name, JSON.stringify(existing));
+
+};
+
+
+// When the document has loaded, display saved my list
+$(document).ready(function () {
+
+    renderBookData();
+});
+
+function saveBooksData(data) {
+
+
+    bookId = $(".book-container").attr("data-id");
+    author = $(".author-text").html();
+    title = $(".title-text").html();
+    date = newDate;
+    
+
+    // date = dateDiv.textContent
+    dataObj = {
+        dataId: bookId,
+        dataTitle: title,
+        dataAuthor: author,
+        dataDate: date
+    };
+
+
+    if (date === "") {
+        displayMessage("error", "Target read date cannot be blank");
+    }
+
+    else {
+
+        dataArray = JSON.parse(localStorage.getItem("bookData")) || [];
+        dataArray.push(dataObj);
+        localStorage.setItem("bookData", JSON.stringify(dataArray));
+    }     
+
+}
+
+//function to show error message
+function displayMessage(type, message) {
+    var msgDiv = $("#msgDiv");
+    msgDiv.text = message;
+    msgDiv.attr("class", type);
+}
+/* this should go to search.css
+#msg {
+  visibility: hidden;
+  margin-top: 20px;
+  font-weight: 700;
+  height: 1.2em;
+  font-size: 1.2em;
+}
+
+#msg.error {
+  visibility: visible;
+  color: #e6252c;
+}
+
+
+
+*/
 // More Information JavaScript
 
 // Declaration of global variables
@@ -344,9 +508,10 @@ function moreInfo(bookID) {
         method: "GET"
     }).then(function (bookResponse) {
 
-        
+
 
         // Variable assignment of returned API book data
+        
 
         var cover;
         if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
@@ -404,7 +569,7 @@ function moreInfo(bookID) {
         var addDiv = $("<div>");
         var addButton = $("<button>");
         var addText = $("<h3>");
-        
+
 
         // Setting attributes
 
@@ -436,7 +601,7 @@ function moreInfo(bookID) {
 
         bookTitle.html(title);
 
-        
+
         if (bookResponse.volumeInfo.authors === undefined) {
             bookAuthor.html("No data available")
         } else if (authorArray.length > 0) {
@@ -446,22 +611,22 @@ function moreInfo(bookID) {
         }
 
         descriptionHead.html("Description");
-        
+
         if (description === undefined) {
             bookDescription.html("No description available");
         } else {
             bookDescription.html(description);
         }
-        
+
         ratingHead.html("Rating");
 
         if (rating === undefined) {
             ratingOutofFive.html("No ratings available");
         } else {
             ratingOutofFive.html("Average Rating: " + rating + "/5");
-        ratingOutofFiveCount.html("Number of ratings: " + ratingsCount);
+            ratingOutofFiveCount.html("Number of ratings: " + ratingsCount);
         }
-                
+
         bookPublishdetails.html(pageCount + " pages | Publish date: " + publishDate + " | " + publisher);
         retailHead.html("Retail Information");
         addText.html("Add to My List");
