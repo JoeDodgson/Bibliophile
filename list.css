@@ -173,12 +173,15 @@ header p {
     font-size: 13px;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    vertical-align: middle;
     text-overflow: ellipsis;
 }
 
 #list-headers {
     font-weight: bold;
+}
+
+#list-header-date-TRD {
+    display: none;
 }
 
 .listed-book {
@@ -191,11 +194,26 @@ header p {
     font-style: italic;
 }
 
+.static-date {
+    width: fit-content;
+    margin: auto;
+    padding: 3px;
+    text-align: center;
+    border: 1px solid black ;
+    border-radius: 5px;
+    background-color: rgb(148, 97, 142, 0.3);
+}
+
+.static-date:hover, .static-date:focus {
+    background-color: rgb(148, 97, 142, 0.7);
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .fa-info-circle, .fa-trash-alt, .fa-plus-circle {
     font-size: 24px;
     cursor: pointer;
 }
-
 
 
 .buttons-container {
@@ -204,12 +222,12 @@ header p {
 }
 
 .clearButton {
-    max-width: 150px;
     display: inline;
 }
 
 #clearBtn {
-    width: 65px;
+    width: 75px;
+    height: 25px;
     border-radius: 10px;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
@@ -218,7 +236,19 @@ header p {
 
 
 /* Modal styling */
-#date-modal-content {
+#change-date-modal, #clear-list-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+#date-modal-content, #clear-modal-content {
     background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     margin: 15% auto;
     padding: 20px;
@@ -226,19 +256,25 @@ header p {
     border-radius: 10px;
     width: 80%; 
     font-family: 'Lato', sans-serif;
-    
 }
 
-#date-modal-close {
+#clear-modal-content {
+    height: 180px;
+}
+
+#date-modal-close, #clear-modal-close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
     height: 100%;
+    text-align: right;
 }
 
 #date-modal-close:hover,
-#date-modal-close:focus {
+#date-modal-close:focus,
+#clear-modal-close:hover,
+#clear-modal-close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -249,14 +285,19 @@ header p {
     grid-template-columns: 90% 10%;
 }
 
-#date-modal-title {
+#date-modal-title, #clear-modal-title {
     font-weight: bold;
-    width: 80%;
+    width: 100%;
     float: right;
 }
 
 #new-date-container {
-    margin-top: 20px;
+    margin-top: 10px;
+}
+
+#clear-modal-guidance p {
+    margin-top: 10px;
+    font-size: 14px;
 }
 
 #select-date-guidance, #select-date-warning, #no-change-warning, #confirm-save {
@@ -280,24 +321,44 @@ header p {
     color: green ;
 }
 
+#date-entry-save-container {
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+}
+
 #select-date {
     width: 80px;
     height: 18px;
     margin-top: 5px;
+    float: left;
 }
 
-#save-button-container {
-    text-align: center;
-    margin-top: 5px;
+#save-button-container, #clear-modal-buttons-container, #no-button-container, #yes-button-container {
+    float: left;
+    margin: 5px 0 0 20px;
+}
+
+#saveBtn, #yesBtn, #noBtn {
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
 }
 
 #saveBtn {
     width: 65px;
-    border-radius: 10px;
-    font-weight: bold;
-    font-family: 'Roboto', sans-serif;
     background-color: green;
 }
+
+#yesBtn {
+    background-color: green;
+}
+
+#noBtn {
+    background-color: grey;
+}
+
+
 
 /* Styling More Info modal */
 
@@ -424,9 +485,20 @@ footer {
     }
 }
 
-@media (min-width: 420px) and (max-width: 479px) {
+@media (min-width: 0px) and (max-width: 479px) {
     .list-grid-item {
         font-size: 11px;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 379px) {
+
+    #list-header-date-TRD {
+        display: block;
+    }
+
+    #list-header-date-full {
+        display: none;
     }
 }
 
