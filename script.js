@@ -775,7 +775,36 @@ $("#clearBtn").on("click", function() {
     clearModal.removeClass("display-none");
     
     // When the user clicks the 'close' icon or the 'No' button it hides the modal
-    $("#date-modal-close").on("click", function() {
+    $("#clear-modal-close").on("click", function() {
+        clearModal.addClass("display-none");
+    })
+    $(".noBtn").on("click", function() {
+        clearModal.addClass("display-none");
+    })
+    
+    // Add an event listener for the 'Yes' button
+    $(".yesBtn").on("click", function() {
+        // When the user clicks the 'Yes' button, clear the bookData index in the local storage
+        localStorage.removeItem("bookData");
+        
+        // Render the user's list
+        renderBookData();
+        
+        // Close the 'clear list' modal
+        clearModal.addClass("display-none");
+    })
+})
+
+// Add an event listener for the click event on Delete icon
+$("#clearBtn").on("click", function() {
+    // Store the date modal as a variable
+    var clearModal = $("#clear-list-modal");
+    
+    // Display the 'clear list' modal
+    clearModal.removeClass("display-none");
+    
+    // When the user clicks the 'close' icon or the 'No' button it hides the modal
+    $("#clear-modal-close").on("click", function() {
         clearModal.addClass("display-none");
     })
     $("#noBtn").on("click", function() {
@@ -783,7 +812,7 @@ $("#clearBtn").on("click", function() {
     })
     
     // Add an event listener for the 'Yes' button
-    $("#yesBtn").on("click", function() {
+    $(".yesBtn").on("click", function() {
         // When the user clicks the 'Yes' button, clear the bookData index in the local storage
         localStorage.removeItem("bookData");
         

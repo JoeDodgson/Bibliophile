@@ -146,12 +146,38 @@
                     <p>Are you sure you want to delete your read list?</p>
                     <p>Click 'Yes' to accept or 'No' to cancel</p>
                 </div>
-                <div id="clear-modal-buttons-container">
-                    <div id="yes-button-container">
-                        <button id="yesBtn">Yes</button>
+                <div class="modal-buttons-container">
+                    <div class="yes-button-container">
+                        <button class="yesBtn">Yes</button>
                     </div>
-                    <div id="no-button-container">
-                        <button id="noBtn">No</button>
+                    <div class="no-button-container">
+                        <button class="noBtn">No</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- Delete book from list modal -->
+        <div id="delete-book-modal" class="display-none">
+
+            <!-- Modal content -->
+            <div id="delete-modal-content" data-id="">
+                <div id="title-close-container">
+                    <span id="delete-modal-title">Placeholder title</span>
+                    <span id="delete-modal-close">&times;</span>
+                </div>
+                <div id="delete-modal-guidance">
+                    <p>When you delete a book from your read list, you cannot retrieve it</p>
+                    <p>Are you sure you want to delete this book from your read list?</p>
+                    <p>Click 'Yes' to accept or 'No' to cancel</p>
+                </div>
+                <div class="modal-buttons-container">
+                    <div class="yes-button-container">
+                        <button class="yesBtn">Yes</button>
+                    </div>
+                    <div class="no-button-container">
+                        <button class="noBtn">No</button>
                     </div>
                 </div>
             </div>

@@ -334,12 +334,12 @@ header p {
     float: left;
 }
 
-#save-button-container, #clear-modal-buttons-container, #no-button-container, #yes-button-container {
+#save-button-container, .modal-buttons-container, .no-button-container, .yes-button-container {
     float: left;
     margin: 5px 0 0 20px;
 }
 
-#saveBtn, #yesBtn, #noBtn {
+#saveBtn, .yesBtn, .noBtn {
     border-radius: 10px;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
@@ -350,11 +350,11 @@ header p {
     background-color: green;
 }
 
-#yesBtn {
+.yesBtn {
     background-color: green;
 }
 
-#noBtn {
+.noBtn {
     background-color: grey;
 }
 
