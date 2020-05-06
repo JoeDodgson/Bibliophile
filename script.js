@@ -727,7 +727,7 @@ function moreInfo(bookID) {
 
         bookPublishdetails.html(pageCount + " pages | Publish date: " + publishDate + " | " + publisher);
         retailHead.html("Retail Information");
-        addText.html("Add to My List");
+        
 
         if (saleability === "FOR_SALE") {
 
