@@ -335,8 +335,14 @@ var dataObj;
 
 
 function renderBookData() {
+    // Clear list prior to rendering book list
+
+    $(".listed-book").remove();
+
     //get the local storage and convert to a json object
+
     dataArray = JSON.parse(localStorage.getItem("bookData"));
+
     //check the local storage have any data or not
     if (dataArray !== null) {
 
@@ -346,10 +352,17 @@ function renderBookData() {
             var listDiv = $("<div>").addClass("list-grid-container listed-book");
 
             //set data-id attribute to a div.
-            var dateText = ($('<input/>').attr({ type: 'text', id: 'addDate', name: 'test', width: '5%' })).val(dataArray[i].dataDate);
+            var dateText = ($('<p>').attr({ type: 'text', class: 'static-date', name: 'test', width: '5%' })).html(dataArray[i].dataDate);
             var listedBook = listDiv.attr('data-id', dataArray[i].dataId);
-            var detailDiv = $("<div>").addClass("list-grid-item").text(dataArray[i].dataTitle + '\n' + dataArray[i].dataAuthor);
-            var dateDiv = ($("<div>").addClass("list-grid-item")).append(dateText);
+            var detailDiv = $("<div>").addClass("list-grid-item book-details")
+            var titleP = $("<p>");
+            titleP.addClass("book-title");
+            titleP.text(dataArray[i].dataTitle)
+            var authorP = $("<p>");
+            authorP.addClass("book-author")
+            authorP.text(dataArray[i].dataAuthor);
+            detailDiv.append(titleP, authorP);
+            var dateDiv = ($("<div>").addClass("list-grid-item target-read-date")).append(dateText);
             var infoDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-info-circle'></i>"));
             var deleteDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-trash-alt'></i>"));
 
@@ -357,11 +370,44 @@ function renderBookData() {
             $(".list-container").append(listedBook);
         }
 
+        // My list - change date modal
+
+// Add an event listener for a click event on the target read date
+
+$(".target-read-date").on("click", function(){
+    console.log(event.target);
+    // Store the date modal as a variable
+    var dateModal = $("#change-date-modal");
+
+    // Get the book ID, title and target read date from the listed book parent element
+    console.log($(this).siblings(".book-details").children(".book-title"));
+    var bookTitle = $(this).siblings(".book-details").children(".book-title")[0].textContent;
+    var bookDate = $(this)[0].textContent.trim();
+    var bookID = $(this).parent(".listed-book").attr('data-id');
+
+    // Update the title & target read date shown in modal and update data-id attribute
+    $("#date-modal-title").html(bookTitle);
+    $("#select-date").val(bookDate);
+    dateModal.attr("data-stored-date",bookDate);
+    dateModal.attr("data-id",bookID);
+
+    // Display the 'change date' modal
+    dateModal.removeClass("display-none");
+    
+    // When the user clicks the close button it hides the modal
+    $("#date-modal-close").on("click", function() {
+        dateModal.addClass("display-none");
+    })
+})
+
     }
 
     // if local storage is empty pass a message to the user
     else {
-        var listEmptyMsg = $("<p>").addClass("emptyList").text("Your read to list is empty...");
+        
+        $(".list-container").empty();
+        var listEmptyMsg = $("<h2>").addClass("emptyList").text("You do not have any books in your read list");
+        $(".list-container").append(listEmptyMsg);
     }
 
     $(".fa-info-circle").on("click", function () {

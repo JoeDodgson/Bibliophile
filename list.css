@@ -159,6 +159,15 @@ header p {
     border: 0px;
 }
 
+/* Empty list styling */
+
+.emptyList {
+    text-align: center;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    padding-top: 20px;
+    font-weight: 500;   
+}
+
 
 /* List styling */
 
@@ -547,6 +556,12 @@ footer {
         max-height: 600px;       
         margin-right: 20px;
         margin-bottom: 10px;
+    }
+
+    .emptyList {
+        
+        font-weight: 600;
+        font-size: 40px;   
     }
 
 }
