@@ -218,12 +218,12 @@ header p {
 }
 
 .clearButton {
-    max-width: 150px;
     display: inline;
 }
 
 #clearBtn {
-    width: 65px;
+    width: 75px;
+    height: 25px;
     border-radius: 10px;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
@@ -231,8 +231,8 @@ header p {
 }
 
 
-/* Target read date modal styling */
-#change-date-modal {
+/* Modal styling */
+#change-date-modal, #clear-list-modal {
     position: fixed;
     z-index: 1;
     left: 0;
@@ -244,7 +244,7 @@ header p {
     background-color: rgba(0,0,0,0.4);
 }
 
-#date-modal-content {
+#date-modal-content, #clear-modal-content {
     background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     margin: 15% auto;
     padding: 20px;
@@ -252,10 +252,13 @@ header p {
     border-radius: 10px;
     width: 80%; 
     font-family: 'Lato', sans-serif;
-    
 }
 
-#date-modal-close {
+#clear-modal-content {
+    height: 180px;
+}
+
+#date-modal-close, #clear-modal-close {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -265,7 +268,9 @@ header p {
 }
 
 #date-modal-close:hover,
-#date-modal-close:focus {
+#date-modal-close:focus,
+#clear-modal-close:hover,
+#clear-modal-close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -276,7 +281,7 @@ header p {
     grid-template-columns: 90% 10%;
 }
 
-#date-modal-title {
+#date-modal-title, #clear-modal-title {
     font-weight: bold;
     width: 100%;
     float: right;
@@ -284,6 +289,11 @@ header p {
 
 #new-date-container {
     margin-top: 10px;
+}
+
+#clear-modal-guidance p {
+    margin-top: 10px;
+    font-size: 14px;
 }
 
 #select-date-guidance, #select-date-warning, #no-change-warning, #confirm-save {
@@ -320,18 +330,31 @@ header p {
     float: left;
 }
 
-#save-button-container {
+#save-button-container, #clear-modal-buttons-container, #no-button-container, #yes-button-container {
     float: left;
     margin: 5px 0 0 20px;
 }
 
-#saveBtn {
-    width: 65px;
+#saveBtn, #yesBtn, #noBtn {
     border-radius: 10px;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
+}
+
+#saveBtn {
+    width: 65px;
     background-color: green;
 }
+
+#yesBtn {
+    background-color: green;
+}
+
+#noBtn {
+    background-color: grey;
+}
+
+
 
 /* Styling More Info modal */
 

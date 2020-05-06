@@ -767,10 +767,30 @@ $("#saveBtn").on("click", function(){
 })
 
 // Add an event listener for the click event on Clear button
-// Create a modal for the user confirm if they are happy to clear all saved books
-// Add event listener for confirm button
-    // Set the local storage data to be a blank string
-    // Render the list
-    // Close the modal
-// Add event listener for cancel button
-    // Close the modal
+$("#clearBtn").on("click", function() {
+    // Store the date modal as a variable
+    var clearModal = $("#clear-list-modal");
+    
+    // Display the 'clear list' modal
+    clearModal.removeClass("display-none");
+    
+    // When the user clicks the 'close' icon or the 'No' button it hides the modal
+    $("#date-modal-close").on("click", function() {
+        clearModal.addClass("display-none");
+    })
+    $("#noBtn").on("click", function() {
+        clearModal.addClass("display-none");
+    })
+    
+    // Add an event listener for the 'Yes' button
+    $("#yesBtn").on("click", function() {
+        // When the user clicks the 'Yes' button, clear the bookData index in the local storage
+        localStorage.removeItem("bookData");
+        
+        // Render the user's list
+        renderBookData();
+        
+        // Close the 'clear list' modal
+        clearModal.addClass("display-none");
+    })
+})
