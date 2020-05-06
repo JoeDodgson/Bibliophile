@@ -101,7 +101,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
         queryURLAuthor = "+inauthor:" + authorSearch;
     }
 
-    if (authorSearch === "") {
+    if (genreSearch === "") {
         queryURLGenre = "";
     }
     // If user did not search for title or author, do not include "+" in genre part of query URL
