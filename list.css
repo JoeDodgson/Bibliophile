@@ -95,9 +95,6 @@ main {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.searchLink {
-    font-weight: bold;
-}
 
 header {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -150,7 +147,7 @@ header p {
     padding-bottom: 10px;
 }
 
-.current-search-link {
+.current-page-link {
     font-weight: bold;
 }
 #addDate{

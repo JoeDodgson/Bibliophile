@@ -61,6 +61,15 @@ $("#newest").on("click", function () {
     window.sortType = "newest";
 });
 
+// Trigger button click on enter keystroke
+
+$("#titleSearchField, #authorSearchField, #genreSearchField").on("keyup", function(event) {
+    if(event.keyCode === 13) {
+        event.preventDefault();
+        $("#searchBtn").click();
+    }
+});
+
 
 // listener for the Search button click event
 $("#searchBtn").on("click", function () {
@@ -627,19 +636,16 @@ function moreInfo(bookID) {
             cover = "./assets/no-book-cover.gif"
         }
 
+        // Declaration of variables to hold data items from API call
+
         var title = bookResponse.volumeInfo.title;
         var authorArray = bookResponse.volumeInfo.authors;
         var last = authorArray.pop();
         var authors = authorArray.join(", ") + " and " + last;
         var publisher = bookResponse.volumeInfo.publisher;
-        var publishDate = bookResponse.volumeInfo.publishedDate;
-        var publishDateSplit = publishDate.split("-");
-        var publishYear = publishDateSplit[0];
-        var publishMonth = publishDateSplit[1];
-        var publishDay = publishDateSplit[2];
+        var publishDate = bookResponse.volumeInfo.publishedDate;       
         var description = bookResponse.volumeInfo.description;
-        var pageCount = bookResponse.volumeInfo.pageCount;
-        var language = bookResponse.volumeInfo.language;
+        var pageCount = bookResponse.volumeInfo.pageCount;        
         var rating = bookResponse.volumeInfo.averageRating;
         var ratingsCount = bookResponse.volumeInfo.ratingsCount;
         var saleability = bookResponse.saleInfo.saleability;
@@ -663,9 +669,7 @@ function moreInfo(bookID) {
         var retailDiv = $("<div>");
         var retailHead = $("<h3>");
         var bookSaleability = $("<p>");
-        var addDiv = $("<div>");
-        var addButton = $("<button>");
-        var addText = $("<h3>");
+        
 
 
         // Setting attributes
@@ -688,10 +692,7 @@ function moreInfo(bookID) {
         ratingDiv.addClass("rating-container info-container")
         ratingHead.addClass("rating-header");
         ratingOutofFive.addClass("rating");
-        ratingOutofFiveCount.addClass("rating-count")
-        addDiv.addClass("add-container info-container");
-        addButton.addClass("fas fa-plus-circle");
-        addText.addClass("add-text");
+        ratingOutofFiveCount.addClass("rating-count")        
 
 
         // Setting content of elements
@@ -744,8 +745,7 @@ function moreInfo(bookID) {
         infoContent.append(descriptionDiv);
         infoContent.append(ratingDiv);
         infoContent.append(retailDiv);
-        infoContent.append(publishDetailsDiv);
-        infoContent.append(addDiv);
+        infoContent.append(publishDetailsDiv);        
         titleAuthorDiv.append(bookTitle);
         titleAuthorDiv.append(bookAuthor);
         descriptionDiv.append(descriptionHead);
@@ -756,8 +756,7 @@ function moreInfo(bookID) {
         ratingDiv.append(ratingOutofFiveCount);
         retailDiv.append(retailHead);
         retailDiv.append(bookSaleability);
-        addDiv.append(addButton);
-        addDiv.append(addText);
+        
 
         // If statement declaring variables holding retail price and currency code as these properties only exist if the saleability is 'For Sale'
 
