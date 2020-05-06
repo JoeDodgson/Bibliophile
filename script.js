@@ -437,6 +437,57 @@ $(".target-read-date").on("click", function(){
             }
         }
     })
+
+    // Add an event listener for the click event on Delete icon
+    $(".fa-trash-alt").on("click", function() {
+        // Store the delete book modal as a variable
+        var deleteModal = $("#delete-book-modal");
+
+        // Store the book's ID
+        var bookID = $(this).parent().parent().attr('data-id');
+        
+        // Populate the delete modal title with the book title
+        var bookTitle = $(this).parent().parent().children()[0].firstChild.textContent;
+        $("#delete-modal-title").html("Delete '" + bookTitle + "'");
+
+        // Display the 'clear list' modal
+        deleteModal.removeClass("display-none");
+        
+        // When the user clicks the 'close' icon or the 'No' button it hides the modal
+        $("#delete-modal-close").on("click", function() {
+            deleteModal.addClass("display-none");
+        })
+        $(".noBtn").on("click", function() {
+            deleteModal.addClass("display-none");
+        })
+        
+        // Add an event listener for the 'Yes' button
+        $(".yesDeleteBtn").on("click", function() {
+            // Retrieve the bookData index in the local storage
+            var bookData = JSON.parse(localStorage.getItem("bookData"));
+
+            // Loop through the bookData and check if the book matches the book being deleted
+            endOfLoop = bookData.length;
+            for (i = 0; i < endOfLoop; i++){
+                // If it matches, remove it from the array
+                if (bookData[i].dataId === bookID){
+                    for (j = i; j < endOfLoop - 1; j++){
+                        bookData[j] = bookData[j + 1];
+                    }
+                    bookData.pop();
+                    break;
+                }
+            }
+            // Set the local storage
+            localStorage.setItem("bookData",JSON.stringify(bookData));
+            
+            // Render the user's list
+            renderBookData();
+            
+            // Close the 'clear list' modal
+            deleteModal.addClass("display-none");
+        })
+    })
 }
 
 var now = new Date();
@@ -825,35 +876,6 @@ $("#clearBtn").on("click", function() {
         clearModal.addClass("display-none");
     })
     $(".noBtn").on("click", function() {
-        clearModal.addClass("display-none");
-    })
-    
-    // Add an event listener for the 'Yes' button
-    $(".yesBtn").on("click", function() {
-        // When the user clicks the 'Yes' button, clear the bookData index in the local storage
-        localStorage.removeItem("bookData");
-        
-        // Render the user's list
-        renderBookData();
-        
-        // Close the 'clear list' modal
-        clearModal.addClass("display-none");
-    })
-})
-
-// Add an event listener for the click event on Delete icon
-$("#clearBtn").on("click", function() {
-    // Store the date modal as a variable
-    var clearModal = $("#clear-list-modal");
-    
-    // Display the 'clear list' modal
-    clearModal.removeClass("display-none");
-    
-    // When the user clicks the 'close' icon or the 'No' button it hides the modal
-    $("#clear-modal-close").on("click", function() {
-        clearModal.addClass("display-none");
-    })
-    $("#noBtn").on("click", function() {
         clearModal.addClass("display-none");
     })
     
