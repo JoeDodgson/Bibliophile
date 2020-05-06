@@ -180,6 +180,10 @@ header p {
     font-weight: bold;
 }
 
+#list-header-date-TRD {
+    display: none;
+}
+
 .listed-book {
     border: 1px solid rgb(97, 97, 97);
     margin-top: 2px;
@@ -481,9 +485,20 @@ footer {
     }
 }
 
-@media (min-width: 420px) and (max-width: 479px) {
+@media (min-width: 0px) and (max-width: 479px) {
     .list-grid-item {
         font-size: 11px;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 379px) {
+
+    #list-header-date-TRD {
+        display: block;
+    }
+
+    #list-header-date-full {
+        display: none;
     }
 }
 
