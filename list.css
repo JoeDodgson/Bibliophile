@@ -162,8 +162,6 @@ header p {
 
 /* List styling */
 
-.list-container {
-}
 
 .list-grid-container {
     display: grid;
@@ -189,6 +187,10 @@ header p {
     background: white
 }
 
+.book-author {
+    font-style: italic;
+}
+
 .fa-info-circle, .fa-trash-alt, .fa-plus-circle {
     font-size: 24px;
     cursor: pointer;
@@ -201,30 +203,101 @@ header p {
     text-align: center;
 }
 
-.saveButton, .cancelButton, .clearButton {
-    margin: 0px 10px;
-    max-width: 100px;
+.clearButton {
+    max-width: 150px;
     display: inline;
 }
 
-#saveBtn, #cancelBtn, #clearBtn {
+#clearBtn {
     width: 65px;
     border-radius: 10px;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
+    background-color: red;
+}
+
+
+/* Modal styling */
+#date-modal-content {
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%; 
+    font-family: 'Lato', sans-serif;
+    
+}
+
+#date-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    height: 100%;
+}
+
+#date-modal-close:hover,
+#date-modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#title-close-container {
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+#date-modal-title {
+    font-weight: bold;
+    width: 80%;
+    float: right;
+}
+
+#new-date-container {
+    margin-top: 20px;
+}
+
+#select-date-guidance, #select-date-warning, #no-change-warning, #confirm-save {
+    font-size: 12px;
+}
+
+#select-date-warning, #no-change-warning, #confirm-save {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#select-date-warning {
+    color: red;
+}
+
+#no-change-warning {
+    color: #e98527 ;
+}
+
+#confirm-save {
+    color: green ;
+}
+
+#select-date {
+    width: 80px;
+    height: 18px;
+    margin-top: 5px;
+}
+
+#save-button-container {
+    text-align: center;
+    margin-top: 5px;
 }
 
 #saveBtn {
+    width: 65px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
     background-color: green;
 }
-
-#cancelBtn {
-    background-color: orange;
-}
-
-#clearBtn {
-    background-color: red;
-} 
 
 /* Styling More Info modal */
 
@@ -328,8 +401,9 @@ header p {
 footer {
     text-align: center;
     border-top: 5px solid #20B2AA;
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    left: 0;
     background-color: dimgray;
     color: #ffffff;
     width: 100%;

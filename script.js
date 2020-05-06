@@ -1,6 +1,5 @@
 // script.js
 
-
 // Declare global variables
 // Static parts of the book search ajax call query URL
 var queryURLAPI = "&key=AIzaSyA6Hu3cw4Ie_fjiKoUuamSqsAFfqi7pknQ";
@@ -691,3 +690,86 @@ function moreInfo(bookID) {
     })
 
 }
+
+
+// My list - change date modal
+
+// Add an event listener for a click event on the target read date
+$(".target-read-date").on("click", function(){
+    // Store the date modal as a variable
+    var dateModal = $("#change-date-modal");
+
+    // Get the book ID, title and target read date from the listed book parent element
+    var bookTitle = $(this).siblings(".book-details").children(".book-title")[0].textContent;
+    var bookDate = $(this)[0].textContent.trim();
+    var bookID = $(this).parent(".listed-book").attr('data-id');
+
+
+    // Update the title & target read date shown in modal and update data-id attribute
+    $("#date-modal-title").html(bookTitle);
+    $("#select-date").val(bookDate);
+    dateModal.attr("data-stored-date",bookDate);
+    dateModal.attr("data-id",bookID);
+
+    // Display the 'change date' modal
+    dateModal.removeClass("display-none");
+
+    // When the user clicks the close button it hides the modal
+    $("#date-modal-close").on("click", function() {
+        dateModal.addClass("display-none");
+    })
+    
+    // When the user clicks anywhere outside of the modal, hide the modal
+    window.onclick = function (event) {
+        if (event.target == dateModal) {
+            modal.style.display = "none";
+        }
+    }
+})
+
+
+// Add an event listener for the click event on the 'save' button
+$("#saveBtn").on("click", function(){
+    // Hide the warning and confirm save messages
+    $("#select-date-warning").addClass("display-none");
+    $("#no-change-warning").addClass("display-none");
+    $("#confirm-save").addClass("display-none");
+    
+    // Retrieve the stored target read date from the modal
+    var storedDate = $("#change-date-modal").attr("data-stored-date");
+    
+    // Store the date that the user entered
+    var enteredDate = $("#select-date").val();
+    
+    // Validate the date entered
+    if(!(enteredDate.length === 10 && enteredDate[2] === "/" && enteredDate[5] === "/" && parseInt(enteredDate.slice(0,2)) <= 31 && parseInt(enteredDate.slice(3,5)) <= 12 && parseInt(enteredDate.slice(6,10)) > 2000)){
+        // If entered text does not pass validation if statement, display the error message
+        $("#select-date-warning").removeClass("display-none");
+    }
+    // Check if the date in the <textarea> is different to the date in the <p> element
+    else if(enteredDate === storedDate){
+        $("#no-change-warning").removeClass("display-none");
+    }
+    else{
+        // Store the book-id, from the data-id attribute in the change date modal
+        var bookID = $("#change-date-modal").attr("data-id");
+        
+        // update the target read date saved in localStorage. 
+        dataArray = JSON.parse(localStorage.getItem("dataArray"));
+        
+        for (i = 0; i < dataArray.length; i++) {
+            if (dataArray[i].dataID === bookID){
+                dataArray[i].dataDate = enteredDate;
+                localStorage.setItem("dataArray", JSON.stringify(dataArray));
+                break;
+            }
+        }
+        
+        // Display text to say changes have been saved
+        $("#confirm-save").removeClass("display-none");
+    }
+})
+
+// Fix the positioning of the modal - should be fixed by the 
+// Add hover styling to Target read date, Clear List button and Save changes button
+// Add 'clear all' functionality
