@@ -554,30 +554,43 @@ $(".target-read-date").on("click", function(){
 
 // Add an event listener for the click event on the 'save' button
 $("#saveBtn").on("click", function(){
+    // Hide the warning and confirm save messages
+    $("#select-date-warning").addClass("display-none");
+    $("#no-change-warning").addClass("display-none");
+    $("#confirm-save").addClass("display-none");
+    
     // Retrieve the stored target read date from the modal
-    var storedDate = $("#change-date-modal")[data-stored-date];
-
+    var storedDate = $("#change-date-modal").attr("data-stored-date");
+    
     // Store the date that the user entered
     var enteredDate = $("#select-date").val();
-
-
-    console.log(enteredDate[2]);
+    
     // Validate the date entered
     if(!(enteredDate.length === 10 && enteredDate[2] === "/" && enteredDate[5] === "/" && parseInt(enteredDate.slice(0,2)) <= 31 && parseInt(enteredDate.slice(3,5)) <= 12 && parseInt(enteredDate.slice(6,10)) > 2000)){
         // If entered text does not pass validation if statement, display the error message
         $("#select-date-warning").removeClass("display-none");
     }
-    else if(enteredDate === $()){
-        // Check if the date in the <textarea> is different to the date in the <p> element
-
+    // Check if the date in the <textarea> is different to the date in the <p> element
+    else if(enteredDate === storedDate){
+        $("#no-change-warning").removeClass("display-none");
+    }
+    else{
         // Store the book-id, from the data-id attribute in the change date modal
-        var bookID = $("#change-date-modal").attr('data-id');
-        
-        // If different, add to an array of changed dates
+        var bookID = $("#change-date-modal").attr("data-id");
         
         // update the target read date saved in localStorage. 
+        dataArray = JSON.parse(localStorage.getItem("dataArray"));
+        
+        for (i = 0; i < dataArray.length; i++) {
+            if (dataArray[i].dataID === bookID){
+                dataArray[i].dataDate = enteredDate;
+                localStorage.setItem("dataArray", JSON.stringify(dataArray));
+                break;
+            }
+        }
         
         // Display text to say changes have been saved
+        $("#confirm-save").removeClass("display-none");
     }
 })
 

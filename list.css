@@ -254,13 +254,25 @@ header p {
     margin-top: 20px;
 }
 
-#select-date-guidance, #select-date-warning {
+#select-date-guidance, #select-date-warning, #no-change-warning, #confirm-save {
     font-size: 12px;
 }
 
-#select-date-warning {
+#select-date-warning, #no-change-warning, #confirm-save {
+    margin-top: 10px;
     font-weight: bold;
+}
+
+#select-date-warning {
     color: red;
+}
+
+#no-change-warning {
+    color: #e98527 ;
+}
+
+#confirm-save {
+    color: green ;
 }
 
 #select-date {
@@ -288,8 +300,9 @@ header p {
 footer {
     text-align: center;
     border-top: 5px solid #20B2AA;
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    left: 0;
     background-color: dimgray;
     color: #ffffff;
     width: 100%;
