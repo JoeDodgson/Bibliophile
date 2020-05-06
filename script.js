@@ -366,9 +366,8 @@ function renderBookData() {
     }
 
     $(".fa-info-circle").on("click", function () {
-        console.log(event.target);
-        var bookID = $(this).parent().parent().attr('data-id');
-        console.log(bookID);
+        
+        var bookID = $(this).parent().parent().attr('data-id');        
         $(".new-modal-content").empty();
         moreInfo(bookID);
 
@@ -440,9 +439,7 @@ function saveBooksData(data) {
     author = $(".author-text").html();
     title = $(".title-text").html();
     date = newDate;
-    console.log(title);
-
-    console.log(date);
+    
 
     // date = dateDiv.textContent
     dataObj = {
@@ -515,7 +512,7 @@ function moreInfo(bookID) {
 
 
         // Variable assignment of returned API book data
-        console.log(bookResponse);
+        
 
         var cover;
         if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
