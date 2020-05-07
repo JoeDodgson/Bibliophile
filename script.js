@@ -588,7 +588,7 @@ function saveBookData(bookContainer) {
         var addButtonContainer = bookContainer.children(".add");
         // Empty the container to removed the 'add to list' icon
         addButtonContainer.empty();
-        // Set text in the container to be "in my list" since the user has added that book to their list
+        // Set text in the container to be "in my list" since the user has added that book to theior list
         addButtonContainer.html("In my list");
     }
 
