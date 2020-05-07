@@ -267,6 +267,11 @@ a {
     text-align: center;
 }
 
+#imageHeader {
+    text-align: left;
+    padding-left: 15px;
+}
+
 .grid-item {
     padding: 5px;
     vertical-align: middle;
@@ -674,6 +679,10 @@ footer {
         margin-bottom: 10px;
     }
     
+    
+    #imageHeader {
+        padding-left: 30px;
+    }
 
     @media screen and (min-width: 1024px) {
 

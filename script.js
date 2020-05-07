@@ -61,6 +61,15 @@ $("#newest").on("click", function () {
     window.sortType = "newest";
 });
 
+// Trigger button click on enter keystroke
+
+$("#titleSearchField, #authorSearchField, #genreSearchField").on("keyup", function(event) {
+    if(event.keyCode === 13) {
+        event.preventDefault();
+        $("#searchBtn").click();
+    }
+});
+
 
 // listener for the Search button click event
 $("#searchBtn").on("click", function () {
@@ -238,7 +247,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
 
 
                 // Check if the user has the book in their list. 
-                userListDataArray = JSON.parse(localStorage.getItem("dataArray"));
+                userListDataArray = JSON.parse(localStorage.getItem("bookData"));
 
                 if (userListDataArray === null) {
                     addToListButton = document.createElement("button");
@@ -249,9 +258,9 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                     userListNumBooks = userListDataArray.length;
                     for (j = 0; j < userListNumBooks; j++) {
                         // If the book is in the user's list, set the text content of add to list container to "In my list"
-                        if (userListDataArray[j].dataID === data.items[i].id) {
+                        if (userListDataArray[j].dataId === data.items[i].id) {
                             addToListContainer.textContent = "In my list";
-                            break
+                            break;
                         }
                         // If the book is not in the user's list, append the Add to list button to the add to list container
                         if (j === userListNumBooks - 1) {
@@ -314,7 +323,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 }
 
             })
-            // Add an event listener for a click event on the target read date
+            // Add an event listener for a click event on the 'add to list' button
             $(".fa-plus-circle").on("click", function () {
                 $("#msgDiv").empty(); 
 
@@ -353,8 +362,14 @@ var dataId
 var dataObj;
 
 function renderBookData() {
+    // Clear list prior to rendering book list
+
+    $(".listed-book").remove();
+
     //get the local storage and convert to a json object
+
     dataArray = JSON.parse(localStorage.getItem("bookData"));
+
     //check the local storage have any data or not
     if (dataArray !== null) {
 
@@ -364,10 +379,17 @@ function renderBookData() {
             var listDiv = $("<div>").addClass("list-grid-container listed-book");
 
             //set data-id attribute to a div.
-            var dateText = ($('<input/>').attr({ type: 'text', id: 'addDate', name: 'test', width: '5%' })).val(dataArray[i].dataDate);
+            var dateText = ($('<p>').attr({ type: 'text', class: 'static-date', name: 'test', width: '5%' })).html(dataArray[i].dataDate);
             var listedBook = listDiv.attr('data-id', dataArray[i].dataId);
-            var detailDiv = $("<div>").addClass("list-grid-item").text(dataArray[i].dataTitle + '\n' + dataArray[i].dataAuthor);
-            var dateDiv = ($("<div>").addClass("list-grid-item")).append(dateText);
+            var detailDiv = $("<div>").addClass("list-grid-item book-details")
+            var titleP = $("<p>");
+            titleP.addClass("book-title");
+            titleP.text(dataArray[i].dataTitle)
+            var authorP = $("<p>");
+            authorP.addClass("book-author")
+            authorP.text(dataArray[i].dataAuthor);
+            detailDiv.append(titleP, authorP);
+            var dateDiv = ($("<div>").addClass("list-grid-item target-read-date")).append(dateText);
             var infoDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-info-circle'></i>"));
             var deleteDiv = $("<div>").addClass("list-grid-item").append($("<i class='fas fa-trash-alt'></i>"));
 
@@ -375,11 +397,44 @@ function renderBookData() {
             $(".list-container").append(listedBook);
         }
 
+        // My list - change date modal
+
+// Add an event listener for a click event on the target read date
+
+$(".target-read-date").on("click", function(){
+    console.log(event.target);
+    // Store the date modal as a variable
+    var dateModal = $("#change-date-modal");
+
+    // Get the book ID, title and target read date from the listed book parent element
+    console.log($(this).siblings(".book-details").children(".book-title"));
+    var bookTitle = $(this).siblings(".book-details").children(".book-title")[0].textContent;
+    var bookDate = $(this)[0].textContent.trim();
+    var bookID = $(this).parent(".listed-book").attr('data-id');
+
+    // Update the title & target read date shown in modal and update data-id attribute
+    $("#date-modal-title").html(bookTitle);
+    $("#select-date").val(bookDate);
+    dateModal.attr("data-stored-date",bookDate);
+    dateModal.attr("data-id",bookID);
+
+    // Display the 'change date' modal
+    dateModal.removeClass("display-none");
+    
+    // When the user clicks the close button it hides the modal
+    $("#date-modal-close").on("click", function() {
+        dateModal.addClass("display-none");
+    })
+})
+
     }
 
     // if local storage is empty pass a message to the user
     else {
-        var listEmptyMsg = $("<p>").addClass("emptyList").text("Your read to list is empty...");
+        
+        $(".list-container").empty();
+        var listEmptyMsg = $("<h2>").addClass("emptyList").text("You do not have any books in your read list");
+        $(".list-container").append(listEmptyMsg);
     }
 
     $(".fa-info-circle").on("click", function () {
@@ -408,6 +463,57 @@ function renderBookData() {
                 modal.style.display = "none";
             }
         }
+    })
+
+    // Add an event listener for the click event on Delete icon
+    $(".fa-trash-alt").on("click", function() {
+        // Store the delete book modal as a variable
+        var deleteModal = $("#delete-book-modal");
+
+        // Store the book's ID
+        var bookID = $(this).parent().parent().attr('data-id');
+        
+        // Populate the delete modal title with the book title
+        var bookTitle = $(this).parent().parent().children()[0].firstChild.textContent;
+        $("#delete-modal-title").html("Delete '" + bookTitle + "'");
+
+        // Display the 'clear list' modal
+        deleteModal.removeClass("display-none");
+        
+        // When the user clicks the 'close' icon or the 'No' button it hides the modal
+        $("#delete-modal-close").on("click", function() {
+            deleteModal.addClass("display-none");
+        })
+        $(".noBtn").on("click", function() {
+            deleteModal.addClass("display-none");
+        })
+        
+        // Add an event listener for the 'Yes' button
+        $(".yesDeleteBtn").on("click", function() {
+            // Retrieve the bookData index in the local storage
+            var bookData = JSON.parse(localStorage.getItem("bookData"));
+
+            // Loop through the bookData and check if the book matches the book being deleted
+            endOfLoop = bookData.length;
+            for (i = 0; i < endOfLoop; i++){
+                // If it matches, remove it from the array
+                if (bookData[i].dataId === bookID){
+                    for (j = i; j < endOfLoop - 1; j++){
+                        bookData[j] = bookData[j + 1];
+                    }
+                    bookData.pop();
+                    break;
+                }
+            }
+            // Set the local storage
+            localStorage.setItem("bookData",JSON.stringify(bookData));
+            
+            // Render the user's list
+            renderBookData();
+            
+            // Close the 'clear list' modal
+            deleteModal.addClass("display-none");
+        })
     })
 }
 
@@ -470,15 +576,6 @@ function saveBookData(bookContainer) {
             dataDate: date
         };
         dataArray = JSON.parse(localStorage.getItem("bookData")) || [];
-        for (let i = 0; i < dataArray.length; i++) {
-            if (bookId === dataArray[i].dataId) {
-                
-                var bookExist = $("<p>").addClass("book-exist error").text("This book already exist in your list...");
-                $("#successsMsgDiv").append(bookExist);
-                $("#successsMsgDiv").empty();
-            }
-            $
-        }
         dataArray.push(dataObj);
         localStorage.setItem("bookData", JSON.stringify(dataArray));
         dataArray = [];
@@ -486,6 +583,13 @@ function saveBookData(bookContainer) {
         var bookAdded = $("<p>").addClass("book-added").text("Book Successfulley added to your list...");
         $("#successsMsgDiv").append(bookAdded);
         $("#successsMsgDiv").empty();
+
+        // Get the element which contains the 'add to list' icon
+        var addButtonContainer = bookContainer.children(".add");
+        // Empty the container to removed the 'add to list' icon
+        addButtonContainer.empty();
+        // Set text in the container to be "in my list" since the user has added that book to their list
+        addButtonContainer.html("In my list");
     }
 
 }
@@ -534,19 +638,16 @@ function moreInfo(bookID) {
             cover = "./assets/no-book-cover.gif"
         }
 
+        // Declaration of variables to hold data items from API call
+
         var title = bookResponse.volumeInfo.title;
         var authorArray = bookResponse.volumeInfo.authors;
         var last = authorArray.pop();
         var authors = authorArray.join(", ") + " and " + last;
         var publisher = bookResponse.volumeInfo.publisher;
-        var publishDate = bookResponse.volumeInfo.publishedDate;
-        var publishDateSplit = publishDate.split("-");
-        var publishYear = publishDateSplit[0];
-        var publishMonth = publishDateSplit[1];
-        var publishDay = publishDateSplit[2];
+        var publishDate = bookResponse.volumeInfo.publishedDate;       
         var description = bookResponse.volumeInfo.description;
-        var pageCount = bookResponse.volumeInfo.pageCount;
-        var language = bookResponse.volumeInfo.language;
+        var pageCount = bookResponse.volumeInfo.pageCount;        
         var rating = bookResponse.volumeInfo.averageRating;
         var ratingsCount = bookResponse.volumeInfo.ratingsCount;
         var saleability = bookResponse.saleInfo.saleability;
@@ -570,9 +671,7 @@ function moreInfo(bookID) {
         var retailDiv = $("<div>");
         var retailHead = $("<h3>");
         var bookSaleability = $("<p>");
-        var addDiv = $("<div>");
-        var addButton = $("<button>");
-        var addText = $("<h3>");
+        
 
 
         // Setting attributes
@@ -595,10 +694,7 @@ function moreInfo(bookID) {
         ratingDiv.addClass("rating-container info-container")
         ratingHead.addClass("rating-header");
         ratingOutofFive.addClass("rating");
-        ratingOutofFiveCount.addClass("rating-count")
-        addDiv.addClass("add-container info-container");
-        addButton.addClass("fas fa-plus-circle");
-        addText.addClass("add-text");
+        ratingOutofFiveCount.addClass("rating-count")        
 
 
         // Setting content of elements
@@ -633,7 +729,7 @@ function moreInfo(bookID) {
 
         bookPublishdetails.html(pageCount + " pages | Publish date: " + publishDate + " | " + publisher);
         retailHead.html("Retail Information");
-        addText.html("Add to My List");
+        
 
         if (saleability === "FOR_SALE") {
 
@@ -651,8 +747,7 @@ function moreInfo(bookID) {
         infoContent.append(descriptionDiv);
         infoContent.append(ratingDiv);
         infoContent.append(retailDiv);
-        infoContent.append(publishDetailsDiv);
-        infoContent.append(addDiv);
+        infoContent.append(publishDetailsDiv);        
         titleAuthorDiv.append(bookTitle);
         titleAuthorDiv.append(bookAuthor);
         descriptionDiv.append(descriptionHead);
@@ -663,8 +758,7 @@ function moreInfo(bookID) {
         ratingDiv.append(ratingOutofFiveCount);
         retailDiv.append(retailHead);
         retailDiv.append(bookSaleability);
-        addDiv.append(addButton);
-        addDiv.append(addText);
+        
 
         // If statement declaring variables holding retail price and currency code as these properties only exist if the saleability is 'For Sale'
 
@@ -779,15 +873,15 @@ $("#clearBtn").on("click", function () {
     clearModal.removeClass("display-none");
 
     // When the user clicks the 'close' icon or the 'No' button it hides the modal
-    $("#date-modal-close").on("click", function () {
+    $("#clear-modal-close").on("click", function() {
         clearModal.addClass("display-none");
     })
-    $("#noBtn").on("click", function () {
+    $(".noBtn").on("click", function() {
         clearModal.addClass("display-none");
     })
 
     // Add an event listener for the 'Yes' button
-    $("#yesBtn").on("click", function () {
+    $(".yesBtn").on("click", function() {
         // When the user clicks the 'Yes' button, clear the bookData index in the local storage
         localStorage.removeItem("bookData");
 

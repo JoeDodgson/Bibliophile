@@ -95,9 +95,6 @@ main {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.searchLink {
-    font-weight: bold;
-}
 
 header {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -150,13 +147,22 @@ header p {
     padding-bottom: 10px;
 }
 
-.current-search-link {
+.current-page-link {
     font-weight: bold;
 }
 #addDate{
     width: -webkit-fill-available;
     text-align: center;
     border: 0px;
+}
+
+/* Empty list styling */
+
+.emptyList {
+    text-align: center;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    padding-top: 20px;
+    font-weight: 500;   
 }
 
 
@@ -236,7 +242,7 @@ header p {
 
 
 /* Modal styling */
-#change-date-modal, #clear-list-modal {
+#change-date-modal, #clear-list-modal, #delete-book-modal {
     position: fixed;
     z-index: 1;
     left: 0;
@@ -248,7 +254,7 @@ header p {
     background-color: rgba(0,0,0,0.4);
 }
 
-#date-modal-content, #clear-modal-content {
+#date-modal-content, #clear-modal-content, #delete-modal-content {
     background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     margin: 15% auto;
     padding: 20px;
@@ -258,11 +264,12 @@ header p {
     font-family: 'Lato', sans-serif;
 }
 
-#clear-modal-content {
-    height: 180px;
+#clear-modal-content, #delete-modal-content {
+    min-height: 180px;
+    max-width: 500px;
 }
 
-#date-modal-close, #clear-modal-close {
+#date-modal-close, #clear-modal-close, #delete-modal-close {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -274,18 +281,20 @@ header p {
 #date-modal-close:hover,
 #date-modal-close:focus,
 #clear-modal-close:hover,
-#clear-modal-close:focus {
+#clear-modal-close:focus,
+#delete-modal-close:hover,
+#delete-modal-close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-#title-close-container {
+.title-close-container {
     display: grid;
     grid-template-columns: 90% 10%;
 }
 
-#date-modal-title, #clear-modal-title {
+#date-modal-title, #clear-modal-title, #delete-modal-title {
     font-weight: bold;
     width: 100%;
     float: right;
@@ -296,6 +305,11 @@ header p {
 }
 
 #clear-modal-guidance p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+#delete-modal-guidance p {
     margin-top: 10px;
     font-size: 14px;
 }
@@ -334,12 +348,12 @@ header p {
     float: left;
 }
 
-#save-button-container, #clear-modal-buttons-container, #no-button-container, #yes-button-container {
+#save-button-container, .modal-buttons-container, .no-button-container, .yes-button-container {
     float: left;
     margin: 5px 0 0 20px;
 }
 
-#saveBtn, #yesBtn, #noBtn {
+#saveBtn, .yesBtn, .noBtn, .yesDeleteBtn {
     border-radius: 10px;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
@@ -350,14 +364,17 @@ header p {
     background-color: green;
 }
 
-#yesBtn {
+.yesBtn {
     background-color: green;
 }
 
-#noBtn {
+.noBtn {
     background-color: grey;
 }
 
+.yesDeleteBtn {
+    background-color: red;
+}
 
 
 /* Styling More Info modal */
@@ -547,6 +564,12 @@ footer {
         max-height: 600px;       
         margin-right: 20px;
         margin-bottom: 10px;
+    }
+
+    .emptyList {
+        
+        font-weight: 600;
+        font-size: 40px;   
     }
 
 }
