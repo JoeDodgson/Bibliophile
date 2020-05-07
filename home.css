@@ -96,9 +96,7 @@ a:hover{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.searchLink {
-    font-weight: bold;
-}
+
 
 header {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -158,7 +156,7 @@ a:active{
     margin-bottom: auto;
 }
 
-.current-search-link {
+.current-page-link {
     font-weight: bold;
 }
 /*main styling*/
@@ -203,7 +201,7 @@ a:active{
 footer {
     text-align: center;
     border-top: 5px solid #20B2AA;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     background-color: dimgray;
     color: #ffffff;
