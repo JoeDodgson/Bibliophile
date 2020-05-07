@@ -647,6 +647,9 @@ function moreInfo(bookID) {
         var description = bookResponse.volumeInfo.description;
         var pageCount = bookResponse.volumeInfo.pageCount;        
         var rating = bookResponse.volumeInfo.averageRating;
+        var starPercentage = rating / 5 * 100;
+        var starPercentageRound = Math.round((starPercentage / 10) * 10);
+        var finalPercentage = starPercentageRound + "%";
         var ratingsCount = bookResponse.volumeInfo.ratingsCount;
         var saleability = bookResponse.saleInfo.saleability;
 
@@ -664,6 +667,8 @@ function moreInfo(bookID) {
         var bookPublishdetails = $("<p>");
         var ratingDiv = $("<div>");
         var ratingHead = $("<h3>");
+        var starsInner = $("<div>");
+        var starsOuter = $("<div>");
         var ratingOutofFive = $("<p>");
         var ratingOutofFiveCount = $("<p>");
         var retailDiv = $("<div>");
@@ -692,7 +697,9 @@ function moreInfo(bookID) {
         ratingDiv.addClass("rating-container info-container")
         ratingHead.addClass("rating-header");
         ratingOutofFive.addClass("rating");
-        ratingOutofFiveCount.addClass("rating-count")        
+        ratingOutofFiveCount.addClass("rating-count");   
+        starsInner.addClass("stars-inner");        
+        starsOuter.addClass("stars-outer");       
 
 
         // Setting content of elements
@@ -752,10 +759,16 @@ function moreInfo(bookID) {
         descriptionDiv.append(bookDescription);
         publishDetailsDiv.append(bookPublishdetails);
         ratingDiv.append(ratingHead);
+        starsOuter.append(starsInner);
+        ratingDiv.append(starsOuter);
         ratingDiv.append(ratingOutofFive);
         ratingDiv.append(ratingOutofFiveCount);
         retailDiv.append(retailHead);
         retailDiv.append(bookSaleability);
+
+        // Set the width of the inner stars to the percentage of the rating out of 5        
+
+        $(".stars-inner").width(finalPercentage);
         
 
         // If statement declaring variables holding retail price and currency code as these properties only exist if the saleability is 'For Sale'
@@ -772,8 +785,15 @@ function moreInfo(bookID) {
                 method: "GET"
             }).then(function (exchangeResponse) {
 
+                // Variable to hold exchange rate for GBP based on currency base code specified in API request
+
                 var exchangeGBP = exchangeResponse.conversion_rates.GBP;
+
+                // Convert currency to GBP and round to 2 decimal places
+
                 var amountGBP = (price * exchangeGBP).toFixed(2);
+
+                // Create element, add class, set HTML content and append to modal 
 
                 var retailPriceGBP = $("<p>");
                 retailPriceGBP.addClass("GBP-retail-price");
