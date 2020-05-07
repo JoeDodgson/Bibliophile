@@ -849,7 +849,7 @@ $("#saveBtn").on("click", function () {
         bookData = JSON.parse(localStorage.getItem("bookData"));
 
         for (i = 0; i < bookData.length; i++) {
-            if (bookData[i].dataID === bookID) {
+            if (bookData[i].dataId === bookID){
                 bookData[i].dataDate = enteredDate;
                 localStorage.setItem("bookData", JSON.stringify(bookData));
                 break;
