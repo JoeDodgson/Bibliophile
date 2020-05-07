@@ -314,13 +314,32 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 }
 
             })
+            // Add an event listener for a click event on the target read date
             $(".fa-plus-circle").on("click", function () {
-                saveBooksData(this);
+                $("#msgDiv").empty(); 
+
+                // Store the date modal as a variable
+                var dateModal = $("#change-date");
+
+                // Display the 'change date' modal
+                dateModal.removeClass("display-none");
+
+                // Get the book ID, title and target read date from the listed book parent element
+                var bookContainer = $(this).parent().parent();
+                
+                // When the user clicks the close button it hides the modal
+                $("#date-modal-close").on("click", function () {
+                    dateModal.addClass("display-none");
+                })
+
+                // when user click call the save BookData()
+                $("#addTolistBtn").on("click", function () {
+
+                    saveBookData(bookContainer);
+                })
 
             });
         }
-
-
 
     });
 }
@@ -332,7 +351,6 @@ var author;
 var date;
 var dataId
 var dataObj;
-
 
 function renderBookData() {
     //get the local storage and convert to a json object
@@ -365,8 +383,8 @@ function renderBookData() {
     }
 
     $(".fa-info-circle").on("click", function () {
-        
-        var bookID = $(this).parent().parent().attr('data-id');        
+
+        var bookID = $(this).parent().parent().attr('data-id');
         $(".new-modal-content").empty();
         moreInfo(bookID);
 
@@ -393,36 +411,15 @@ function renderBookData() {
     })
 }
 
-var now = new Date();
 
-var day = ("0" + now.getDate()).slice(-2);
-var month = ("0" + (now.getMonth() + 1)).slice(-2);
-var newDate = (day) + "/" + (month) + "/" + now.getFullYear();
 
-$("#addDate").keypress(function (event) {
+$("#select-date").keypress(function (event) {
 
     if (event.keyCode === 13) {
         event.preventDefault();
-        changeDate();
+        $("#addTolistBtn").click(); 
     }
 });
-
-function changeDate(bookData, dataDate, newDate) {
-
-    // Get the existing data
-    var existing = localStorage.getItem(bookData);
-
-    // If no existing data, create an array
-    // Otherwise, convert the localStorage string to an array
-    existing = existing ? JSON.parse(existing) : {};
-
-    // Add new data to localStorage Array
-    existing[dataDate] = newDate;
-
-    // Save back to localStorage
-    localStorage.setItem(name, JSON.stringify(existing));
-
-};
 
 
 // When the document has loaded, display saved my list
@@ -431,60 +428,67 @@ $(document).ready(function () {
     renderBookData();
 });
 
-function saveBooksData(data) {
+// save book info to local storage function
+function saveBookData(bookContainer) {
 
+    // get all the info what we need to add to local storage
+    newDate = $(".selectDate").val();
+    bookId = bookContainer.attr("data-id");
+    author = bookContainer.find(".author-text").html();
+    title = bookContainer.find(".title-text").html();
+    date = newDate;    
 
-    bookId = $(".book-container").attr("data-id");
-    author = $(".author-text").html();
-    title = $(".title-text").html();
-    date = newDate;
-    
-
-    // date = dateDiv.textContent
-    dataObj = {
-        dataId: bookId,
-        dataTitle: title,
-        dataAuthor: author,
-        dataDate: date
-    };
-
-
+    //if user forgot to add a date, pass a massage 
     if (date === "") {
-        displayMessage("error", "Target read date cannot be blank");
+        $("#msgDiv").empty();
+        $("#msgDiv").text("Type a valid date please...");
+    }
+    //if date format is incorrect,  pass a message
+    else if (!(date.length === 10 && date[2] === "/" &&
+        date[5] === "/" && parseInt(date.slice(0, 2)) <= 31 &&
+        parseInt(date.slice(3, 5)) <= 12 && parseInt(date.slice(6, 10)) > 2000)) {
+
+        $("#msgDiv").empty();    
+        $("#msgDiv").text("Date format is incorrect...");
     }
 
+    // add date in to local storage if it is not already there
     else {
 
+        // Store the date modal as a variable
+        var dateModal = $("#change-date");
+
+        // Display the 'change date' modal
+        dateModal.addClass("display-none");
+
+
+        // date = dateDiv.textContent
+        dataObj = {
+            dataId: bookId,
+            dataTitle: title,
+            dataAuthor: author,
+            dataDate: date
+        };
         dataArray = JSON.parse(localStorage.getItem("bookData")) || [];
+        for (let i = 0; i < dataArray.length; i++) {
+            if (bookId === dataArray[i].dataId) {
+                
+                var bookExist = $("<p>").addClass("book-exist error").text("This book already exist in your list...");
+                $("#successsMsgDiv").append(bookExist);
+                $("#successsMsgDiv").empty();
+            }
+            $
+        }
         dataArray.push(dataObj);
         localStorage.setItem("bookData", JSON.stringify(dataArray));
-    }     
+        dataArray = [];
+        $("#successsMsgDiv").empty();
+        var bookAdded = $("<p>").addClass("book-added").text("Book Successfulley added to your list...");
+        $("#successsMsgDiv").append(bookAdded);
+        $("#successsMsgDiv").empty();
+    }
 
 }
-
-//function to show error message
-function displayMessage(type, message) {
-    var msgDiv = $("#msgDiv");
-    msgDiv.text = message;
-    msgDiv.attr("class", type);
-}
-/* this should go to search.css
-#msg {
-  visibility: hidden;
-  margin-top: 20px;
-  font-weight: 700;
-  height: 1.2em;
-  font-size: 1.2em;
-}
-
-#msg.error {
-  visibility: visible;
-  color: #e6252c;
-}
-
-
-
-*/
 // More Information JavaScript
 
 // Declaration of global variables
@@ -511,7 +515,7 @@ function moreInfo(bookID) {
 
 
         // Variable assignment of returned API book data
-        
+
 
         var cover;
         if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
@@ -695,7 +699,7 @@ function moreInfo(bookID) {
 // My list - change date modal
 
 // Add an event listener for a click event on the target read date
-$(".target-read-date").on("click", function(){
+$(".target-read-date").on("click", function () {
 
     // Store the date modal as a variable
     var dateModal = $("#change-date-modal");
@@ -708,56 +712,56 @@ $(".target-read-date").on("click", function(){
     // Update the title & target read date shown in modal and update data-id attribute
     $("#date-modal-title").html(bookTitle);
     $("#select-date").val(bookDate);
-    dateModal.attr("data-stored-date",bookDate);
-    dateModal.attr("data-id",bookID);
+    dateModal.attr("data-stored-date", bookDate);
+    dateModal.attr("data-id", bookID);
 
     // Display the 'change date' modal
     dateModal.removeClass("display-none");
-    
+
     // When the user clicks the close button it hides the modal
-    $("#date-modal-close").on("click", function() {
+    $("#date-modal-close").on("click", function () {
         dateModal.addClass("display-none");
     })
 })
 
 
 // Add an event listener for the click event on the 'save' button
-$("#saveBtn").on("click", function(){
+$("#saveBtn").on("click", function () {
     // Hide the warning and confirm save messages
     $("#select-date-warning").addClass("display-none");
     $("#no-change-warning").addClass("display-none");
     $("#confirm-save").addClass("display-none");
-    
+
     // Retrieve the stored target read date from the modal
     var storedDate = $("#change-date-modal").attr("data-stored-date");
-    
+
     // Store the date that the user entered
     var enteredDate = $("#select-date").val();
-    
+
     // Validate the date entered
-    if(!(enteredDate.length === 10 && enteredDate[2] === "/" && enteredDate[5] === "/" && parseInt(enteredDate.slice(0,2)) <= 31 && parseInt(enteredDate.slice(3,5)) <= 12 && parseInt(enteredDate.slice(6,10)) > 2000)){
+    if (!(enteredDate.length === 10 && enteredDate[2] === "/" && enteredDate[5] === "/" && parseInt(enteredDate.slice(0, 2)) <= 31 && parseInt(enteredDate.slice(3, 5)) <= 12 && parseInt(enteredDate.slice(6, 10)) > 2000)) {
         // If entered text does not pass validation if statement, display the error message
         $("#select-date-warning").removeClass("display-none");
     }
     // Check if the date in the <textarea> is different to the date in the <p> element
-    else if(enteredDate === storedDate){
+    else if (enteredDate === storedDate) {
         $("#no-change-warning").removeClass("display-none");
     }
-    else{
+    else {
         // Store the book-id, from the data-id attribute in the change date modal
         var bookID = $("#change-date-modal").attr("data-id");
-        
+
         // update the target read date saved in localStorage. 
         bookData = JSON.parse(localStorage.getItem("bookData"));
-        
+
         for (i = 0; i < bookData.length; i++) {
-            if (bookData[i].dataID === bookID){
+            if (bookData[i].dataID === bookID) {
                 bookData[i].dataDate = enteredDate;
                 localStorage.setItem("bookData", JSON.stringify(bookData));
                 break;
             }
         }
-        
+
         // Display text to say changes have been saved
         $("#confirm-save").removeClass("display-none");
 
@@ -767,29 +771,29 @@ $("#saveBtn").on("click", function(){
 })
 
 // Add an event listener for the click event on Clear button
-$("#clearBtn").on("click", function() {
+$("#clearBtn").on("click", function () {
     // Store the date modal as a variable
     var clearModal = $("#clear-list-modal");
-    
+
     // Display the 'clear list' modal
     clearModal.removeClass("display-none");
-    
+
     // When the user clicks the 'close' icon or the 'No' button it hides the modal
-    $("#date-modal-close").on("click", function() {
+    $("#date-modal-close").on("click", function () {
         clearModal.addClass("display-none");
     })
-    $("#noBtn").on("click", function() {
+    $("#noBtn").on("click", function () {
         clearModal.addClass("display-none");
     })
-    
+
     // Add an event listener for the 'Yes' button
-    $("#yesBtn").on("click", function() {
+    $("#yesBtn").on("click", function () {
         // When the user clicks the 'Yes' button, clear the bookData index in the local storage
         localStorage.removeItem("bookData");
-        
+
         // Render the user's list
         renderBookData();
-        
+
         // Close the 'clear list' modal
         clearModal.addClass("display-none");
     })
