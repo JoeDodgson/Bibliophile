@@ -335,6 +335,12 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
 
                 // Get the book ID, title and target read date from the listed book parent element
                 var bookContainer = $(this).parent().parent();
+
+                // dynamicaly create a header for date modal using book title.                
+                title = bookContainer.find(".title-text").html();
+                var dateHeader = $("<span>").addClass("dateHeader").prepend(title + "<br><br>");
+                $("#date-modal-title").prepend(dateHeader);
+                
                 
                 // When the user clicks the close button it hides the modal
                 $("#date-modal-close").on("click", function () {
@@ -344,10 +350,11 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 // when user click call the save BookData()
                 $("#addTolistBtn").on("click", function () {
 
-                    saveBookData(bookContainer);
                     
+                    saveBookData(bookContainer);
+                    $(".dateHeader").empty();
                 })
-
+               
             });
         }
 
@@ -419,7 +426,7 @@ $(".target-read-date").on("click", function(){
     dateModal.attr("data-stored-date",bookDate);
     dateModal.attr("data-id",bookID);
 
-    // Display the 'change date' modal
+    // Display the 'save to my list' modal
     dateModal.removeClass("display-none");
     
     // When the user clicks the close button it hides the modal
@@ -519,6 +526,11 @@ $(".target-read-date").on("click", function(){
     })
 }
 
+// When the document has loaded, display saved my list
+$(document).ready(function () {
+    
+    renderBookData();
+});
 
 //after enter a date use can also press enter button to submit the data
 $("#select-date").keypress(function (event) {
@@ -527,13 +539,6 @@ $("#select-date").keypress(function (event) {
         event.preventDefault();
         $("#addTolistBtn").click(); 
     }
-});
-
-
-// When the document has loaded, display saved my list
-$(document).ready(function () {
-
-    renderBookData();
 });
 
 // save book info to local storage function
@@ -561,8 +566,7 @@ function saveBookData(bookContainer) {
     }
 
     // add date in to local storage if it is not already there
-    else {
-        
+    else {        
         // Store the date modal as a variable
         var dateModal = $("#change-date");
 
@@ -570,22 +574,18 @@ function saveBookData(bookContainer) {
         dateModal.addClass("display-none");
 
 
-        // date = dateDiv.textContent
+        // create an object with data what we going to put in local storage
         dataObj = {
             dataId: bookId,
             dataTitle: title,
             dataAuthor: author,
             dataDate: date
         };
+        // save all data in to local storage
         dataArray = JSON.parse(localStorage.getItem("bookData")) || [];
         dataArray.push(dataObj);
         localStorage.setItem("bookData", JSON.stringify(dataArray));
-        dataArray = [];
-        $("#successsMsgDiv").empty();
-        var bookAdded = $("<p>").addClass("book-added").text("Book Successfulley added to your list...");
-        $("#successsMsgDiv").append(bookAdded);
-        $("#successsMsgDiv").empty();
-        
+        dataArray = [];           
 
         // Get the element which contains the 'add to list' icon
         var addButtonContainer = bookContainer.children(".add");
@@ -652,9 +652,6 @@ function moreInfo(bookID) {
         var description = bookResponse.volumeInfo.description;
         var pageCount = bookResponse.volumeInfo.pageCount;        
         var rating = bookResponse.volumeInfo.averageRating;
-        var starPercentage = rating / 5 * 100;
-        var starPercentageRound = Math.round((starPercentage / 10) * 10);
-        var finalPercentage = starPercentageRound + "%";
         var ratingsCount = bookResponse.volumeInfo.ratingsCount;
         var saleability = bookResponse.saleInfo.saleability;
 
@@ -672,8 +669,6 @@ function moreInfo(bookID) {
         var bookPublishdetails = $("<p>");
         var ratingDiv = $("<div>");
         var ratingHead = $("<h3>");
-        var starsInner = $("<div>");
-        var starsOuter = $("<div>");
         var ratingOutofFive = $("<p>");
         var ratingOutofFiveCount = $("<p>");
         var retailDiv = $("<div>");
@@ -702,9 +697,7 @@ function moreInfo(bookID) {
         ratingDiv.addClass("rating-container info-container")
         ratingHead.addClass("rating-header");
         ratingOutofFive.addClass("rating");
-        ratingOutofFiveCount.addClass("rating-count");   
-        starsInner.addClass("stars-inner");        
-        starsOuter.addClass("stars-outer");       
+        ratingOutofFiveCount.addClass("rating-count")        
 
 
         // Setting content of elements
@@ -764,16 +757,10 @@ function moreInfo(bookID) {
         descriptionDiv.append(bookDescription);
         publishDetailsDiv.append(bookPublishdetails);
         ratingDiv.append(ratingHead);
-        starsOuter.append(starsInner);
-        ratingDiv.append(starsOuter);
         ratingDiv.append(ratingOutofFive);
         ratingDiv.append(ratingOutofFiveCount);
         retailDiv.append(retailHead);
         retailDiv.append(bookSaleability);
-
-        // Set the width of the inner stars to the percentage of the rating out of 5        
-
-        $(".stars-inner").width(finalPercentage);
         
 
         // If statement declaring variables holding retail price and currency code as these properties only exist if the saleability is 'For Sale'
@@ -790,15 +777,8 @@ function moreInfo(bookID) {
                 method: "GET"
             }).then(function (exchangeResponse) {
 
-                // Variable to hold exchange rate for GBP based on currency base code specified in API request
-
                 var exchangeGBP = exchangeResponse.conversion_rates.GBP;
-
-                // Convert currency to GBP and round to 2 decimal places
-
                 var amountGBP = (price * exchangeGBP).toFixed(2);
-
-                // Create element, add class, set HTML content and append to modal 
 
                 var retailPriceGBP = $("<p>");
                 retailPriceGBP.addClass("GBP-retail-price");
