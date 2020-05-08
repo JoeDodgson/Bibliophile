@@ -468,6 +468,9 @@ footer small {
     border-image: unset;
     cursor: pointer;
 }
+.add{
+    color: red;
+}
 /* start model for add date */
 /* Modal styling */
 .display-none{
@@ -527,11 +530,10 @@ footer small {
 }
 
 #date-modal-title, #clear-modal-title {
-    
     width: 100%;
     float: right;
     text-align-last: center;
-    font-size: 12px;
+    font-size: 13px;
     color: #6e5462;
 }
 .dateHeader{
@@ -539,13 +541,10 @@ footer small {
     font-weight: 600;
     color: purple;
 }
-    
-
 .dateBtnStyle{
     display: inline-block;
     border-bottom: groove;
 }
-
 #new-date-container {
     margin-top: 10px;
 }
@@ -556,11 +555,9 @@ footer small {
 }
 
 #select-date-guidance, #select-date-warning, #no-change-warning, #confirm-save {
-    
-    font-size: 12px;
+    font-size: 13px;
     color: #6e5462;
 }
-
 
 #select-date-warning, #no-change-warning, #confirm-save {
     margin-top: 10px;
@@ -601,7 +598,7 @@ footer small {
 #addToListBtn, #yesBtn, #noBtn {
     border-radius: 10px;
     font-weight: bold;
-   
+    
 }
 
 #addTolistBtn {
@@ -621,7 +618,7 @@ footer small {
 .error {
     visibility: visible;
     color: #e6252c;
-    font-size: 18px;
+    font-size: 13px;
   }
   .hideMe{
       visibility: hidden;
@@ -641,7 +638,7 @@ footer small {
    
   .stars-outer::before {
     content: "\f005 \f005 \f005 \f005 \f005";
-    
+    font-family: "Font Awesome 5 Free";
     font-weight: 900;
     color: #ccc;
   }
@@ -657,17 +654,11 @@ footer small {
    
   .stars-inner::before {
     content: "\f005 \f005 \f005 \f005 \f005";
-    
+    font-family: "Font Awesome 5 Free";
     font-weight: 900;
     color: #f8ce0b;
   }
-  .saveToList{
-    float: right;
-  }
-.textTRD{
-    font-weight: bold;
-    color: #8f6a8f
-}
+
 
 /* General styling */
 
