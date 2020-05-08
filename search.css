@@ -466,6 +466,149 @@ footer {
     border-image: unset;
     cursor: pointer;
 }
+/* start model for add date */
+/* Modal styling */
+.display-none{
+    visibility: hidden;
+}
+.success{
+    font-size: 25px;
+    color: green;
+}
+#change-date, #clear-list-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+#date-modal-content, #clear-modal-content {
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%; 
+    font-family: 'Lato', sans-serif;
+}
+
+#clear-modal-content {
+    height: 180px;
+}
+
+#date-modal-close, #clear-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    height: 100%;
+    text-align: right;
+}
+
+#date-modal-close:hover,
+#date-modal-close:focus,
+#clear-modal-close:hover,
+#clear-modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#title-close-container {
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+#date-modal-title, #clear-modal-title {
+    font-weight: bold;
+    width: 100%;
+    float: right;
+}
+
+#new-date-container {
+    margin-top: 10px;
+}
+
+#clear-modal-guidance p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+#select-date-guidance, #select-date-warning, #no-change-warning, #confirm-save {
+    font-size: 12px;
+}
+
+#select-date-warning, #no-change-warning, #confirm-save {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#select-date-warning {
+    color: red;
+}
+
+#no-change-warning {
+    color: #e98527 ;
+}
+
+#confirm-save {
+    color: green ;
+}
+
+#date-entry-save-container {
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+}
+
+#select-date {
+    width: 80px;
+    height: 18px;
+    margin-top: 5px;
+    float: left;
+}
+
+#save-button-container, #clear-modal-buttons-container, #no-button-container, #yes-button-container {
+    float: left;
+    margin: 5px 0 0 20px;
+}
+
+#addToListBtn, #yesBtn, #noBtn {
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
+
+#addTolistBtn {
+    width: auto;
+    background-color: rgb(192, 148, 194);
+}
+
+#yesBtn {
+    background-color: green;
+}
+
+#noBtn {
+    background-color: grey;
+}
+
+.error {
+    visibility: visible;
+    color: #e6252c;
+    font-size: 18px;
+  }
+  .hideMe{
+      visibility: hidden;
+  }
+.pass{
+    color: green;
+    font-size: 18px;
+}
 
 /* Star ratings */
 
@@ -497,6 +640,7 @@ footer {
     font-weight: 900;
     color: #f8ce0b;
   }
+
 
 /* General styling */
 

@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="search.css">
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
 </head>
@@ -71,7 +72,8 @@
                 </ul>
             </form>
 
-            <div class="order">
+            <div class="order">                
+                <p id="successsMsgDiv" class="success"></p>
                 <p>Order search by:</p>
                 <div class="radio-buttons">
                     <input type="radio" id="relevance" name="orderGroup" value="relevance" checked="true">
@@ -106,6 +108,33 @@
 
                 </div>
 
+            </div>
+
+        </div>
+        <div id="change-date" class="display-none">
+
+            <!-- Modal content -->
+            <div id="date-modal-content" data-date="">
+                <div id="title-close-container">
+                    <span id="date-modal-title">You are about to add this book in to your list...</span>
+                    <span id="date-modal-close"><i class="far fa-window-close"></i></span>
+                    <span id="date-modal-title2"></span>
+                </div>
+                <div id="new-date-container">
+                    <p id="select-date-guidance">
+                        Enter a target read date in the format DD/MM/YYYY:
+                    </p>
+                </div>
+                <div id="date-entry-save-container">
+                    <input type="text" class="selectDate" id="select-date" placeholder="DD/MM/YYYY">
+                    <div id="save-button-container">
+                        <button id="addTolistBtn">Add to list</button>
+                    </div>
+                </div>
+                <p id="msgDiv" class="error"></p>
+                <!-- <p id="select-date-warning" class="display-none">The date you entered is not of the format DD/MM/YYYY</p> -->
+                <!-- <p id="no-change-warning" class="display-none">The date you entered is the same as the date you previously set</p> -->
+                <!-- <p id="confirm-save" class="display-none">Your new target read date has been saved</p> -->
             </div>
 
         </div>
