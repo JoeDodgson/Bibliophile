@@ -324,6 +324,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
             // Add an event listener for a click event on the 'add to list' button
             $(".fa-plus-circle").on("click", function () {
                 $("#msgDiv").empty(); 
+                $(".dateHeader").empty();
                 
                 // Store the date modal as a variable
                 var dateModal = $("#change-date");
@@ -350,7 +351,6 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
 
                     
                     saveBookData(bookContainer);
-                    $(".dateHeader").empty();
                 })
                
             });
