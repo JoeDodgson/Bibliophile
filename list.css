@@ -475,16 +475,25 @@ header p {
 
 
 /* Footer styling */
-
 footer {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
-    border-top: 5px solid #20B2AA;
+    border-top: 5px solid #49274A;
     position: fixed;
     bottom: 0;
-    left: 0;
     background-color: dimgray;
     color: #ffffff;
     width: 100%;
+    min-height: 30px;
+}
+
+footer small {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 
@@ -496,6 +505,7 @@ footer {
 
 
 /* Responsiveness */
+
 @media (min-width: 480px) and (max-width: 570px) {
     .list-grid-item {
         font-size: 13px;
@@ -519,6 +529,17 @@ footer {
     }
 }
 
+@media (min-width: 300px) and (max-width: 390px) {
+    footer {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 299px) {
+    footer {
+        font-size: 12px;
+    }
+}
 
 @media screen and (min-width: 768px) {
     
