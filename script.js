@@ -3,6 +3,7 @@
 // Declare global variables
 // Static parts of the book search ajax call query URL
 var queryURLAPI = "&key=AIzaSyA6Hu3cw4Ie_fjiKoUuamSqsAFfqi7pknQ";
+var queryURLMaxResults = "&maxResults=40";
 var queryURLPrintType = "&printType=books";
 var queryURLProjection = "&projection=lite";
 
@@ -124,10 +125,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
     var queryURLOrder = "&orderBy=" + sortType;
 
     // Concatenate all parts of the queryURL
-    queryURL = "https://www.googleapis.com/books/v1/volumes?q=" + queryURLTitle + queryURLAuthor + queryURLGenre + queryURLPrintType + queryURLProjection + queryURLOrder + queryURLAPI;
-
-    // While the ajax call is being executed, display a loading icon
-    // REMOVE THE DISPLAY-NONE CLASS FROM THE LOADING ICON?
+    queryURL = "https://www.googleapis.com/books/v1/volumes?q=" + queryURLTitle + queryURLAuthor + queryURLGenre + queryURLPrintType + queryURLProjection + queryURLOrder + queryURLMaxResults + queryURLAPI;
 
     // Perform an ajax call using the query URL
     $.ajax({
