@@ -3,6 +3,7 @@
 // Declare global variables
 // Static parts of the book search ajax call query URL
 var queryURLAPI = "&key=AIzaSyA6Hu3cw4Ie_fjiKoUuamSqsAFfqi7pknQ";
+var queryURLMaxResults = "&maxResults=40";
 var queryURLPrintType = "&printType=books";
 var queryURLProjection = "&projection=lite";
 
@@ -124,10 +125,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
     var queryURLOrder = "&orderBy=" + sortType;
 
     // Concatenate all parts of the queryURL
-    queryURL = "https://www.googleapis.com/books/v1/volumes?q=" + queryURLTitle + queryURLAuthor + queryURLGenre + queryURLPrintType + queryURLProjection + queryURLOrder + queryURLAPI;
-
-    // While the ajax call is being executed, display a loading icon
-    // REMOVE THE DISPLAY-NONE CLASS FROM THE LOADING ICON?
+    queryURL = "https://www.googleapis.com/books/v1/volumes?q=" + queryURLTitle + queryURLAuthor + queryURLGenre + queryURLPrintType + queryURLProjection + queryURLOrder + queryURLMaxResults + queryURLAPI;
 
     // Perform an ajax call using the query URL
     $.ajax({
@@ -407,33 +405,31 @@ function renderBookData() {
 
         // My list - change date modal
 
-// Add an event listener for a click event on the target read date
+        // Add an event listener for a click event on the target read date
 
-$(".target-read-date").on("click", function(){
-    console.log(event.target);
-    // Store the date modal as a variable
-    var dateModal = $("#change-date-modal");
+        $(".target-read-date").on("click", function(){
+            // Store the date modal as a variable
+            var dateModal = $("#change-date-modal");
 
-    // Get the book ID, title and target read date from the listed book parent element
-    console.log($(this).siblings(".book-details").children(".book-title"));
-    var bookTitle = $(this).siblings(".book-details").children(".book-title")[0].textContent;
-    var bookDate = $(this)[0].textContent.trim();
-    var bookID = $(this).parent(".listed-book").attr('data-id');
+            // Get the book ID, title and target read date from the listed book parent element
+            var bookTitle = $(this).siblings(".book-details").children(".book-title")[0].textContent;
+            var bookDate = $(this)[0].textContent.trim();
+            var bookID = $(this).parent(".listed-book").attr('data-id');
 
-    // Update the title & target read date shown in modal and update data-id attribute
-    $("#date-modal-title").html(bookTitle);
-    $("#select-date").val(bookDate);
-    dateModal.attr("data-stored-date",bookDate);
-    dateModal.attr("data-id",bookID);
+            // Update the title & target read date shown in modal and update data-id attribute
+            $("#date-modal-title").html(bookTitle);
+            $("#select-date").val(bookDate);
+            dateModal.attr("data-stored-date",bookDate);
+            dateModal.attr("data-id",bookID);
 
-    // Display the 'save to my list' modal
-    dateModal.removeClass("display-none");
-    
-    // When the user clicks the close button it hides the modal
-    $("#date-modal-close").on("click", function() {
-        dateModal.addClass("display-none");
-    })
-})
+            // Display the 'change date' modal
+            dateModal.removeClass("display-none");
+            
+            // When the user clicks the close button it hides the modal
+            $("#date-modal-close").on("click", function() {
+                dateModal.addClass("display-none");
+            })
+        })
 
     }
 
@@ -793,36 +789,7 @@ function moreInfo(bookID) {
 }
 
 
-// My list - change date modal
-
-// Add an event listener for a click event on the target read date
-$(".target-read-date").on("click", function () {
-
-    // Store the date modal as a variable
-    var dateModal = $("#change-date-modal");
-
-    // Get the book ID, title and target read date from the listed book parent element
-    var bookTitle = $(this).siblings(".book-details").children(".book-title")[0].textContent;
-    var bookDate = $(this)[0].textContent.trim();
-    var bookID = $(this).parent(".listed-book").attr('data-id');
-
-    // Update the title & target read date shown in modal and update data-id attribute
-    $("#date-modal-title").html(bookTitle);
-    $("#select-date").val(bookDate);
-    dateModal.attr("data-stored-date", bookDate);
-    dateModal.attr("data-id", bookID);
-
-    // Display the 'change date' modal
-    dateModal.removeClass("display-none");
-
-    // When the user clicks the close button it hides the modal
-    $("#date-modal-close").on("click", function () {
-        dateModal.addClass("display-none");
-    })
-})
-
-
-// Add an event listener for the click event on the 'save' button
+// Add an event listener for the click event on the 'save' button in my list
 $("#saveBtn").on("click", function () {
     // Hide the warning and confirm save messages
     $("#select-date-warning").addClass("display-none");
