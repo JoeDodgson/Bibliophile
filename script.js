@@ -326,7 +326,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
             // Add an event listener for a click event on the 'add to list' button
             $(".fa-plus-circle").on("click", function () {
                 $("#msgDiv").empty(); 
-
+                
                 // Store the date modal as a variable
                 var dateModal = $("#change-date");
 
@@ -345,6 +345,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 $("#addTolistBtn").on("click", function () {
 
                     saveBookData(bookContainer);
+                    
                 })
 
             });
@@ -439,6 +440,7 @@ $(".target-read-date").on("click", function(){
 
     $(".fa-info-circle").on("click", function () {
 
+        //using clicked add to list button find the data related to that specific book 
         var bookID = $(this).parent().parent().attr('data-id');
         $(".new-modal-content").empty();
         moreInfo(bookID);
@@ -518,7 +520,7 @@ $(".target-read-date").on("click", function(){
 }
 
 
-
+//after enter a date use can also press enter button to submit the data
 $("#select-date").keypress(function (event) {
 
     if (event.keyCode === 13) {
@@ -560,7 +562,7 @@ function saveBookData(bookContainer) {
 
     // add date in to local storage if it is not already there
     else {
-
+        
         // Store the date modal as a variable
         var dateModal = $("#change-date");
 
@@ -583,6 +585,7 @@ function saveBookData(bookContainer) {
         var bookAdded = $("<p>").addClass("book-added").text("Book Successfulley added to your list...");
         $("#successsMsgDiv").append(bookAdded);
         $("#successsMsgDiv").empty();
+        
 
         // Get the element which contains the 'add to list' icon
         var addButtonContainer = bookContainer.children(".add");
