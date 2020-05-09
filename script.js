@@ -126,7 +126,6 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
 
     // Concatenate all parts of the queryURL
     queryURL = "https://www.googleapis.com/books/v1/volumes?q=" + queryURLTitle + queryURLAuthor + queryURLGenre + queryURLPrintType + queryURLProjection + queryURLOrder + queryURLMaxResults + queryURLAPI;
-    console.log(queryURL);
     // Perform an ajax call using the query URL
     $.ajax({        
         type: "GET",
@@ -345,7 +344,6 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
 
                 // when user click call the save BookData()
                 $("#addTolistBtn").on("click", function () {
-
                     saveBookData(bookContainer);
                 })
 
@@ -536,7 +534,6 @@ $(document).ready(function () {
 
 // save book info to local storage function
 function saveBookData(bookContainer) {
-
     // get all the info what we need to add to local storage
     newDate = $(".selectDate").val();
     bookId = bookContainer.attr("data-id");
@@ -576,20 +573,33 @@ function saveBookData(bookContainer) {
             dataDate: date
         };
         dataArray = JSON.parse(localStorage.getItem("bookData")) || [];
-        dataArray.push(dataObj);
-        localStorage.setItem("bookData", JSON.stringify(dataArray));
-        dataArray = [];
-        $("#successsMsgDiv").empty();
-        var bookAdded = $("<p>").addClass("book-added").text("Book Successfulley added to your list...");
-        $("#successsMsgDiv").append(bookAdded);
-        $("#successsMsgDiv").empty();
 
-        // Get the element which contains the 'add to list' icon
-        var addButtonContainer = bookContainer.children(".add");
-        // Empty the container to removed the 'add to list' icon
-        addButtonContainer.empty();
-        // Set text in the container to be "in my list" since the user has added that book to theior list
-        addButtonContainer.html("In my list");
+        var continueYN = true;
+
+        if(dataArray.length > 0){
+            for(i = 0; i < dataArray.length; i++){
+                if (dataArray[i].dataId === dataObj.dataId){
+                    continueYN = false;
+                }
+            }
+        }
+
+        if(continueYN === true){
+            dataArray.push(dataObj);
+            localStorage.setItem("bookData", JSON.stringify(dataArray));
+            dataArray = [];
+            $("#successsMsgDiv").empty();
+            var bookAdded = $("<p>").addClass("book-added").text("Book Successfully added to your list...");
+            $("#successsMsgDiv").append(bookAdded);
+            $("#successsMsgDiv").empty();
+            // Get the element which contains the 'add to list' icon
+            var addButtonContainer = bookContainer.children(".add");
+            // Empty the container to removed the 'add to list' icon
+            addButtonContainer.empty();
+            // Set text in the container to be "in my list" since the user has added that book to theior list
+            addButtonContainer.html("In my list");
+        }
+    
     }
 
 }
