@@ -126,9 +126,8 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
 
     // Concatenate all parts of the queryURL
     queryURL = "https://www.googleapis.com/books/v1/volumes?q=" + queryURLTitle + queryURLAuthor + queryURLGenre + queryURLPrintType + queryURLProjection + queryURLOrder + queryURLMaxResults + queryURLAPI;
-
     // Perform an ajax call using the query URL
-    $.ajax({
+    $.ajax({        
         type: "GET",
         url: queryURL,
         dataType: "json",
@@ -164,12 +163,14 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
 
                 // Loop through to find the smallest image URL, starting by checking for the smallest image then moving up the sizes
                 for (j = 0; j < coverImage.length; j++) {
-
+                    
                     // Use the imageURLLookup object to get the imageURLLookup required to retrieve the image URL
                     imageURLLookup = coverImage[j].imageURLLookup;
 
                     // Use the imageURLLookup to retrieve the image URL
+                    if (data.items[i].volumeInfo.imageLinks !== undefined) {
                     imageURL = data.items[i].volumeInfo.imageLinks[imageURLLookup];
+                }
 
                     // If that image size exists, set the imageElement source to be that image URL and break the loop
                     if (imageURL !== undefined) {
@@ -196,7 +197,9 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                     imageURLLookup = coverImage[j].imageURLLookup;
 
                     // Use the imageURLLookup to retrieve the image URL
+                    if (data.items[i].volumeInfo.imageLinks !== undefined) {
                     imageURL = data.items[i].volumeInfo.imageLinks[imageURLLookup];
+                }
 
                     // If that image size exists, set the imageElement source to be that image URL and break the loop
                     if (imageURL !== undefined) {
@@ -247,7 +250,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 // Check if the user has the book in their list. 
                 userListDataArray = JSON.parse(localStorage.getItem("bookData"));
 
-                if (userListDataArray === null) {
+                if (userListDataArray === null || userListDataArray.length < 1) {
                     addToListButton = document.createElement("button");
                     addToListButton.setAttribute("class", "fas fa-plus-circle");
                     addToListContainer.append(addToListButton);
@@ -346,11 +349,10 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 // When the user clicks the close button it hides the modal
                 $("#date-modal-close").on("click", function () {
                     dateModal.addClass("display-none");
-                })
+                })                
 
                 // when user click call the save BookData()
                 $("#addTolistBtn").on("click", function () {
-
                     saveBookData(bookContainer);
                 })
 
@@ -378,7 +380,7 @@ function renderBookData() {
     dataArray = JSON.parse(localStorage.getItem("bookData"));
 
     //check the local storage have any data or not
-    if (dataArray !== null) {
+    if (dataArray !== null && dataArray.length > 0) {
 
         //use a for loop to render get revelent data from local storage  
         for (var i = 0; i < dataArray.length; i++) {
@@ -541,7 +543,6 @@ $(document).ready(function () {
 
 // save book info to local storage function
 function saveBookData(bookContainer) {
-
     // get all the info what we need to add to local storage
     newDate = $(".selectDate").val();
     bookId = bookContainer.attr("data-id");
@@ -580,20 +581,33 @@ function saveBookData(bookContainer) {
         };
         
         dataArray = JSON.parse(localStorage.getItem("bookData")) || [];
-        dataArray.push(dataObj);
-        localStorage.setItem("bookData", JSON.stringify(dataArray));
-        
-        $("#successsMsgDiv").empty();
-        var bookAdded = $("<p>").addClass("book-added").text("Book Successfulley added to your list...");
-        $("#successsMsgDiv").append(bookAdded);
-        $("#successsMsgDiv").empty();
 
-        // Get the element which contains the 'add to list' icon
-        var addButtonContainer = bookContainer.children(".add");
-        // Empty the container to removed the 'add to list' icon
-        addButtonContainer.empty();
-        // Set text in the container to be "in my list" since the user has added that book to theior list
-        addButtonContainer.html("In my list");
+        var continueYN = true;
+
+        if(dataArray.length > 0){
+            for(i = 0; i < dataArray.length; i++){
+                if (dataArray[i].dataId === dataObj.dataId){
+                    continueYN = false;
+                }
+            }
+        }
+
+        if(continueYN === true){
+            dataArray.push(dataObj);
+            localStorage.setItem("bookData", JSON.stringify(dataArray));
+            dataArray = [];
+            $("#successsMsgDiv").empty();
+            var bookAdded = $("<p>").addClass("book-added").text("Book Successfully added to your list...");
+            $("#successsMsgDiv").append(bookAdded);
+            $("#successsMsgDiv").empty();
+            // Get the element which contains the 'add to list' icon
+            var addButtonContainer = bookContainer.children(".add");
+            // Empty the container to removed the 'add to list' icon
+            addButtonContainer.empty();
+            // Set text in the container to be "in my list" since the user has added that book to theior list
+            addButtonContainer.html("In my list");
+        }
+    
     }
 
 }
