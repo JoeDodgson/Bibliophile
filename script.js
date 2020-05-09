@@ -325,6 +325,8 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
              $(".fa-plus-circle").on("click", function () {
                 $("#msgDiv").empty(); 
                 $(".dateHeader").empty();
+               // dataArray = [];
+                
                 
                 // Store the date modal as a variable
                 var dateModal = $("#change-date");
@@ -349,7 +351,6 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 // when user click call the save BookData()
                 $("#addTolistBtn").on("click", function () {
 
-                    
                     saveBookData(bookContainer);
                 })
 
@@ -564,13 +565,11 @@ function saveBookData(bookContainer) {
 
     // add date in to local storage if it is not already there
     else {
-
         // Store the date modal as a variable
         var dateModal = $("#change-date");
 
         // Display the 'change date' modal
         dateModal.addClass("display-none");
-
 
         // date = dateDiv.textContent
         dataObj = {
@@ -579,10 +578,11 @@ function saveBookData(bookContainer) {
             dataAuthor: author,
             dataDate: date
         };
+        
         dataArray = JSON.parse(localStorage.getItem("bookData")) || [];
         dataArray.push(dataObj);
         localStorage.setItem("bookData", JSON.stringify(dataArray));
-        dataArray = [""];
+        
         $("#successsMsgDiv").empty();
         var bookAdded = $("<p>").addClass("book-added").text("Book Successfulley added to your list...");
         $("#successsMsgDiv").append(bookAdded);
