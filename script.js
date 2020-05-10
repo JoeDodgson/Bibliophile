@@ -324,10 +324,13 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 }
 
             })
-            // Add an event listener for a click event on the 'add to list' button
-            $(".fa-plus-circle").on("click", function () {
+             // Add an event listener for a click event on the 'add to list' button
+             $(".fa-plus-circle").on("click", function () {
                 $("#msgDiv").empty(); 
-
+                $(".dateHeader").empty();
+               // dataArray = [];
+                
+                
                 // Store the date modal as a variable
                 var dateModal = $("#change-date");
 
@@ -336,6 +339,12 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
 
                 // Get the book ID, title and target read date from the listed book parent element
                 var bookContainer = $(this).parent().parent();
+
+                // dynamicaly create a header for date modal using book title.                
+                title = bookContainer.find(".title-text").html();
+                var dateHeader = $("<span>").addClass("dateHeader").prepend(title + "<br><br>");
+                $("#date-modal-title").prepend(dateHeader);
+                
                 
                 // When the user clicks the close button it hides the modal
                 $("#date-modal-close").on("click", function () {
@@ -557,13 +566,11 @@ function saveBookData(bookContainer) {
 
     // add date in to local storage if it is not already there
     else {
-
         // Store the date modal as a variable
         var dateModal = $("#change-date");
 
         // Display the 'change date' modal
         dateModal.addClass("display-none");
-
 
         // date = dateDiv.textContent
         dataObj = {
@@ -572,6 +579,7 @@ function saveBookData(bookContainer) {
             dataAuthor: author,
             dataDate: date
         };
+        
         dataArray = JSON.parse(localStorage.getItem("bookData")) || [];
 
         var continueYN = true;

@@ -468,6 +468,9 @@ footer small {
     border-image: unset;
     cursor: pointer;
 }
+.add{
+    color: red;
+}
 /* start model for add date */
 /* Modal styling */
 .display-none{
@@ -527,11 +530,21 @@ footer small {
 }
 
 #date-modal-title, #clear-modal-title {
-    font-weight: bold;
     width: 100%;
     float: right;
+    text-align-last: center;
+    font-size: 13px;
+    color: #6e5462;
 }
-
+.dateHeader{
+    font-size: 15px;
+    font-weight: 600;
+    color: purple;
+}
+.dateBtnStyle{
+    display: inline-block;
+    border-bottom: groove;
+}
 #new-date-container {
     margin-top: 10px;
 }
@@ -542,7 +555,8 @@ footer small {
 }
 
 #select-date-guidance, #select-date-warning, #no-change-warning, #confirm-save {
-    font-size: 12px;
+    font-size: 13px;
+    color: #6e5462;
 }
 
 #select-date-warning, #no-change-warning, #confirm-save {
@@ -573,6 +587,7 @@ footer small {
     height: 18px;
     margin-top: 5px;
     float: left;
+    font-size: 12px;
 }
 
 #save-button-container, #clear-modal-buttons-container, #no-button-container, #yes-button-container {
@@ -583,12 +598,13 @@ footer small {
 #addToListBtn, #yesBtn, #noBtn {
     border-radius: 10px;
     font-weight: bold;
-    font-family: 'Roboto', sans-serif;
+    
 }
 
 #addTolistBtn {
     width: auto;
     background-color: rgb(192, 148, 194);
+    cursor: pointer;
 }
 
 #yesBtn {
@@ -602,7 +618,7 @@ footer small {
 .error {
     visibility: visible;
     color: #e6252c;
-    font-size: 18px;
+    font-size: 13px;
   }
   .hideMe{
       visibility: hidden;
