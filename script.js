@@ -353,7 +353,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
     });
 }
 
-//start-niro
+
 var dataArray = [];
 var title;
 var author;
@@ -725,6 +725,9 @@ function moreInfo(bookID) {
 
         bookTitle.html(title);
 
+        // If else statements to manage undefined data in the API response
+
+        // Author
 
         if (bookResponse.volumeInfo.authors === undefined) {
             bookAuthor.html("No data available")
@@ -734,6 +737,8 @@ function moreInfo(bookID) {
             bookAuthor.html(last);
         }
 
+        // Description
+
         descriptionHead.html("Description");
 
         if (description === undefined) {
@@ -741,6 +746,8 @@ function moreInfo(bookID) {
         } else {
             bookDescription.html(description);
         }
+
+        // Ratings
 
         ratingHead.html("Rating");
 
@@ -751,9 +758,12 @@ function moreInfo(bookID) {
             ratingOutofFiveCount.html("Number of ratings: " + ratingsCount);
         }
 
+        // Publishing details
+
         bookPublishdetails.html(pageCount + " pages | Publish date: " + publishDate + " | " + publisher);
         retailHead.html("Retail Information");
         
+        // Saleability
 
         if (saleability === "FOR_SALE") {
 
