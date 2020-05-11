@@ -64,8 +64,8 @@ $("#newest").on("click", function () {
 
 // Trigger button click on enter keystroke
 
-$("#titleSearchField, #authorSearchField, #genreSearchField").on("keyup", function(event) {
-    if(event.keyCode === 13) {
+$("#titleSearchField, #authorSearchField, #genreSearchField").on("keyup", function (event) {
+    if (event.keyCode === 13) {
         event.preventDefault();
         $("#searchBtn").click();
     }
@@ -127,7 +127,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
     // Concatenate all parts of the queryURL
     queryURL = "https://www.googleapis.com/books/v1/volumes?q=" + queryURLTitle + queryURLAuthor + queryURLGenre + queryURLPrintType + queryURLProjection + queryURLOrder + queryURLMaxResults + queryURLAPI;
     // Perform an ajax call using the query URL
-    $.ajax({        
+    $.ajax({
         type: "GET",
         url: queryURL,
         dataType: "json",
@@ -163,14 +163,14 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
 
                 // Loop through to find the smallest image URL, starting by checking for the smallest image then moving up the sizes
                 for (j = 0; j < coverImage.length; j++) {
-                    
+
                     // Use the imageURLLookup object to get the imageURLLookup required to retrieve the image URL
                     imageURLLookup = coverImage[j].imageURLLookup;
 
                     // Use the imageURLLookup to retrieve the image URL
                     if (data.items[i].volumeInfo.imageLinks !== undefined) {
-                    imageURL = data.items[i].volumeInfo.imageLinks[imageURLLookup];
-                }
+                        imageURL = data.items[i].volumeInfo.imageLinks[imageURLLookup];
+                    }
 
                     // If that image size exists, set the imageElement source to be that image URL and break the loop
                     if (imageURL !== undefined) {
@@ -198,8 +198,8 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
 
                     // Use the imageURLLookup to retrieve the image URL
                     if (data.items[i].volumeInfo.imageLinks !== undefined) {
-                    imageURL = data.items[i].volumeInfo.imageLinks[imageURLLookup];
-                }
+                        imageURL = data.items[i].volumeInfo.imageLinks[imageURLLookup];
+                    }
 
                     // If that image size exists, set the imageElement source to be that image URL and break the loop
                     if (imageURL !== undefined) {
@@ -328,7 +328,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
              $(".fa-plus-circle").on("click", function () {
                 $("#msgDiv").empty(); 
                 $(".dateHeader").empty();
-               // dataArray = [];
+               
                 
                 
                 // Store the date modal as a variable
@@ -349,7 +349,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
                 // When the user clicks the close button it hides the modal
                 $("#date-modal-close").on("click", function () {
                     dateModal.addClass("display-none");
-                })                
+                })
 
                 // when user click call the save BookData()
                 $("#addTolistBtn").on("click", function () {
@@ -362,7 +362,7 @@ function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
     });
 }
 
-//start-niro
+
 var dataArray = [];
 var title;
 var author;
@@ -410,7 +410,7 @@ function renderBookData() {
 
         // Add an event listener for a click event on the target read date
 
-        $(".target-read-date").on("click", function(){
+        $(".target-read-date").on("click", function () {
             // Store the date modal as a variable
             var dateModal = $("#change-date-modal");
 
@@ -422,14 +422,14 @@ function renderBookData() {
             // Update the title & target read date shown in modal and update data-id attribute
             $("#date-modal-title").html(bookTitle);
             $("#select-date").val(bookDate);
-            dateModal.attr("data-stored-date",bookDate);
-            dateModal.attr("data-id",bookID);
+            dateModal.attr("data-stored-date", bookDate);
+            dateModal.attr("data-id", bookID);
 
             // Display the 'change date' modal
             dateModal.removeClass("display-none");
-            
+
             // When the user clicks the close button it hides the modal
-            $("#date-modal-close").on("click", function() {
+            $("#date-modal-close").on("click", function () {
                 dateModal.addClass("display-none");
             })
         })
@@ -438,7 +438,7 @@ function renderBookData() {
 
     // if local storage is empty pass a message to the user
     else {
-        
+
         $(".list-container").empty();
         var listEmptyMsg = $("<h2>").addClass("emptyList").text("You do not have any books in your read list");
         $(".list-container").append(listEmptyMsg);
@@ -473,39 +473,39 @@ function renderBookData() {
     })
 
     // Add an event listener for the click event on Delete icon
-    $(".fa-trash-alt").on("click", function() {
+    $(".fa-trash-alt").on("click", function () {
         // Store the delete book modal as a variable
         var deleteModal = $("#delete-book-modal");
 
         // Store the book's ID
         var bookID = $(this).parent().parent().attr('data-id');
-        
+
         // Populate the delete modal title with the book title
         var bookTitle = $(this).parent().parent().children()[0].firstChild.textContent;
         $("#delete-modal-title").html("Delete '" + bookTitle + "'");
 
         // Display the 'clear list' modal
         deleteModal.removeClass("display-none");
-        
+
         // When the user clicks the 'close' icon or the 'No' button it hides the modal
-        $("#delete-modal-close").on("click", function() {
+        $("#delete-modal-close").on("click", function () {
             deleteModal.addClass("display-none");
         })
-        $(".noBtn").on("click", function() {
+        $(".noBtn").on("click", function () {
             deleteModal.addClass("display-none");
         })
-        
+
         // Add an event listener for the 'Yes' button
-        $(".yesDeleteBtn").on("click", function() {
+        $(".yesDeleteBtn").on("click", function () {
             // Retrieve the bookData index in the local storage
             var bookData = JSON.parse(localStorage.getItem("bookData"));
 
             // Loop through the bookData and check if the book matches the book being deleted
             endOfLoop = bookData.length;
-            for (i = 0; i < endOfLoop; i++){
+            for (i = 0; i < endOfLoop; i++) {
                 // If it matches, remove it from the array
-                if (bookData[i].dataId === bookID){
-                    for (j = i; j < endOfLoop - 1; j++){
+                if (bookData[i].dataId === bookID) {
+                    for (j = i; j < endOfLoop - 1; j++) {
                         bookData[j] = bookData[j + 1];
                     }
                     bookData.pop();
@@ -513,11 +513,11 @@ function renderBookData() {
                 }
             }
             // Set the local storage
-            localStorage.setItem("bookData",JSON.stringify(bookData));
-            
+            localStorage.setItem("bookData", JSON.stringify(bookData));
+
             // Render the user's list
             renderBookData();
-            
+
             // Close the 'clear list' modal
             deleteModal.addClass("display-none");
         })
@@ -530,7 +530,7 @@ $("#select-date").keypress(function (event) {
 
     if (event.keyCode === 13) {
         event.preventDefault();
-        $("#addTolistBtn").click(); 
+        $("#addTolistBtn").click();
     }
 });
 
@@ -548,7 +548,7 @@ function saveBookData(bookContainer) {
     bookId = bookContainer.attr("data-id");
     author = bookContainer.find(".author-text").html();
     title = bookContainer.find(".title-text").html();
-    date = newDate;    
+    date = newDate;
 
     //if user forgot to add a date, pass a massage 
     if (date === "") {
@@ -560,7 +560,7 @@ function saveBookData(bookContainer) {
         date[5] === "/" && parseInt(date.slice(0, 2)) <= 31 &&
         parseInt(date.slice(3, 5)) <= 12 && parseInt(date.slice(6, 10)) > 2000)) {
 
-        $("#msgDiv").empty();    
+        $("#msgDiv").empty();
         $("#msgDiv").text("Date format is incorrect...");
     }
 
@@ -584,15 +584,15 @@ function saveBookData(bookContainer) {
 
         var continueYN = true;
 
-        if(dataArray.length > 0){
-            for(i = 0; i < dataArray.length; i++){
-                if (dataArray[i].dataId === dataObj.dataId){
+        if (dataArray.length > 0) {
+            for (i = 0; i < dataArray.length; i++) {
+                if (dataArray[i].dataId === dataObj.dataId) {
                     continueYN = false;
                 }
             }
         }
 
-        if(continueYN === true){
+        if (continueYN === true) {
             dataArray.push(dataObj);
             localStorage.setItem("bookData", JSON.stringify(dataArray));
             dataArray = [];
@@ -607,7 +607,7 @@ function saveBookData(bookContainer) {
             // Set text in the container to be "in my list" since the user has added that book to theior list
             addButtonContainer.html("In my list");
         }
-    
+
     }
 
 }
@@ -640,18 +640,25 @@ function moreInfo(bookID) {
 
 
         var cover;
-        if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.thumbnail;
-        } else if (bookResponse.volumeInfo.imageLinks.smallThumbnail !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.smallThumbnail;
-        } else if (bookResponse.volumeInfo.imageLinks.small !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.small;
-        } else if (bookResponse.volumeInfo.imageLinks.medium !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.medium;
-        } else if (bookResponse.volumeInfo.imageLinks.large !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.large;
-        } else if (bookResponse.volumeInfo.imageLinks.extraLarge !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.extraLarge;
+
+        if (bookResponse.volumeInfo.imageLinks) {
+
+            if (bookResponse.volumeInfo.imageLinks.extraLarge !== undefined) {
+                cover = bookResponse.volumeInfo.imageLinks.extraLarge.replace("http", "https");
+            } else if (bookResponse.volumeInfo.imageLinks.large !== undefined) {
+                cover = bookResponse.volumeInfo.imageLinks.large.replace("http", "https");
+            } else if (bookResponse.volumeInfo.imageLinks.medium !== undefined) {
+                cover = bookResponse.volumeInfo.imageLinks.medium.replace("http", "https");
+            } else if (bookResponse.volumeInfo.imageLinks.small !== undefined) {
+                cover = bookResponse.volumeInfo.imageLinks.small.replace("http", "https");
+            } else if (bookResponse.volumeInfo.imageLinks.smallThumbnail !== undefined) {
+                cover = bookResponse.volumeInfo.imageLinks.smallThumbnail.replace("http", "https");
+            } else if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
+                cover = bookResponse.volumeInfo.imageLinks.thumbnail.replace("http", "https");
+            } else {
+                cover = "./assets/no-book-cover.gif"
+            }
+
         } else {
             cover = "./assets/no-book-cover.gif"
         }
@@ -663,9 +670,9 @@ function moreInfo(bookID) {
         var last = authorArray.pop();
         var authors = authorArray.join(", ") + " and " + last;
         var publisher = bookResponse.volumeInfo.publisher;
-        var publishDate = bookResponse.volumeInfo.publishedDate;       
+        var publishDate = bookResponse.volumeInfo.publishedDate;
         var description = bookResponse.volumeInfo.description;
-        var pageCount = bookResponse.volumeInfo.pageCount;        
+        var pageCount = bookResponse.volumeInfo.pageCount;
         var rating = bookResponse.volumeInfo.averageRating;
         var starPercentage = rating / 5 * 100;
         var starPercentageRound = Math.round((starPercentage / 10) * 10);
@@ -694,7 +701,7 @@ function moreInfo(bookID) {
         var retailDiv = $("<div>");
         var retailHead = $("<h3>");
         var bookSaleability = $("<p>");
-        
+
 
 
         // Setting attributes
@@ -717,15 +724,18 @@ function moreInfo(bookID) {
         ratingDiv.addClass("rating-container info-container")
         ratingHead.addClass("rating-header");
         ratingOutofFive.addClass("rating");
-        ratingOutofFiveCount.addClass("rating-count");   
-        starsInner.addClass("stars-inner");        
-        starsOuter.addClass("stars-outer");       
+        ratingOutofFiveCount.addClass("rating-count");
+        starsInner.addClass("stars-inner");
+        starsOuter.addClass("stars-outer");
 
 
         // Setting content of elements
 
         bookTitle.html(title);
 
+        // If else statements to manage undefined data in the API response
+
+        // Author
 
         if (bookResponse.volumeInfo.authors === undefined) {
             bookAuthor.html("No data available")
@@ -735,6 +745,8 @@ function moreInfo(bookID) {
             bookAuthor.html(last);
         }
 
+        // Description
+
         descriptionHead.html("Description");
 
         if (description === undefined) {
@@ -742,6 +754,8 @@ function moreInfo(bookID) {
         } else {
             bookDescription.html(description);
         }
+
+        // Ratings
 
         ratingHead.html("Rating");
 
@@ -752,9 +766,12 @@ function moreInfo(bookID) {
             ratingOutofFiveCount.html("Number of ratings: " + ratingsCount);
         }
 
+        // Publishing details
+
         bookPublishdetails.html(pageCount + " pages | Publish date: " + publishDate + " | " + publisher);
         retailHead.html("Retail Information");
-        
+
+        // Saleability
 
         if (saleability === "FOR_SALE") {
 
@@ -772,7 +789,7 @@ function moreInfo(bookID) {
         infoContent.append(descriptionDiv);
         infoContent.append(ratingDiv);
         infoContent.append(retailDiv);
-        infoContent.append(publishDetailsDiv);        
+        infoContent.append(publishDetailsDiv);
         titleAuthorDiv.append(bookTitle);
         titleAuthorDiv.append(bookAuthor);
         descriptionDiv.append(descriptionHead);
@@ -789,7 +806,7 @@ function moreInfo(bookID) {
         // Set the width of the inner stars to the percentage of the rating out of 5        
 
         $(".stars-inner").width(finalPercentage);
-        
+
 
         // If statement declaring variables holding retail price and currency code as these properties only exist if the saleability is 'For Sale'
 
@@ -858,7 +875,7 @@ $("#saveBtn").on("click", function () {
         bookData = JSON.parse(localStorage.getItem("bookData"));
 
         for (i = 0; i < bookData.length; i++) {
-            if (bookData[i].dataId === bookID){
+            if (bookData[i].dataId === bookID) {
                 bookData[i].dataDate = enteredDate;
                 localStorage.setItem("bookData", JSON.stringify(bookData));
                 break;
@@ -882,15 +899,15 @@ $("#clearBtn").on("click", function () {
     clearModal.removeClass("display-none");
 
     // When the user clicks the 'close' icon or the 'No' button it hides the modal
-    $("#clear-modal-close").on("click", function() {
+    $("#clear-modal-close").on("click", function () {
         clearModal.addClass("display-none");
     })
-    $(".noBtn").on("click", function() {
+    $(".noBtn").on("click", function () {
         clearModal.addClass("display-none");
     })
 
     // Add an event listener for the 'Yes' button
-    $(".yesBtn").on("click", function() {
+    $(".yesBtn").on("click", function () {
         // When the user clicks the 'Yes' button, clear the bookData index in the local storage
         localStorage.removeItem("bookData");
 
