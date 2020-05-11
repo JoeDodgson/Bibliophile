@@ -632,18 +632,25 @@ function moreInfo(bookID) {
 
 
         var cover;
-        if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.thumbnail;
-        } else if (bookResponse.volumeInfo.imageLinks.smallThumbnail !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.smallThumbnail;
-        } else if (bookResponse.volumeInfo.imageLinks.small !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.small;
-        } else if (bookResponse.volumeInfo.imageLinks.medium !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.medium;
-        } else if (bookResponse.volumeInfo.imageLinks.large !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.large;
-        } else if (bookResponse.volumeInfo.imageLinks.extraLarge !== undefined) {
-            cover = bookResponse.volumeInfo.imageLinks.extraLarge;
+        
+        if (bookResponse.volumeInfo.imageLinks) {
+
+            if (bookResponse.volumeInfo.imageLinks.extraLarge !== undefined) {
+                cover = bookResponse.volumeInfo.imageLinks.extraLarge.replace("http", "https");
+            } else if (bookResponse.volumeInfo.imageLinks.large !== undefined) {
+                cover = bookResponse.volumeInfo.imageLinks.large.replace("http", "https");
+            } else if (bookResponse.volumeInfo.imageLinks.medium !== undefined) {
+                cover = bookResponse.volumeInfo.imageLinks.medium.replace("http", "https");
+            } else if (bookResponse.volumeInfo.imageLinks.small !== undefined) {
+                cover = bookResponse.volumeInfo.imageLinks.small.replace("http", "https");
+            } else if (bookResponse.volumeInfo.imageLinks.smallThumbnail !== undefined) {
+                cover = bookResponse.volumeInfo.imageLinks.smallThumbnail.replace("http", "https");
+            } else if (bookResponse.volumeInfo.imageLinks.thumbnail !== undefined) {
+                cover = bookResponse.volumeInfo.imageLinks.thumbnail.replace("http", "https");
+            } else {
+                cover = "./assets/no-book-cover.gif"
+            }
+    
         } else {
             cover = "./assets/no-book-cover.gif"
         }
