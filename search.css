@@ -124,21 +124,20 @@ header h1 {
 
 /* Search styling */
 
+.form-style{
+    max-width:400px;
+    margin: 0 auto;
+    border-radius:2px;
+    padding:0 20px 0 20px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
 .form-style h2{
 	display: block;
 	text-align: center;
 	padding: 0;
 	margin: 0px 0px 25px 0px;
 	color: #5C5C5C;
-	
-}
-
-.form-style{
-	max-width:400px;
-	margin:15px auto 0 auto;	
-	border-radius:2px;
-	padding:0 20px 20px 20px;
-	font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .form-style ul{
@@ -166,8 +165,11 @@ header h1 {
     font-size: 14px;
     font-weight: bold;
 	overflow: hidden;
-	font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid rgb(54, 54, 54);
+    border-radius: 5px;
 }
+
 .form-style input[type="text"] {
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -237,22 +239,17 @@ header h1 {
     font-size: 12px;
     text-transform: uppercase;
     text-decoration: none;
-    background: #60a3bc;
+    background: #94618E;
     padding: 20px;
     border-radius: 25px;
     display: inline-block;
     border: none;
     transition: all 0.4s ease 0s;
     cursor: pointer;
-    margin-bottom: 15px;
-    
-    
 }
 
 #searchBtn:hover {
-
-    background-color: blueviolet;
-
+    background-color: #49274A;
 }
 
 /* Search results styling */
@@ -694,6 +691,12 @@ footer small {
     }
 }
 
+@media (min-width: 0px) and (max-width: 343px) {
+    .form-style li > span{
+        font-size: 10px;
+    }
+}
+
 @media screen and (min-width: 768px) {
     
     /* Navbar changeover */
@@ -723,6 +726,11 @@ footer small {
         padding-top: 60px;
     }
     
+    .form-style {
+        margin-top: 15px;
+        margin-bottom: auto;
+    }
+
     .searchElements {
         border: 2px solid black;
         padding: 10px;
@@ -738,9 +746,9 @@ footer small {
         font-size: 20px;
     }
     
-
     #searchBtn {
         font-size: 18px;
+        margin-bottom: 20px;
     }
     
     .modal-content {
@@ -768,10 +776,7 @@ footer small {
 
     @media screen and (min-width: 1024px) {
 
-        
-        
         .image {
-            
             width: 150px;
         } 
 
