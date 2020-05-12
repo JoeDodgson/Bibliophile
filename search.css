@@ -65,15 +65,9 @@ header {
 }
 
 .desktop-navbar {
-    padding-top: 35px;
-    padding-right: 5px;
+    width: 40%;
 }
 
-.desktop-navbar a {
-    padding-left: 20px;
-    padding-right: 20px;
-
-}
 
 /* Styling text common to mobile and desktop views */
 
@@ -87,12 +81,30 @@ header h1 {
     color: #d9dcd6;
 }
 
-a {
-    color: #ffffff !important;
-    text-decoration: none;
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;  
+    transition: all .25s;  
 }
 
-.searchLink {
+.nav-link:hover{
+    transform: scale(1.5);
+    color: #94618E;
+}
+
+.nav-link:active{
+    color: orangered;
+}
+
+.nav-link-container {
+    width: 33.33%;
+    float: left;
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.current-page-link {
     font-weight: bold;
 }
 
@@ -112,21 +124,20 @@ a {
 
 /* Search styling */
 
+.form-style{
+    max-width:400px;
+    margin: 0 auto;
+    border-radius:2px;
+    padding:0 20px 0 20px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
 .form-style h2{
 	display: block;
 	text-align: center;
 	padding: 0;
 	margin: 0px 0px 25px 0px;
 	color: #5C5C5C;
-	
-}
-
-.form-style{
-	max-width:400px;
-	margin:15px auto 0 auto;	
-	border-radius:2px;
-	padding:0 20px 20px 20px;
-	font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .form-style ul{
@@ -154,8 +165,11 @@ a {
     font-size: 14px;
     font-weight: bold;
 	overflow: hidden;
-	font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid rgb(54, 54, 54);
+    border-radius: 5px;
 }
+
 .form-style input[type="text"] {
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -164,7 +178,7 @@ a {
 	display: block;
 	outline: none;
 	border: none;
-	height: 25px;
+	min-height: 30px;
 	line-height: 25px;
 	font-size: 16px;
 	padding: 0;
@@ -202,13 +216,10 @@ a {
     text-align: center;
     font-family: Georgia, "Times New Roman", Times, serif;   
     font-weight: 500;    
-    
 }
 
 .order p {
     margin-bottom: 20px;
-    
-    
 }
 
 .radio-buttons {
@@ -216,8 +227,7 @@ a {
 }
 
 .searchButton {
-    text-align: center;
-    
+    text-align: center; 
 }
 
 #searchBtn {
@@ -225,22 +235,17 @@ a {
     font-size: 12px;
     text-transform: uppercase;
     text-decoration: none;
-    background: #60a3bc;
-    padding: 20px;
+    background: #94618E;
+    padding: 10px 20px;
     border-radius: 25px;
     display: inline-block;
     border: none;
     transition: all 0.4s ease 0s;
     cursor: pointer;
-    margin-bottom: 15px;
-    
-    
 }
 
 #searchBtn:hover {
-
-    background-color: blueviolet;
-
+    background-color: #49274A;
 }
 
 /* Loading spinner */
@@ -295,12 +300,13 @@ a {
     flex-direction: column;
 }
 
-.fa-info-circle {
+.fa-info-circle, .fa-plus-circle {
     font-size: 24px;
+    transition: all .25s;  
 }
 
-.fa-plus-circle {
-    font-size: 24px;
+.fa-info-circle:hover, .fa-plus-circle:hover {
+    transform: scale(1.5);
 }
 
 .fa-info-circle::before {
@@ -406,10 +412,10 @@ footer small {
     background-color: rgba(0,0,0,0.4);
     
     
-  }
-  
-  /* Modal Content/Box */
-  .modal-content {
+}
+
+/* Modal Content/Box */
+.modal-content {
     background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     margin: 15% auto;
     padding: 20px;
@@ -417,61 +423,60 @@ footer small {
     border-radius: 10px;
     width: 80%; 
     font-family: 'Lato', sans-serif;
-    
-  }
-  
-  /* The Close Button */
-  .close {
+}
+
+/* The Close Button */
+.close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
+}
 
-  .new-modal-content {
+.new-modal-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+}
 
-  .info-container {
-      
+.info-container {
+    
     width: 100%;
     border-bottom: 2px solid lightgrey;
     padding-bottom: 20px;
     padding-top: 20px;
-    
-  }
 
-  .title-author-container {
-      text-align: center;
-  }
+}
 
-  .book-author {
-      font-style: italic;
-  }
+.title-author-container {
+    text-align: center;
+}
 
-  .book-cover {
-      width: 80%;
-      height: auto;
-  }
+.book-author {
+    font-style: italic;
+}
 
-  .add-container {
-      text-align: center;
-  }
+.book-cover {
+    width: 80%;
+    height: auto;
+}
 
-  .add-container h3 {
-      margin-bottom: 0;
-  }
+.add-container {
+    text-align: center;
+}
 
-  .add-container .fas {
+.add-container h3 {
+    margin-bottom: 0;
+}
+
+.add-container .fas {
     background-color: transparent;
     box-sizing: unset;
     margin: 0em;
@@ -483,11 +488,14 @@ footer small {
     border-image: unset;
     cursor: pointer;
 }
+
 .add{
     color: red;
 }
-/* start model for add date */
+
+
 /* Modal styling */
+
 .display-none{
     visibility: hidden;
 }
@@ -699,6 +707,12 @@ footer small {
     }
 }
 
+@media (min-width: 0px) and (max-width: 343px) {
+    .form-style li > span{
+        font-size: 10px;
+    }
+}
+
 @media screen and (min-width: 768px) {
     
     /* Navbar changeover */
@@ -711,6 +725,16 @@ footer small {
         display: none;
     }
 
+    .nav-link {
+        position: absolute;
+        left: 30%;
+        top: 40%;
+    }
+    
+    .nav-link:hover{
+        transform: scale(1.5);
+        color: #49274A;
+    }
     
     .mainBody {
         padding-left: 40px;
@@ -718,6 +742,11 @@ footer small {
         padding-top: 60px;
     }
     
+    .form-style {
+        margin-top: 15px;
+        margin-bottom: auto;
+    }
+
     .searchElements {
         border: 2px solid black;
         padding: 10px;
@@ -733,9 +762,9 @@ footer small {
         font-size: 20px;
     }
     
-
     #searchBtn {
-        font-size: 18px;
+        font-size: 16px;
+        margin-bottom: 20px;
     }
     
     .modal-content {
@@ -763,10 +792,7 @@ footer small {
 
     @media screen and (min-width: 1024px) {
 
-        
-        
         .image {
-            
             width: 150px;
         } 
 
