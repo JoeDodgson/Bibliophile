@@ -216,13 +216,10 @@ header h1 {
     text-align: center;
     font-family: Georgia, "Times New Roman", Times, serif;   
     font-weight: 500;    
-    
 }
 
 .order p {
     margin-bottom: 20px;
-    
-    
 }
 
 .radio-buttons {
@@ -230,8 +227,7 @@ header h1 {
 }
 
 .searchButton {
-    text-align: center;
-    
+    text-align: center; 
 }
 
 #searchBtn {
@@ -240,7 +236,7 @@ header h1 {
     text-transform: uppercase;
     text-decoration: none;
     background: #94618E;
-    padding: 20px;
+    padding: 10px 20px;
     border-radius: 25px;
     display: inline-block;
     border: none;
