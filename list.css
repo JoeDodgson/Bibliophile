@@ -11,7 +11,6 @@ body {
 }
 
 h1 {
-    
     font-weight: 500;
     margin-top: 0;
 }
@@ -44,11 +43,6 @@ main {
     justify-content: center;
     border-bottom: 1px solid rgb(97, 97, 97);
     padding: 5px 0 5px 0;
-}
-
-.nav-link {
-    font-size: 17px;
-    color: rgb(97, 97, 97);
 }
 
 .logo-text {
@@ -93,7 +87,6 @@ main {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-
 header {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: #94618E;
@@ -109,9 +102,31 @@ header h1 {
     font-weight: 500;
 }
 
-a {
-    color: #ffffff !important;
-    text-decoration: none;
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;  
+    transition: transform .25s;  
+}
+
+.nav-link:hover{
+    transform: scale(1.5);
+    color: #94618E;
+}
+
+.nav-link-container {
+    width: 33.33%;
+    float: left;
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.current-page-link {
+    font-weight: bold;
+}
+
+.desktop-navbar {
+    width: 40%;
 }
 
 .desktopContainer {
@@ -130,24 +145,11 @@ a {
     margin-bottom: 0;
 }
 
-.desktop-navbar {
-    padding-top: 35px;
-    padding-right: 5px;
-}
-
-.desktop-navbar a {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
 header p {
     margin: 0;
     padding-bottom: 10px;
 }
 
-.current-page-link {
-    font-weight: bold;
-}
 #addDate{
     width: -webkit-fill-available;
     text-align: center;
@@ -166,18 +168,26 @@ header p {
 
 /* List styling */
 
-
 .list-grid-container {
     display: grid;
     grid-template-columns: 45% 25% 15% 15%;
+    align-items: center;
 }
 
 .list-grid-item {
     padding: 5px;
-    font-size: 13px;
+    font-size: 11px;
     text-align: center;
     font-family: 'Roboto', sans-serif;
     text-overflow: ellipsis;
+    position: relative;
+}
+
+.list-grid-item .static-date, .list-grid-item i {
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%); */
 }
 
 #list-headers {
@@ -190,6 +200,7 @@ header p {
 
 .listed-book {
     border: 1px solid rgb(97, 97, 97);
+    border-radius: 5px;
     margin-top: 2px;
     background: white
 }
@@ -199,26 +210,31 @@ header p {
 }
 
 .static-date {
-    width: fit-content;
-    margin: auto;
     padding: 3px;
-    text-align: center;
     border: 1px solid black ;
     border-radius: 5px;
     background-color: rgb(148, 97, 142, 0.3);
+    transition: transform .25s;
+    width: fit-content;
+    margin: auto;
 }
 
 .static-date:hover, .static-date:focus {
     background-color: rgb(148, 97, 142, 0.7);
     font-weight: bold;
     cursor: pointer;
+    transform: scale(1.15);
 }
 
-.fa-info-circle, .fa-trash-alt, .fa-plus-circle {
-    font-size: 24px;
+.fa-info-circle, .fa-trash-alt {
+    font-size: 22px;
     cursor: pointer;
+    transition: transform .25s;
 }
 
+.fa-info-circle:hover, .fa-trash-alt:hover {
+    transform: scale(1.25);
+}
 
 .buttons-container {
     margin-top: 50px;
@@ -230,12 +246,20 @@ header p {
 }
 
 #clearBtn {
-    width: 75px;
-    height: 25px;
-    border-radius: 10px;
-    font-weight: bold;
-    font-family: 'Roboto', sans-serif;
-    background-color: red;
+    color: #fff;
+    background: red;
+    padding: 10px 15px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    font-size: 12px;
+    transition: all 0.4s ease 0s;
+    cursor: pointer;
+}
+
+#clearBtn:hover {
+    background-color: rgb(185, 0, 0);
 }
 
 
@@ -260,11 +284,11 @@ header p {
     border-radius: 10px;
     width: 80%; 
     font-family: 'Lato', sans-serif;
+    max-width: 500px;
 }
 
 #clear-modal-content, #delete-modal-content {
-    min-height: 180px;
-    max-width: 500px;
+    padding-bottom: 65px;
 }
 
 #date-modal-close, #clear-modal-close, #delete-modal-close {
@@ -302,12 +326,7 @@ header p {
     margin-top: 10px;
 }
 
-#clear-modal-guidance p {
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-#delete-modal-guidance p {
+#clear-modal-guidance p, #delete-modal-guidance p {
     margin-top: 10px;
     font-size: 14px;
 }
@@ -334,44 +353,69 @@ header p {
 }
 
 #date-entry-save-container {
-    margin-top: 10px;
+    margin-top: 20px;
     width: 100%;
     height: 40px;
 }
 
 #select-date {
     width: 80px;
-    height: 18px;
-    margin-top: 5px;
+    height: 20px;
     float: left;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
 }
 
-#save-button-container, .modal-buttons-container, .no-button-container, .yes-button-container {
+.modal-buttons-container, .no-button-container, .yes-button-container {
     float: left;
-    margin: 5px 0 0 20px;
+    margin: 7.5px 0 0 15px;
+}
+
+#save-button-container {
+    float: left;
+    margin-left: 15px;
 }
 
 #saveBtn, .yesBtn, .noBtn, .yesDeleteBtn {
     border-radius: 10px;
-    font-weight: bold;
     font-family: 'Roboto', sans-serif;
+    color: #fff;
+    padding: 7.5px 10px;
+    border-radius: 15px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    font-size: 12px;
+    transition: all 0.4s ease 0s;
+    cursor: pointer;
+}
+
+#saveBtn, .yesBtn {
+    background-color: green;
 }
 
 #saveBtn {
     width: 65px;
-    background-color: green;
 }
 
-.yesBtn {
-    background-color: green;
+#saveBtn:hover, .yesBtn:hover {
+    background-color: rgb(1, 85, 1);
 }
 
 .noBtn {
     background-color: grey;
 }
 
+.noBtn:hover {
+    background-color: rgb(83, 83, 83);
+}
+
 .yesDeleteBtn {
     background-color: red;
+}
+
+.yesDeleteBtn:hover {
+    background-color: rgb(185, 0, 0);
 }
 
 
@@ -388,77 +432,75 @@ header p {
     height: 100%; 
     overflow: auto; 
     background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-    
-    
-  }
+    background-color: rgba(0,0,0,0.4);   
+}
   
-  /* Modal Content/Box */
-  .modal-content {
-    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    border-radius: 10px;
-    width: 80%; 
-    font-family: 'Lato', sans-serif;
+/* Modal Content/Box */
+.modal-content {
+background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+margin: 15% auto;
+padding: 20px;
+border: 1px solid #888;
+border-radius: 10px;
+width: 80%; 
+font-family: 'Lato', sans-serif;
+
+}
+
+/* The Close Button */
+.close {
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+/* Modal content */
+
+.new-modal-content {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.info-container {
     
-  }
-  
-  /* The Close Button */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
+width: 100%;
+border-bottom: 2px solid lightgrey;
+padding-bottom: 20px;
+padding-top: 20px;
 
-  /* Modal content */
+}
 
-  .new-modal-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.title-author-container {
+    text-align: center;
+}
 
-  .info-container {
-      
-    width: 100%;
-    border-bottom: 2px solid lightgrey;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    
-  }
+.book-author {
+    font-style: italic;
+}
 
-  .title-author-container {
-      text-align: center;
-  }
+.book-cover {
+    width: 80%;
+    height: auto;
+}
 
-  .book-author {
-      font-style: italic;
-  }
+.add-container {
+    text-align: center;
+}
 
-  .book-cover {
-      width: 80%;
-      height: auto;
-  }
+.add-container h3 {
+    margin-bottom: 0;
+}
 
-  .add-container {
-      text-align: center;
-  }
-
-  .add-container h3 {
-      margin-bottom: 0;
-  }
-
-  .add-container .fas {
+.add-container .fas {
     background-color: transparent;
     box-sizing: unset;
     margin: 0em;
@@ -476,31 +518,30 @@ header p {
 .stars-outer {
     display: inline-block;
     position: relative;
-    
-  }
-   
-  .stars-outer::before {
+}
+
+.stars-outer::before {
     content: "\f005 \f005 \f005 \f005 \f005";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     color: #ccc;
-  }
-   
-  .stars-inner {
+}
+
+.stars-inner {
     position: absolute;
     top: 0;
     left: 0;
     white-space: nowrap;
     overflow: hidden;
     width: 0;
-  }
-   
-  .stars-inner::before {
+}
+
+.stars-inner::before {
     content: "\f005 \f005 \f005 \f005 \f005";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     color: #f8ce0b;
-  }
+}
 
 
 /* Footer styling */
@@ -536,15 +577,11 @@ footer small {
 /* Responsiveness */
 
 @media (min-width: 480px) and (max-width: 570px) {
+
     .list-grid-item {
         font-size: 13px;
     }
-}
 
-@media (min-width: 0px) and (max-width: 479px) {
-    .list-grid-item {
-        font-size: 11px;
-    }
 }
 
 @media (min-width: 0px) and (max-width: 379px) {
@@ -559,15 +596,19 @@ footer small {
 }
 
 @media (min-width: 300px) and (max-width: 390px) {
+
     footer {
         font-size: 13px;
     }
+
 }
 
 @media (min-width: 0px) and (max-width: 299px) {
+
     footer {
         font-size: 12px;
     }
+
 }
 
 @media screen and (min-width: 768px) {
@@ -578,6 +619,30 @@ footer small {
 
     #isMobile {
         display: none;
+    }
+
+    .nav-link {
+        position: absolute;
+        left: 30%;
+        top: 40%;
+        font-size: 18px;
+    }
+    
+    .nav-link:hover{
+        transform: scale(1.5);
+        color: #49274A;
+    }
+
+    .listed-book {
+        margin-top: 4px;
+    }
+
+    .list-grid-item {
+        font-size: 16px;
+    }
+
+    .fa-info-circle, .fa-trash-alt {
+        font-size: 28px;
     }
 
     .bookImage {
@@ -594,6 +659,10 @@ footer small {
         flex-direction: column;
     }
 
+    #clearBtn {
+        font-size: 16px;
+    }
+
     .fa-book-reader {
         font-size: 40px;
     }
@@ -604,6 +673,25 @@ footer small {
     
     .new-modal-content {
         display: block;
+    }
+
+    #date-modal-title, #clear-modal-title, #delete-modal-title {
+        font-size: 20px;
+    }
+
+    #delete-modal-content, #clear-modal-content {
+        padding-bottom: 80px;
+    }
+
+    #delete-modal-guidance p, #select-date-guidance, #select-date-warning, #no-change-warning, #confirm-save, #clear-modal-guidance p, #saveBtn, .yesBtn, .noBtn, .yesDeleteBtn {
+        font-size: 18px;
+    }
+
+    #select-date {
+        width: 105px;
+        height: 25px;
+        font-size: 18px;
+        margin: 2px 10px 0 0;
     }
 
     .book-cover {
@@ -617,7 +705,6 @@ footer small {
     }
 
     .emptyList {
-        
         font-weight: 600;
         font-size: 40px;   
     }

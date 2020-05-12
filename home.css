@@ -43,15 +43,6 @@ main {
     padding: 5px 0 5px 0;
 }
 
-a:hover{
-    color: orange;
-}
-
-.nav-link {
-    font-size: 17px;
-    color: rgb(97, 97, 97);
-}
-
 .logo-text {
     font-family: 'Roboto', sans-serif;
 }
@@ -109,15 +100,27 @@ header h1 {
     font-weight: 500;
 }
 
-a {
+.nav-link {
     color: #ffffff;
-    text-decoration: none;    
+    text-decoration: none;  
+    transition: all .25s;  
 }
-a:hover{
-    color: orange;
+
+.nav-link:hover{
+    transform: scale(1.5);
+    color: #94618E;
 }
-a:active{
+
+.nav-link:active{
     color: orangered;
+}
+
+.nav-link-container {
+    width: 33.33%;
+    float: left;
+    height: 100%;
+    position: relative;
+    text-align: center;
 }
 
 .desktopContainer {
@@ -137,13 +140,7 @@ a:active{
 }
 
 .desktop-navbar {
-    padding-top: 35px;
-    padding-right: 5px;
-}
-
-.desktop-navbar a {
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 40%;
 }
 
  p {
@@ -279,6 +276,16 @@ footer small {
         flex-direction: column;
     }
 
+    .nav-link {
+        position: absolute;
+        left: 30%;
+        top: 40%;
+    }
+    
+    .nav-link:hover{
+        transform: scale(1.5);
+        color: #49274A;
+    }
 }
 
 @media (min-width: 300px) and (max-width: 390px) {
