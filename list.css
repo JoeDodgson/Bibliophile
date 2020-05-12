@@ -102,19 +102,15 @@ header h1 {
     font-weight: 500;
 }
 
-a {
+.nav-link {
     color: #ffffff;
     text-decoration: none;  
     transition: all .25s;  
 }
 
-a:hover{
+.nav-link:hover{
     transform: scale(1.5);
     color: #94618E;
-}
-
-a:active{
-    color: orangered;
 }
 
 .nav-link-container {
@@ -617,6 +613,10 @@ footer small {
     .searchElements {
         display: flex;
         flex-direction: column;
+    }
+
+    #clearBtn {
+        font-size: 16px;
     }
 
     .fa-book-reader {
