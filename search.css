@@ -283,12 +283,13 @@ header h1 {
     flex-direction: column;
 }
 
-.fa-info-circle {
+.fa-info-circle, .fa-plus-circle {
     font-size: 24px;
+    transition: all .25s;  
 }
 
-.fa-plus-circle {
-    font-size: 24px;
+.fa-info-circle:hover, .fa-plus-circle:hover {
+    transform: scale(1.5);
 }
 
 .fa-info-circle::before {

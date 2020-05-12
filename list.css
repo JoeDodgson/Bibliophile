@@ -216,11 +216,15 @@ header p {
     cursor: pointer;
 }
 
-.fa-info-circle, .fa-trash-alt, .fa-plus-circle {
+.fa-info-circle, .fa-trash-alt {
     font-size: 24px;
     cursor: pointer;
+    transition: all .25s;  
 }
 
+.fa-info-circle:hover, .fa-trash-alt:hover {
+    transform: scale(1.25);
+}
 
 .buttons-container {
     margin-top: 50px;
@@ -590,13 +594,13 @@ footer small {
         display: none;
     }
 
-    a {
+    .nav-link {
         position: absolute;
         left: 30%;
         top: 40%;
     }
     
-    a:hover{
+    .nav-link:hover{
         transform: scale(1.5);
         color: #49274A;
     }
