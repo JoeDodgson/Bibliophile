@@ -91,6 +91,23 @@ $("#searchBtn").on("click", function () {
 
 })
 
+// Loading spinner
+
+
+// Hide search button and display loading spinner when the ajax call commences
+
+$(document).ajaxStart(function() {
+    $("#searchBtn").hide();
+    $(".loading").removeClass("display-none");
+  });
+
+// Hide loading spinner and show search button when ajax call completes
+  
+  $(document).ajaxStop(function() {
+    $(".loading").addClass("display-none");
+    $("#searchBtn").show();        
+  });
+
 function bookSearch(titleSearch, authorSearch, genreSearch, sortType) {
     // Form the different parts of the query URL, based on the user's selection
     if (titleSearch === "") {
