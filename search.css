@@ -65,15 +65,9 @@ header {
 }
 
 .desktop-navbar {
-    padding-top: 35px;
-    padding-right: 5px;
+    width: 40%;
 }
 
-.desktop-navbar a {
-    padding-left: 20px;
-    padding-right: 20px;
-
-}
 
 /* Styling text common to mobile and desktop views */
 
@@ -87,12 +81,30 @@ header h1 {
     color: #d9dcd6;
 }
 
-a {
-    color: #ffffff !important;
-    text-decoration: none;
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;  
+    transition: all .25s;  
 }
 
-.searchLink {
+.nav-link:hover{
+    transform: scale(1.5);
+    color: #94618E;
+}
+
+.nav-link:active{
+    color: orangered;
+}
+
+.nav-link-container {
+    width: 33.33%;
+    float: left;
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.current-page-link {
     font-weight: bold;
 }
 
@@ -694,6 +706,16 @@ footer small {
         display: none;
     }
 
+    .nav-link {
+        position: absolute;
+        left: 30%;
+        top: 40%;
+    }
+    
+    .nav-link:hover{
+        transform: scale(1.5);
+        color: #49274A;
+    }
     
     .mainBody {
         padding-left: 40px;

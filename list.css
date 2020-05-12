@@ -11,7 +11,6 @@ body {
 }
 
 h1 {
-    
     font-weight: 500;
     margin-top: 0;
 }
@@ -44,11 +43,6 @@ main {
     justify-content: center;
     border-bottom: 1px solid rgb(97, 97, 97);
     padding: 5px 0 5px 0;
-}
-
-.nav-link {
-    font-size: 17px;
-    color: rgb(97, 97, 97);
 }
 
 .logo-text {
@@ -93,7 +87,6 @@ main {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-
 header {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: #94618E;
@@ -110,8 +103,34 @@ header h1 {
 }
 
 a {
-    color: #ffffff !important;
-    text-decoration: none;
+    color: #ffffff;
+    text-decoration: none;  
+    transition: all .25s;  
+}
+
+a:hover{
+    transform: scale(1.5);
+    color: #94618E;
+}
+
+a:active{
+    color: orangered;
+}
+
+.nav-link-container {
+    width: 33.33%;
+    float: left;
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.current-page-link {
+    font-weight: bold;
+}
+
+.desktop-navbar {
+    width: 40%;
 }
 
 .desktopContainer {
@@ -130,24 +149,11 @@ a {
     margin-bottom: 0;
 }
 
-.desktop-navbar {
-    padding-top: 35px;
-    padding-right: 5px;
-}
-
-.desktop-navbar a {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
 header p {
     margin: 0;
     padding-bottom: 10px;
 }
 
-.current-page-link {
-    font-weight: bold;
-}
 #addDate{
     width: -webkit-fill-available;
     text-align: center;
@@ -578,6 +584,17 @@ footer small {
 
     #isMobile {
         display: none;
+    }
+
+    a {
+        position: absolute;
+        left: 30%;
+        top: 40%;
+    }
+    
+    a:hover{
+        transform: scale(1.5);
+        color: #49274A;
     }
 
     .bookImage {
